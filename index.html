@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بنك أسئلة الحاسبات | مع الشرح (275 سؤال)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #131b2e;
+            --bg-card: #19233c;
+            --bg-card-hover: #212e4d;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #10b981;
+            --accent-secondary: #f59e0b;
+            --border-color: rgba(255, 255, 255, 0.09);
+            --glow: rgba(16, 185, 129, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #059669;
+            --accent-secondary: #d97706;
+            --border-color: rgba(15, 23, 42, 0.1);
+            --glow: rgba(5, 150, 105, 0.15);
+        }
+
+        [data-theme="gold"] {
+            --bg-primary: #0f0c06;
+            --bg-secondary: #1c160b;
+            --bg-card: #261e0f;
+            --bg-card-hover: #332814;
+            --text-primary: #fef3c7;
+            --text-secondary: #d4b16a;
+            --accent-primary: #f59e0b;
+            --accent-secondary: #fbbf24;
+            --border-color: rgba(245, 158, 11, 0.22);
+            --glow: rgba(245, 158, 11, 0.25);
+        }
+
+        [data-theme="cyber"] {
+            --bg-primary: #090514;
+            --bg-secondary: #140b29;
+            --bg-card: #1d1138;
+            --bg-card-hover: #27174a;
+            --text-primary: #f3e8ff;
+            --text-secondary: #a855f7;
+            --accent-primary: #06b6d4;
+            --accent-secondary: #ec4899;
+            --border-color: rgba(6, 182, 212, 0.25);
+            --glow: rgba(6, 182, 212, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.35s ease, color 0.35s ease;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .theme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-secondary {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .text-muted {
+            color: var(--text-secondary);
+        }
+
+        .accent-btn {
+            background: linear-gradient(135deg, var(--accent-primary), #047857);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--glow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        [data-theme="gold"] .accent-btn {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            color: #0f0c06;
+            font-weight: 800;
+        }
+
+        [data-theme="cyber"] .accent-btn {
+            background: linear-gradient(135deg, #06b6d4, #7c3aed);
+            color: #fff;
+        }
+
+        .accent-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+
+        .accent-btn:active {
+            transform: translateY(0);
+        }
+
+        .view-window {
+            display: none;
+            animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .view-window.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-item {
+            background-color: var(--bg-secondary);
+            border: 1.5px solid var(--border-color);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--bg-card-hover);
+            border-color: var(--accent-primary);
+            transform: translateX(-4px);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: rgba(16, 185, 129, 0.12);
+        }
+
+        .option-item.correct {
+            border-color: #10b981 !important;
+            background-color: rgba(16, 185, 129, 0.18) !important;
+        }
+
+        .option-item.wrong {
+            border-color: #ef4444 !important;
+            background-color: rgba(239, 68, 68, 0.16) !important;
+        }
+
+        .inline-collapse {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        }
+
+        .inline-collapse.open {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .page-badge {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            font-size: 0.75rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            white-space: nowrap;
+        }
+
+        [data-theme="light"] .page-badge {
+            background: #fef3c7;
+            color: #b45309;
+            border-color: #f59e0b;
+        }
+
+        .explanation-card {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        [data-theme="light"] .explanation-card {
+            background: #ecfdf5;
+            border-color: #6ee7b7;
+            color: #065f46;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+        .no-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="pb-12">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-30 backdrop-blur-md bg-opacity-85 theme-secondary border-b px-2 sm:px-4 py-1.5 sm:py-2">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-2 cursor-pointer shrink-0" onclick="switchWindow('view-start')">
+                <div class="w-8 h-8 rounded-lg accent-btn flex items-center justify-center text-sm shadow-md">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div class="leading-none">
+                    <h1 class="font-extrabold text-sm sm:text-base flex items-center gap-1.5">
+                        <span>بنك أسئلة الحاسبات</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">275 سؤال + الشرح</span>
+                    </h1>
+                    <p class="text-[10px] text-muted mt-0.5 hidden sm:block">ويندوز 10، أمن المعلومات، الإنترنت، Excel 2013 💻</p>
+                </div>
+            </div>
+
+            <!-- Controls: Sound + Themes -->
+            <div class="flex items-center gap-1.5 shrink-0">
+                <button id="sound-btn" onclick="toggleSound()" title="تفعيل/كتم المؤثرات الصوتية" class="w-7 h-7 rounded-lg theme-card flex items-center justify-center text-xs hover:scale-105">
+                    <i id="sound-icon" class="fa-solid fa-volume-high text-emerald-400"></i>
+                </button>
+
+                <div class="flex items-center p-0.5 rounded-lg theme-card gap-0.5">
+                    <button onclick="setTheme('dark')" id="theme-dark" class="px-1.5 py-0.5 rounded text-[10px] font-bold transition-all text-muted hover:text-current" title="الوضع الليلي">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <button onclick="setTheme('light')" id="theme-light" class="px-1.5 py-0.5 rounded text-[10px] font-bold transition-all text-muted hover:text-current" title="الوضع النهاري">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button onclick="setTheme('gold')" id="theme-gold" class="px-1.5 py-0.5 rounded text-[10px] font-bold transition-all text-muted hover:text-current" title="ثيم قاعدة الذهب">
+                        <i class="fa-solid fa-coins"></i>
+                    </button>
+                    <button onclick="setTheme('cyber')" id="theme-cyber" class="px-1.5 py-0.5 rounded text-[10px] font-bold transition-all text-muted hover:text-current" title="ثيم نيون الشورجة">
+                        <i class="fa-solid fa-bolt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 pt-6">
+
+        <!-- WINDOW 1: START & SETUP VIEW -->
+        <section id="view-start" class="view-window active">
+            <div class="theme-card rounded-3xl p-6 sm:p-8 mb-6 relative overflow-hidden">
+                <div class="absolute -left-10 -bottom-10 opacity-5 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-computer"></i>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                        <i class="fa-solid fa-book-open ml-1"></i> 5 ملفات دراسية
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        <i class="fa-solid fa-graduation-cap ml-1"></i> مزود بشرح كامل لكل إجابة صحيحة
+                    </span>
+                </div>
+
+                <h2 class="text-2xl sm:text-3xl font-black mb-3 leading-snug">
+                    يا هلا بيك باختبار <span class="text-amber-400">"بنك أسئلة الحاسبات"</span> 💻
+                </h2>
+                <p class="text-muted text-sm sm:text-base leading-relaxed mb-6">
+                    بنك شامل من <strong>275 سؤال MCQ</strong> موزع على 5 ملفات: نظام ويندوز 10، أمن المعلومات والفيروسات، الإنترنت والبحث العلمي، وبرنامج Excel 2013 (المحاضرات 1-4).
+                </p>
+
+                <!-- Quick Stats Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                    <div class="theme-secondary rounded-2xl p-3.5 text-center">
+                        <div class="text-amber-400 text-xl mb-1"><i class="fa-solid fa-list-check"></i></div>
+                        <div class="text-lg font-black">275 سؤال</div>
+                        <div class="text-xs text-muted">شامل لكل فقرة</div>
+                    </div>
+                    <div class="theme-secondary rounded-2xl p-3.5 text-center">
+                        <div class="text-emerald-400 text-xl mb-1"><i class="fa-solid fa-book-open-reader"></i></div>
+                        <div class="text-lg font-black">275 شرح وافي</div>
+                        <div class="text-xs text-muted">تفسير سبب الإجابة</div>
+                    </div>
+                    <div class="theme-secondary rounded-2xl p-3.5 text-center">
+                        <div class="text-sky-400 text-xl mb-1"><i class="fa-solid fa-file-lines"></i></div>
+                        <div class="text-lg font-black">5 ملفات</div>
+                        <div class="text-xs text-muted">مقسمة إلى 26 قسم</div>
+                    </div>
+                    <div class="theme-secondary rounded-2xl p-3.5 text-center">
+                        <div class="text-purple-400 text-xl mb-1"><i class="fa-solid fa-crown"></i></div>
+                        <div class="text-lg font-black">5 ألقاب</div>
+                        <div class="text-xs text-muted">حسب درجتك النهائية</div>
+                    </div>
+                </div>
+
+                <!-- Quiz Configuration Options -->
+                <div class="border-t border-white/10 pt-6" id="setup-container">
+                    <h3 class="text-lg font-extrabold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-emerald-400"></i>
+                        <span>تضبيط الكعدة والاختبار (خياراتك):</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <label class="theme-secondary rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:border-emerald-500/40 transition-all">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-shuffle"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm sm:text-base">خربطة ترتيب الأسئلة</div>
+                                    <div class="text-xs text-muted">حتى لا تحفظهن عالتسلسل مثل الببغاء!</div>
+                                </div>
+                            </div>
+                            <input type="checkbox" id="opt-shuffle-q" class="w-5 h-5 accent-emerald-500 rounded cursor-pointer">
+                        </label>
+
+                        <label class="theme-secondary rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:border-emerald-500/40 transition-all">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-random"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm sm:text-base">تغيير مكان الاختيارات</div>
+                                    <div class="text-xs text-muted">نفرّ الاختيارات (أ، ب، ج، د)</div>
+                                </div>
+                            </div>
+                            <input type="checkbox" id="opt-shuffle-a" checked class="w-5 h-5 accent-emerald-500 rounded cursor-pointer">
+                        </label>
+
+                        <label class="theme-secondary rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:border-emerald-500/40 transition-all">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-bolt-lightning"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm sm:text-base">تصحيح فوري + شرح</div>
+                                    <div class="text-xs text-muted">يطلعلك الشرح أول ما تختار الجواب</div>
+                                </div>
+                            </div>
+                            <input type="checkbox" id="opt-instant" checked class="w-5 h-5 accent-emerald-500 rounded cursor-pointer">
+                        </label>
+
+                        <div class="theme-secondary rounded-2xl p-4 flex flex-col justify-center">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="font-bold text-sm flex items-center gap-1.5">
+                                    <i class="fa-solid fa-filter text-purple-400"></i>
+                                    حدد النطاق:
+                                </span>
+                            </div>
+                            <select id="opt-scope" class="w-full rounded-xl px-3 py-2 text-sm font-bold bg-black/25 border border-white/10 focus:outline-none focus:border-emerald-500">
+                                <option value="all">الكل (275 سؤال - الملفات الخمسة)</option>
+                                <option value="quick15">اختبار سريع عالطاير (15 سؤال)</option>
+                                <option value="quick30">اختبار متوسط (30 سؤال)</option>
+                                <option value="quick50">اختبار موسّع (50 سؤال)</option>
+                                <option value="f1">الملف 1: نظام ويندوز 10 (59 سؤال)</option>
+                                <option value="f2">الملف 2: أمن المعلومات والفيروسات (55 سؤال)</option>
+                                <option value="f3">الملف 3: الإنترنت والبحث العلمي (57 سؤال)</option>
+                                <option value="f4">الملف 4: Excel 2013 - المحاضرة 1 و 2 (62 سؤال)</option>
+                                <option value="f5">الملف 5: Excel 2013 - المحاضرة 3 و 4 (42 سؤال)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="startQuiz()" class="w-full py-4 rounded-2xl accent-btn text-lg font-black flex items-center justify-center gap-3 shadow-lg">
+                        <span>يلا نبلش الاختبار (شد حيلك يا بطل!)</span>
+                        <i class="fa-solid fa-rocket"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WINDOW 2: QUIZ VIEW -->
+        <section id="view-quiz" class="view-window">
+            <div class="theme-card rounded-2xl p-4 mb-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-400 font-black text-sm" id="q-counter-badge"></span>
+                        <span id="q-page-badge" class="page-badge" title="الملف الدراسي">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span id="q-page-text"></span>
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-3 text-xs sm:text-sm font-bold">
+                        <span class="px-2.5 py-1 rounded-lg theme-secondary flex items-center gap-1.5 text-emerald-400" title="الإجابات الصحيحة">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="live-correct">0</span>
+                        </span>
+                        <span class="px-2.5 py-1 rounded-lg theme-secondary flex items-center gap-1.5 text-rose-400" title="الأخطاء/متروك">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span id="live-wrong">0</span>
+                        </span>
+                        <span class="px-2.5 py-1 rounded-lg theme-secondary flex items-center gap-1.5 text-amber-400" title="الوقت المنقضي">
+                            <i class="fa-regular fa-clock"></i>
+                            <span id="live-timer">00:00</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="w-full h-2.5 bg-black/30 rounded-full overflow-hidden mb-3">
+                    <div id="quiz-progress-bar" class="h-full bg-gradient-to-l from-emerald-400 to-teal-500 transition-all duration-300" style="width: 0%"></div>
+                </div>
+
+                <div id="q-nav-strip" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1"></div>
+            </div>
+
+            <div class="theme-card rounded-3xl p-5 sm:p-7 mb-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-muted" id="q-category-label"></span>
+                        <span id="q-inline-page" class="page-badge"></span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="revealExplanationDirectly()" id="reveal-btn" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all flex items-center gap-1.5 shrink-0" title="اعرف الجواب الصحيح (يُحسب كإجابة خاطئة)">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>كشف الجواب والشرح</span>
+                        </button>
+                    </div>
+                </div>
+
+                <h2 id="q-text" class="text-lg sm:text-xl font-extrabold leading-relaxed mb-4"></h2>
+
+                <div id="options-container" class="space-y-3 mt-5"></div>
+
+                <div id="feedback-box" class="inline-collapse rounded-2xl overflow-hidden">
+                    <div id="feedback-header" class="px-4 py-3 flex flex-wrap items-center justify-between gap-2 border-b border-white/10">
+                        <div class="flex items-center gap-2.5 font-extrabold text-sm sm:text-base">
+                            <i id="feedback-icon" class="fa-solid fa-face-grin-stars text-xl"></i>
+                            <span id="feedback-text"></span>
+                        </div>
+                        <span id="feedback-page-ref" class="page-badge"></span>
+                    </div>
+
+                    <div class="p-4 space-y-3 text-xs sm:text-sm leading-relaxed">
+                        <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/35 flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-base mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-black text-emerald-400 block mb-0.5">الإجابة الصحيحة المعتمدة:</span>
+                                <span id="feedback-correct-answer" class="font-bold"></span>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl theme-secondary border border-white/10 flex items-start gap-2.5">
+                            <i class="fa-solid fa-book-open-reader text-amber-400 text-base mt-1 shrink-0"></i>
+                            <div>
+                                <span id="explanation-title" class="font-black text-amber-400 block mb-1"></span>
+                                <p id="feedback-explanation-text" class="leading-relaxed opacity-95"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <button onclick="prevQuestion()" id="btn-prev" class="px-4 py-3 rounded-2xl theme-card font-bold text-sm hover:border-emerald-500/40 flex items-center gap-2 disabled:opacity-40 disabled:pointer-events-none">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <span>السابق</span>
+                    </button>
+                    <button onclick="nextQuestion()" id="btn-next" class="px-5 py-3 rounded-2xl accent-btn font-bold text-sm flex items-center gap-2">
+                        <span id="btn-next-label">التالي</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+
+                <button onclick="finishQuiz()" class="px-4 py-3 rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30 hover:bg-rose-500/25 font-bold text-sm flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                    <span>إنهاء وتسليم الدفتر</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- WINDOW 3: RESULTS VIEW -->
+        <section id="view-results" class="view-window">
+            <div class="theme-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden mb-6">
+                <div class="max-w-lg mx-auto">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-4">
+                        <i class="fa-solid fa-award"></i>
+                        <span>لقبك الحاسوبي الرسمي</span>
+                    </div>
+
+                    <div id="rank-emoji" class="text-5xl sm:text-6xl mb-3"></div>
+                    <h2 id="rank-title" class="text-2xl sm:text-3xl font-black mb-2 text-amber-400"></h2>
+                    <p id="rank-desc" class="text-muted text-sm sm:text-base leading-relaxed mb-6"></p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                        <div class="theme-secondary rounded-2xl p-4">
+                            <div class="text-xs text-muted mb-1">النسبة المئوية</div>
+                            <div id="res-percent" class="text-2xl font-black text-emerald-400"></div>
+                        </div>
+                        <div class="theme-secondary rounded-2xl p-4">
+                            <div class="text-xs text-muted mb-1">الإجابات الصحيحة</div>
+                            <div id="res-correct" class="text-2xl font-black text-emerald-400"></div>
+                        </div>
+                        <div class="theme-secondary rounded-2xl p-4">
+                            <div class="text-xs text-muted mb-1">الأخطاء / المتروك</div>
+                            <div id="res-wrong" class="text-2xl font-black text-rose-400"></div>
+                        </div>
+                        <div class="theme-secondary rounded-2xl p-4">
+                            <div class="text-xs text-muted mb-1">الوقت المستغرق</div>
+                            <div id="res-time" class="text-2xl font-black text-amber-400"></div>
+                        </div>
+                    </div>
+
+                    <div class="theme-secondary rounded-2xl p-4 text-right mb-6">
+                        <h4 class="text-xs font-extrabold text-muted uppercase mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-chart-pie text-amber-400"></i>
+                            <span>تحليل مستواك حسب الملفات:</span>
+                        </h4>
+                        <div id="page-breakdown-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs"></div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <button onclick="openReviewWindow('all')" class="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-2xl accent-btn font-extrabold text-sm sm:text-base flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            <span>مراجعة الأجوبة والشرح</span>
+                        </button>
+                        <button onclick="switchWindow('view-start')" class="w-full sm:w-auto py-3.5 px-6 rounded-2xl theme-secondary hover:border-emerald-500/40 font-extrabold text-sm sm:text-base flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>إعادة الاختبار بغير إعدادات</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WINDOW 4: DETAILED REVIEW VIEW -->
+        <section id="view-review" class="view-window">
+            <div class="theme-card rounded-2xl p-3 sm:p-4 mb-4 sticky top-[42px] sm:top-[50px] z-20 backdrop-blur-md bg-opacity-95 shadow-sm border-b sm:border-x-0 border-x-0">
+                <div class="flex flex-col gap-2 mb-2">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="leading-tight">
+                            <h2 class="text-sm sm:text-base font-black flex items-center gap-1.5">
+                                <i class="fa-solid fa-clipboard-check text-emerald-400"></i>
+                                <span>مراجعة الدفتر وشرح الإجابات</span>
+                            </h2>
+                            <p class="text-[10px] text-muted mt-0.5">مع شرح بنك الأسئلة (275 سؤال)</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="toggleAllReviewExplanations()" id="btn-toggle-rev-exp" class="px-2 py-1 rounded-lg bg-amber-500/15 text-amber-400 border border-amber-500/30 text-[10px] font-bold flex items-center gap-1 hover:bg-amber-500/25">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span id="toggle-rev-exp-text">إخفاء الشرح</span>
+                            </button>
+                            <button onclick="switchWindow('view-results')" class="px-2 py-1 rounded-lg theme-secondary text-[10px] font-bold hover:border-emerald-500/40 flex items-center gap-1">
+                                <i class="fa-solid fa-trophy text-amber-400"></i>
+                                <span>النتيجة</span>
+                            </button>
+                            <button onclick="switchWindow('view-start')" class="px-2 py-1 rounded-lg accent-btn text-[10px] font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-house"></i>
+                                <span>البداية</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 pt-2 border-t border-white/5">
+                    <div class="flex items-center gap-1 overflow-x-auto no-scrollbar pb-1 w-full sm:w-auto flex-nowrap">
+                        <button onclick="filterReview('all')" id="rev-filter-all" class="px-2 py-1 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
+                            الكل (<span id="count-all">0</span>)
+                        </button>
+                        <button onclick="filterReview('correct')" id="rev-filter-correct" class="px-2 py-1 rounded-lg text-[10px] font-bold theme-secondary text-muted shrink-0">
+                            صحيحة ✅ (<span id="count-correct">0</span>)
+                        </button>
+                        <button onclick="filterReview('wrong')" id="rev-filter-wrong" class="px-2 py-1 rounded-lg text-[10px] font-bold theme-secondary text-muted shrink-0">
+                            خاطئة ❌ (<span id="count-wrong">0</span>)
+                        </button>
+                    </div>
+
+                    <select id="rev-page-select" onchange="filterReviewByPage(this.value)" class="w-full sm:w-auto rounded-lg px-2 py-1 text-[10px] font-bold theme-secondary focus:outline-none shrink-0">
+                        <option value="all">كل الملفات (1 - 5)</option>
+                        <option value="1">ملف 1: ويندوز 10</option>
+                        <option value="2">ملف 2: أمن المعلومات</option>
+                        <option value="3">ملف 3: الإنترنت والبحث العلمي</option>
+                        <option value="4">ملف 4: Excel 2013 (م1-2)</option>
+                        <option value="5">ملف 5: Excel 2013 (م3-4)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="review-list-container" class="space-y-4"></div>
+        </section>
+
+    </main>
+
+    <script>
+const MASTER_QUESTIONS = [
+            {"id": 1, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "ما هي الشركة المنتجة لنظام التشغيل ويندوز 10 (Windows 10)؟", "options": ["شركة أبل", "شركة مايكروسوفت", "شركة جوجل", "شركة إنتل"], "correct": 1, "explanation": "ويندوز 10 هو آخر إصدار والنسخة الجديدة من نظام تشغيل الحواسيب ويندوز، والتي تنتجه شركة مايكروسوفت."},
+            {"id": 2, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "في أي تاريخ تم كشف النقاب عن نظام التشغيل ويندوز 10؟", "options": ["29 يوليو 2015", "30 سبتمبر 2014", "30 سبتمبر 2015", "29 يوليو 2014"], "correct": 1, "explanation": "تم كشف النقاب عن نظام التشغيل ويندوز 10 في تاريخ 30 سبتمبر 2014."},
+            {"id": 3, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "في أي تاريخ تم إصدار نظام التشغيل ويندوز 10؟", "options": ["30 سبتمبر 2014", "29 يوليو 2014", "29 يوليو 2015", "30 يوليو 2016"], "correct": 2, "explanation": "بعد كشف النقاب عنه في عام 2014، تم إصدار نظام التشغيل ويندوز 10 رسمياً في 29 يوليو 2015."},
+            {"id": 4, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "ما هو الاسم الذي لم يكن متوقعاً استبعاده لصالح اسم \"ويندوز 10\"؟", "options": ["ويندوز 8.5", "ويندوز 9", "ويندوز 11", "ويندوز X"], "correct": 1, "explanation": "ما لم يكن متوقعاً هو أن اسم النسخة الجديدة سيكون \"ويندوز 10\" وليس \"ويندوز 9\"."},
+            {"id": 5, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "ما السبب الذي أعلنته الشركة لعدم تسمية النظام الجديد باسم \"ويندوز 9\"؟", "options": ["لأن الاسم مستخدم مسبقاً من شركة أخرى", "لأن اسم \"ويندوز 9\" لن يناسب القفزة الكبيرة التي حققتها الشركة في النظام الجديد", "لتقليص عدد الإصدارات في السوق", "بسبب وجود مشكلة تقنية مع الرقم 9 في البرمجة"], "correct": 1, "explanation": "أعلنت الشركة أن اسم \"ويندوز 9\" لا يتناسب مع القفزة الكبيرة التي حققتها في نظام التشغيل الجديد."},
+            {"id": 6, "page": 1, "category": "أولاً: مقدمة عن نظام التشغيل ويندوز 10", "q": "أي من الفئات التالية صُمم نظام ويندوز 10 لتشغيلها ضمن نظام تشغيل موحد؟", "options": ["الحواسيب المكتبية فقط", "الحواسيب المكتبية والمحمولة فقط", "الحواسيب المكتبية والمحمولة واللوحية والهواتف الذكية وهواتف \"التابلت\" وإنترنت الأشياء", "الهواتف الذكية والأجهزة اللوحية فقط"], "correct": 2, "explanation": "جرى تصميم ويندوز 10 لتشغيل جميع أنواع الأجهزة بنظام تشغيل موحد، ويشمل ذلك الحواسيب المكتبية والمحمولة واللوحية والهواتف الذكية وهواتف التابلت وما يُطلق عليه إنترنت الأشياء."},
+            {"id": 7, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هي السرعة الدنيا المطلوبة للمعالج لتشغيل نظام ويندوز 10؟", "options": ["500 ميغاهرتز أو أسرع", "1 غيغاهرتز أو معالج أسرع أو SoC", "2 غيغاهرتز أو معالج أسرع", "3 غيغاهرتز أو معالج أسرع"], "correct": 1, "explanation": "يشترط لتشغيل ويندوز 10 توفر معالج بسرعة 1 غيغاهرتز أو معالج أسرع أو SoC."},
+            {"id": 8, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هي سعة ذاكرة الوصول العشوائي (RAM) المطلوبة لإصدار 32 بت من ويندوز 10؟", "options": ["512 ميغابايت", "1 غيغابايت", "2 غيغابايت", "4 غيغابايت"], "correct": 1, "explanation": "يتطلب إصدار 32 بت من نظام ويندوز 10 ذاكرة وصول عشوائي بحجم 1 غيغابايت."},
+            {"id": 9, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هي سعة ذاكرة الوصول العشوائي (RAM) المطلوبة لإصدار 64 بت من ويندوز 10؟", "options": ["1 غيغابايت", "2 غيغابايت", "4 غيغابايت", "8 غيغابايت"], "correct": 1, "explanation": "يتطلب إصدار 64 بت من نظام ويندوز 10 ذاكرة وصول عشوائي بحجم 2 غيغابايت."},
+            {"id": 10, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هي مساحة القرص الثابت المطلوبة لتثبيت نظام تشغيل ويندوز 10 إصدار 32 بت؟", "options": ["10 غيغابايت", "12 غيغابايت", "16 غيغابايت", "20 غيغابايت"], "correct": 2, "explanation": "يحتاج نظام تشغيل ويندوز 10 إصدار 32 بت إلى مساحة قرص ثابت تبلغ 16 غيغابايت."},
+            {"id": 11, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هي مساحة القرص الثابت المطلوبة لتثبيت نظام تشغيل ويندوز 10 إصدار 64 بت؟", "options": ["16 غيغابايت", "20 غيغابايت", "25 غيغابايت", "32 غيغابايت"], "correct": 1, "explanation": "يحتاج نظام تشغيل ويندوز 10 إصدار 64 بت إلى مساحة قرص ثابت تبلغ 20 غيغابايت."},
+            {"id": 12, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ما هو إصدار برنامج تشغيل بطاقة الرسومات المطلوب ضمن متطلبات نظام ويندوز 10؟", "options": ["WDDM 0.5", "WDDM 1.0", "WDDM 2.5", "WDDM 3.0"], "correct": 1, "explanation": "تتطلب بطاقة الرسومات في ويندوز 10 دعماً لـ DirectX مع برنامج تشغيل WDDM 1.0."},
+            {"id": 13, "page": 1, "category": "ثانياً: متطلبات النظام لويندوز 10", "q": "ماذا تتطلب بعض الميزات الإضافية في نظام ويندوز 10 لكي تعمل؟", "options": ["بطاقة صوت خارجية", "حساب Microsoft والوصول إلى الإنترنت", "قرص مرن للتثبيت", "شاشة تعمل باللمس حصراً"], "correct": 1, "explanation": "تنص متطلبات النظام على أن بعض الميزات في ويندوز 10 تتطلب حساب Microsoft والوصول إلى الإنترنت."},
+            {"id": 14, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "ما هو الشعار الذي تم الإعلان عن نظام التشغيل Windows 10 تحته؟", "options": ["نظام سريع ومتجر مفتوح", "نظام تشغيل واحد ومتجر واحد", "لكل جهاز نظام مستقل", "واجهة واحدة وأداء مضاعف"], "correct": 1, "explanation": "تم الإعلان عن Windows 10 تحت شعار \"نظام تشغيل واحد ومتجر واحد\"."},
+            {"id": 15, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "ما هي منصة تشغيل الألعاب التي أشارت المحاضرة إلى أن نظام ويندوز 10 يأتي ليعمل عليها أيضاً؟", "options": ["بلاي ستيشن", "نينتندو", "إكس بوكس", "أتاري"], "correct": 2, "explanation": "يأتي نظام ويندوز 10 لكافة منصات التشغيل المختلفة مثل الأجهزة المكتبية والمحمولة والهواتف والأجهزة اللوحية، ويأتي أيضاً لمنصة تشغيل الألعاب إكس بوكس."},
+            {"id": 16, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "ما الفائدة الرئيسية من ميزة \"متجر واحد\" في نظام Windows 10؟", "options": ["تنزيل البرامج مجاناً دون إنترنت", "القدرة على استخدام التطبيقات على جميع منصات التشغيل بسهولة", "منع تثبيت أي تطبيقات خارجية نهائياً", "زيادة مساحة القرص الثابت تلقائياً"], "correct": 1, "explanation": "كون متجر Windows 10 متجراً واحداً بمختلف منصات التشغيل يعني القدرة على استخدام التطبيقات على جميع منصات التشغيل بسهولة."},
+            {"id": 17, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "ما الذي أصبحت تتيحه خاصية البحث المباشر داخل قائمة \"ابدأ\" في ويندوز 10؟", "options": ["البحث عن الملفات النصية فقط", "البحث عن التطبيقات والبرامج في النظام فقط", "البحث عن التطبيقات والبرامج في النظام بالإضافة إلى البحث باستخدام الإنترنت", "البحث في سلة المهملات فقط"], "correct": 2, "explanation": "أصبحت خاصية البحث داخل قائمة ابدأ تتيح البحث المباشر ليس فقط عن التطبيقات والبرامج في النظام، بل أيضاً البحث باستخدام الإنترنت."},
+            {"id": 18, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "ماذا يحدث عند استخدام خاصية البحث عبر الإنترنت من داخل قائمة \"ابدأ\" في ويندوز 10؟", "options": ["يتم إغلاق قائمة ابدأ تلقائياً", "تظهر نتائج البحث أمام المستخدم بشكل مباشر من الإنترنت", "يتم حفظ الصفحة كملف نصي على سطح المكتب", "يتطلب الأمر إعادة تشغيل الحاسوب"], "correct": 1, "explanation": "يعني البحث باستخدام الإنترنت من قائمة ابدأ ظهور نتائج بحث أمام المستخدم بشكل مباشر من الإنترنت."},
+            {"id": 19, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "من أي نظام تشغيل اهتمت مايكروسوفت بتسهيل عملية الانتقال إلى ويندوز 10؟", "options": ["Windows 95", "Windows XP", "Windows 7", "Windows Vista"], "correct": 2, "explanation": "من المميزات الجديدة للنظام إمكانية الانتقال من نظام Windows 7 بسهولة إلى نظام Windows 10 الجديد."},
+            {"id": 20, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "لماذا اهتمت مايكروسوفت بعملية الانتقال السلس من Windows 7 إلى Windows 10؟", "options": ["لأن نظام Windows 7 هو الأحدث قبل ويندوز 10 مباشرة", "لأن نظام Windows 7 من أكثر الأنظمة انتشاراً", "لأن نظام Windows 7 لا يدعم لوحة المفاتيح", "لأن حجم نظام Windows 7 صغير جداً"], "correct": 1, "explanation": "ذكرت المحاضرة أن نظام Windows 7 من أكثر الأنظمة انتشاراً، ولذا اهتمت مايكروسوفت بعملية الانتقال منه إلى نظام Windows 10 الجديد."},
+            {"id": 21, "page": 1, "category": "ثالثاً: المميزات الجديدة لنظام ويندوز 10", "q": "لماذا لا تشكل واجهة ويندوز 10 واستخدامه صعوبات بالنسبة لمستخدمي Windows 7؟", "options": ["لأنه لا يحتوي على واجهة رسومية", "لأن المستخدم سيجد نفس الإعدادات والسمات", "لأنه يعمل بالأوامر النصية فقط", "لأن قائمة ابدأ أُلغيت منه تماماً"], "correct": 1, "explanation": "واجهة النظام والاستخدام في ويندوز 10 لن تشكل صعوبات بالنسبة لمستخدمي Windows 7 لأنهم سيجدون نفس الإعدادات والسمات."},
+            {"id": 22, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هو المصطلح الإنجليزي الذي يُعرف به \"سطح المكتب\"؟", "options": ["Taskbar", "Shortcut", "Desktop", "Start Menu"], "correct": 2, "explanation": "يُعرف سطح المكتب باللغة الإنجليزية باسم (Desktop)."},
+            {"id": 23, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "متى تظهر شاشة سطح المكتب أمام مستخدم الحاسوب؟", "options": ["قبل تشغيل الحاسوب", "بعد تشغيل الحاسوب بدقائق معدودة", "بعد إطفاء الحاسوب مباشرة", "فقط عند الاتصال بشبكة الإنترنت"], "correct": 1, "explanation": "سطح المكتب هو الشاشة الملونة التي تظهر أمام مستخدم الحاسوب بعد تشغيله بدقائق معدودة."},
+            {"id": 24, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هي الشاشة الرئيسية لنظام تشغيل الحاسوب التي يتمكن المستخدم من خلالها بالتحكم بجهاز الحاسوب بشكل كامل؟", "options": ["شاشة قائمة ابدأ", "شاشة سطح المكتب", "شاشة مستكشف الملفات", "شاشة ضبط الوقت والتاريخ"], "correct": 1, "explanation": "تُعتبر شاشة سطح المكتب الشاشة الرئيسية لنظام تشغيل الحاسوب، والتي يتمكن المستخدم من خلالها بالتحكم بجهاز الحاسوب بشكل كامل."},
+            {"id": 25, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما المقصود بـ \"الأيقونات\" في سطح المكتب؟", "options": ["الأوامر البرمجية المخفية داخل النظام", "الأشكال أو الرموز التي تتميز بها التطبيقات الموجودة في سطح المكتب", "الأزرار الموجودة على لوحة المفاتيح", "الأسلاك المتصلة بجهاز الحاسوب"], "correct": 1, "explanation": "الأيقونات هي الأشكال أو الرموز التي تتميز بها التطبيقات الموجودة في سطح المكتب، وكل تطبيق يتم تحميله على الحاسوب يجب أن ترتبط به أيقونة معينة."},
+            {"id": 26, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "إلى كم نوع تُقسم أيقونات سطح المكتب؟", "options": ["نوع واحد فقط", "نوعين: أيقونات نظام ويندوز وأيقونات التطبيقات الأخرى", "ثلاثة أنواع: أيقونات النظام وأيقونات الإنترنت وأيقونات الألعاب", "أربعة أنواع"], "correct": 1, "explanation": "تُقسم أيقونات سطح المكتب إلى نوعين هما: أيقونات نظام ويندوز، وأيقونات التطبيقات الأخرى."},
+            {"id": 27, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما المقصود بـ \"أيقونات نظام ويندوز\"؟", "options": ["الأيقونات التي يصممها المستخدم بنفسه", "كافة أيقونات التطبيقات التي تأتي مع نظام تشغيل ويندوز", "أيقونات البرامج التي يتم تنزيلها من الإنترنت فقط", "أيقونات الألعاب المثبتة على الحاسوب"], "correct": 1, "explanation": "تُعرف أيقونات نظام ويندوز بأنها كافة أيقونات التطبيقات التي تأتي مع نظام تشغيل ويندوز."},
+            {"id": 28, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "أي مما يلي يمثل الأيقونات الرئيسية لسطح المكتب في نظام ويندوز؟", "options": ["الرسام، الآلة الحاسبة، والمفكرة", "جهاز الكمبيوتر، سلة المهملات (المحذوفات)، والملف الشخصي (ملفاتي)", "متصفح إيدج، المتجر، والتقويم", "الطاقة، الصوت، والواي فاي"], "correct": 1, "explanation": "تُعد كل من أيقونة جهاز الكمبيوتر، وسلة المهملات (المحذوفات)، والملف الشخصي (ملفاتي) هي الأيقونات الرئيسية لسطح المكتب."},
+            {"id": 29, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هو الاسم الآخر الذي تُعرف به أيقونة \"الملف الشخصي\" في بعض نسخ ويندوز؟", "options": ["مستندات النظام", "ملفاتي", "سلة المحذوفات", "لوحة التحكم"], "correct": 1, "explanation": "يُشار إلى أيقونة الملف الشخصي في بعض نسخ ويندوز باسم (ملفاتي)."},
+            {"id": 30, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هي أهمية الأيقونات الرئيسية لسطح المكتب؟", "options": ["تغيير لون شاشة الحاسوب فقط", "تمكّن المستخدم من التحكم بأغلب خصائص جهاز الحاسوب", "الاتصال بالإنترنت تلقائياً", "إطفاء الحاسوب بشكل فوري"], "correct": 1, "explanation": "من خلال الأيقونات الرئيسية لسطح المكتب يتمكن المستخدم من التحكم بأغلب خصائص جهاز الحاسوب."},
+            {"id": 31, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "على ماذا تعتمد طبيعة \"أيقونات التطبيقات الأخرى\" الموجودة على سطح المكتب؟", "options": ["على حجم الشاشة", "على البرامج الخاصة بها", "على سرعة المعالج", "على وقت تشغيل الحاسوب"], "correct": 1, "explanation": "أيقونات التطبيقات الأخرى هي الأيقونات التي ترتبط بالتطبيقات التي يستخدمها مستخدم الحاسوب، وتختلف طبيعتها بناءً على البرامج الخاصة بها."},
+            {"id": 32, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ماذا يظهر على سطح المكتب مباشرة بعد تحميل أي تطبيق جديد على جهاز الحاسوب؟", "options": ["رسالة خطأ من النظام", "اختصار لأيقونة التطبيق", "نافذة ضبط الوقت والتاريخ", "ملف مضغوط للنظام"], "correct": 1, "explanation": "بعد تحميل أي تطبيق على جهاز الحاسوب، يظهر اختصار لأيقونته على سطح المكتب مباشرة."},
+            {"id": 33, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هو المصطلح الإنجليزي الذي يُشار به إلى \"اختصار\" أيقونة التطبيق على سطح المكتب؟", "options": ["Desktop", "Shortcut", "Taskbar", "Settings"], "correct": 1, "explanation": "يُشار إلى الاختصار الذي يظهر لأيقونة التطبيق على سطح المكتب بالمصطلح الإنجليزي (Shortcut)."},
+            {"id": 34, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ما هي الخطوة الأولى لإظهار أيقونات سطح المكتب في ويندوز 10؟", "options": ["فتح مستكشف الملفات &gt; عرض", "تحديد زر البدء، ثم الإعدادات &gt; إضفاء طابع شخصي &gt; النسق", "الضغط بزر الفأرة الأيمن على شريط المهام", "فتح قائمة الطاقة &gt; الإعدادات"], "correct": 1, "explanation": "الخطوة الأولى لإظهار أيقونات سطح المكتب هي تحديد زر البدء، ثم الإعدادات &gt; إضفاء طابع شخصي &gt; النسق."},
+            {"id": 35, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "ضمن قسم \"النسق\" و\"الإعدادات ذات الصلة\"، ما الخيار الذي يتم تحديده لإظهار أيقونات سطح المكتب؟", "options": ["إعدادات شريط المهام", "إعدادات أيقونات سطح المكتب", "إعدادات اللغة والوقت", "إعدادات الحساب"], "correct": 1, "explanation": "في الخطوة الثانية ضمن \"النسق\" &gt; \"الإعدادات ذات الصلة\"، يتم تحديد خيار \"إعدادات أيقونات سطح المكتب\"."},
+            {"id": 36, "page": 1, "category": "رابعاً: مكونات سطح المكتب والأيقونات", "q": "بعد اختيار الأيقونات التي يرغب المستخدم في إظهارها على سطح المكتب، ما هما الزران اللذان يجب تحديدهما لتثبيت التغيير؟", "options": ["حفظ وإغلاق", "تطبيق وموافق", "تحديث وإعادة تشغيل", "إلغاء وتطبيق"], "correct": 1, "explanation": "في الخطوة الثالثة يتم اختيار الأيقونات المطلوب إظهارها على سطح المكتب، ثم تحديد \"تطبيق\" و\"موافق\"."},
+            {"id": 37, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هي القائمة الرئيسية في سطح المكتب التي توفر التحكم بكافة التطبيقات والأيقونات الموجودة في الحاسوب؟", "options": ["قائمة شريط المهام", "قائمة ابدأ", "قائمة مستكشف الملفات", "قائمة النسق"], "correct": 1, "explanation": "قائمة ابدأ هي القائمة الرئيسية في سطح المكتب، وتوفر للمستخدم التحكم بكافة التطبيقات والأيقونات الموجودة في جهاز الحاسوب."},
+            {"id": 38, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ماذا توفر قائمة ابدأ بالإضافة إلى التحكم بالتطبيقات والأيقونات؟", "options": ["إمكانية استخدام مجموعة من البرامج المساعدة، ومنها التطبيقات التي توفر التحكم بإعدادات الحاسوب", "زيادة سرعة الإنترنت فقط", "فحص مكونات المعالج الفيزيائية", "تغيير حجم القرص الصلب"], "correct": 0, "explanation": "توفر قائمة ابدأ إمكانية استخدام مجموعة من البرامج المساعدة لمستخدم الحاسوب، ومنها التطبيقات التي توفر التحكم بإعدادات الحاسوب."},
+            {"id": 39, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هو الوصف الصحيح لتصميم \"قائمة ابدأ\" عبر إصدارات ويندوز المختلفة؟", "options": ["بقي تصميمها ثابتاً دون أي تغيير", "اختلف تصميم قائمة ابدأ مع كل إصدار من إصدارات ويندوز", "تم حذفها في جميع الإصدارات الحديثة", "تغير تصميمها مرة واحدة فقط في ويندوز 95"], "correct": 1, "explanation": "تشير المحاضرة صراحةً إلى أن تصميم قائمة ابدأ اختلف مع كل إصدار من إصدارات ويندوز."},
+            {"id": 40, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هي وظيفة زر \"القائمة\" (الزر رقم 1) في قائمة ابدأ؟", "options": ["إطفاء الحاسوب", "التوسع لعرض الأسماء لجميع عناصر القائمة", "البحث عن الملفات في الحاسوب", "إنشاء حساب جديد"], "correct": 1, "explanation": "يقوم زر \"القائمة\" في قائمة ابدأ بالتوسع لعرض الأسماء لجميع عناصر القائمة."},
+            {"id": 41, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هي وظيفة زر \"الحساب\" (الزر رقم 2) في قائمة ابدأ؟", "options": ["التحكم بمستوى صوت الحاسوب", "إنشاء حساب داخل نظام الويندوز يمكن من خلاله استقبال التحديثات للنظام", "إظهار أيقونات سطح المكتب", "ضبط الوقت والتاريخ"], "correct": 1, "explanation": "يتيح زر \"الحساب\" إنشاء حساب داخل نظام الويندوز، ومن خلال هذا الحساب يمكن استقبال التحديثات للنظام."},
+            {"id": 42, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هي وظيفة زر \"مستكشف الملفات\" (الزر رقم 3) في قائمة ابدأ؟", "options": ["البحث والاستعلام عن الملفات الأخرى الموجودة داخل الحاسوب الإلكتروني", "وضع الحاسوب في وضع السكون", "استقبال تحديثات النظام", "تغيير لغة لوحة المفاتيح"], "correct": 0, "explanation": "من خلال زر \"مستكشف الملفات\" يمكن للمستخدم البحث والاستعلام عن الملفات الأخرى الموجودة داخل الحاسوب الإلكتروني."},
+            {"id": 43, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "ما هي وظيفة زر \"الإعدادات\" (الزر رقم 4) في قائمة ابدأ؟", "options": ["إطفاء الحاسوب وإعادة تشغيله", "التحكم بالكثير من خواص النظام", "توسيع أسماء عناصر القائمة فقط", "تشغيل الألعاب على إكس بوكس"], "correct": 1, "explanation": "يتيح زر \"الإعدادات\" في قائمة ابدأ التحكم بالكثير من خواص النظام."},
+            {"id": 44, "page": 1, "category": "خامساً: قائمة ابدأ وعناصرها", "q": "أي مما يلي يُعد من الوظائف التي يوفرها زر \"الطاقة\" (الزر رقم 5) في قائمة ابدأ؟", "options": ["البحث عن الملفات في الحاسوب", "إطفاء الحاسوب أو إعادة تشغيله أو وضعه في وضع السكون (sleep)", "إنشاء حساب مستخدم جديد", "تفعيل شبكة الواي فاي"], "correct": 1, "explanation": "من خلال زر \"الطاقة\" يمكن إطفاء الحاسوب أو إعادة تشغيله أو وضعه في وضع sleep."},
+            {"id": 45, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "ما هو المصطلح الإنجليزي لـ \"شريط المهام\"؟", "options": ["Desktop", "Shortcut", "Taskbar", "Start Bar"], "correct": 2, "explanation": "يُعرف شريط المهام باللغة الإنجليزية باسم (Taskbar)."},
+            {"id": 46, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "أين يقع شريط المهام، وما هي طبيعته؟", "options": ["شريط ثابت في منتصف الشاشة لا يمكن إخفاؤه", "شريط متحرك يمكن إخفاؤه وضبطه، يقع على طرف الواجهة الرسومية للمستخدم", "نافذة مخفية داخل قائمة الإعدادات فقط", "شريط يظهر فقط أثناء تشغيل الألعاب"], "correct": 1, "explanation": "يُعرف شريط المهام بأنه شريط متحرك يمكن إخفاؤه والعمل على ضبطه، ويقع على طرف الواجهة الرسومية الخاصة بالمستخدم."},
+            {"id": 47, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "كيف يُستخدم شريط المهام في الواجهة الرسومية؟", "options": ["كمنصة تشغيل للتطبيقات والبرامج، وحاملاً للرموز التي تشير إلى البرامج المشغلة", "لتخزين الملفات المحذوفة فقط", "لإنشاء حسابات مايكروسوفت فقط", "لعرض خلفية سطح المكتب فقط"], "correct": 0, "explanation": "يُستخدم شريط المهام كمنصة تشغيل للتطبيقات والبرامج، كما يُعتبر حاملاً للرموز التي تشير إلى البرامج المشغلة."},
+            {"id": 48, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "في أي نظام تشغيل تم تقديم \"شريط المهام\" لأول مرة ومن قِبل أي شركة؟", "options": ["نظام ويندوز 7 من قِبل مايكروسوفت", "نظام ويندوز 95 من قِبل مايكروسوفت", "نظام ويندوز 10 من قِبل مايكروسوفت", "نظام ويندوز XP من قِبل مايكروسوفت"], "correct": 1, "explanation": "تم تقديم شريط المهام لأول مرة من قِبل مايكروسوفت (Microsoft) في نظام تشغيل ويندوز 95، ومنذ ذلك الوقت تم استخدامه واعتماده من قِبل أنظمة تشغيل متعددة."},
+            {"id": 49, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "ما هي الخطوة الأولى لضبط الوقت والتاريخ من خلال شريط المهام (Taskbar)؟", "options": ["الضغط على زر ابدأ ثم الطاقة", "الضغط على الجزء الذي يُظهر الساعة والتاريخ بيمين شريط المهام", "فتح مستكشف الملفات", "الضغط على علامة الواي فاي"], "correct": 1, "explanation": "تبدأ عملية ضبط الوقت والتاريخ بالضغط على الجزء الذي يُظهر الساعة والتاريخ بيمين شريط المهام Taskbar، ليظهر الإطار الخاص بالوقت والتقويم."},
+            {"id": 50, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "ما هو الخيار الذي نضغط عليه بأسفل إطار الوقت والتقويم في الخطوة الثانية لضبط الوقت والتاريخ؟", "options": ["Change calendar settings", "Change date and time settings...", "Change time zone...", "OK"], "correct": 1, "explanation": "في الخطوة الثانية يتم الضغط على الخيار Change date and time settings... بأسفل إطار الوقت والتقويم، فتظهر نافذة Date and Time."},
+            {"id": 51, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "في الخطوة الثالثة، ما هو المفتاح الذي نضغط عليه داخل نافذة (Date and Time) للوصول إلى نافذة (Date and Time Settings)؟", "options": ["Change time zone...", "Change date and time...", "Cancel", "Internet Time"], "correct": 1, "explanation": "في الخطوة الثالثة يتم الضغط على المفتاح Change date and time... داخل نافذة Date and Time لتظهر نافذة Date and Time Settings."},
+            {"id": 52, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "في أي جزء من نافذة (Date and Time Settings) توجد الخانة المخصصة لضبط الوقت؟", "options": ["الجزء الأيسر من النافذة", "الجزء الأيمن من النافذة", "الجزء العلوي من النافذة", "الجزء السفلي من النافذة"], "correct": 1, "explanation": "يتم ضبط الوقت من خلال الخانة المخصصة لذلك بالجزء الأيمن من نافذة Date and Time Settings."},
+            {"id": 53, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "في أي جزء من نافذة (Date and Time Settings) يوجد التقويم المخصص لضبط التاريخ؟", "options": ["يمين النافذة", "يسار النافذة", "أسفل النافذة", "أعلى يمين النافذة"], "correct": 1, "explanation": "يتم ضبط التاريخ من خلال الجزء المختص بالتقويم بيسار نافذة Date and Time Settings."},
+            {"id": 54, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "ما هو المفتاح الذي يُضغط عليه في الخطوتين السادسة والسابعة لتطبيق التعديلات الجديدة على الوقت والتاريخ وإغلاق نافذة (Date and Time)؟", "options": ["Cancel", "OK", "Reset", "Back"], "correct": 1, "explanation": "في الخطوة السادسة يُضغط مفتاح OK لتطبيق التعديلات الجديدة على الوقت والتاريخ، وفي الخطوة السابعة يُضغط مفتاح OK بالنافذة Date and Time."},
+            {"id": 55, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "كيف يمكن تفعيل شبكة الإنترنت من خلال شريط المهام؟", "options": ["من خلال أيقونة الساعة", "من خلال علامة الواي فاي", "من خلال زر الطاقة", "من خلال سلة المهملات"], "correct": 1, "explanation": "من الأعمال التي يمكن تنفيذها عبر شريط المهام تفعيل شبكة الإنترنت من خلال علامة الواي فاي."},
+            {"id": 56, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "أي من الخيارات التالية يمثل وظيفة يمكن إجراؤها على لوحة المفاتيح من خلال شريط المهام؟", "options": ["تنظيف أزرار لوحة المفاتيح", "تغيير لغة لوحة المفاتيح", "فحص سرعة الكتابة", "تعطيل مفتاح المسافة"], "correct": 1, "explanation": "يتيح شريط المهام للمستخدم إمكانية تغيير لغة لوحة المفاتيح."},
+            {"id": 57, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "أي من الوظائف التالية المتعلقة بالصوت والبطارية يمكن القيام بها عبر شريط المهام؟", "options": ["التحكم بمستوى صوت الحاسوب ومعرفة نسبة الشحن للحاسوب", "تسجيل المقاطع الصوتية فقط", "شحن الحاسوب لاسلكياً", "زيادة سعة البطارية الفيزيائية"], "correct": 0, "explanation": "يمكن من خلال شريط المهام التحكم بمستوى صوت الحاسوب، وكذلك معرفة نسبة الشحن للحاسوب."},
+            {"id": 58, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "ماذا يمكن فعله للتطبيقات المفتوحة في النظام من خلال شريط المهام؟", "options": ["حذفها من القرص الصلب نهائياً", "إخفاء وإظهار التطبيقات المفتوحة في النظام", "تعديل الكود البرمجي الخاص بها", "منع تحديثها"], "correct": 1, "explanation": "يتيح شريط المهام إخفاء وإظهار التطبيقات المفتوحة في النظام."},
+            {"id": 59, "page": 1, "category": "سادساً: شريط المهام (Taskbar) وضبط الوقت والتاريخ", "q": "لماذا يُنصح بتخصيص شريط المهام بإدراج التطبيقات الأكثر استخداماً فيه؟", "options": ["لتقليل استهلاك ذاكرة الوصول العشوائي", "من أجل الوصول السريع إليها", "لزيادة مساحة القرص الثابت", "لحمايتها من الحذف"], "correct": 1, "explanation": "يمكن تخصيص شريط المهام بإدراج التطبيقات الأكثر استخداماً فيه من أجل الوصول السريع إليها."},
+            {"id": 60, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المصطلح الإنجليزي لـ \"أمن المعلومات\"؟", "options": ["Data Integrity", "Information Security", "Remote Access", "Data Availability"], "correct": 1, "explanation": "يُعرف أمن المعلومات باللغة الإنجليزية باسم Information Security."},
+            {"id": 61, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "لماذا أصبح من الصعب الاستغناء عن استخدام المعلومات في أجهزة الحاسبات وتناقلها عبر الشبكات الداخلية والعنكبوتية؟", "options": ["لأنها مجانية بالكامل", "لأنها سهلت متطلبات العمل اليومية", "لأنها لا تتعرض لأي نوع من الاختراق", "لأنها تلغي الحاجة إلى الحاسبات"], "correct": 1, "explanation": "أصبح استخدام المعلومات وتناقلها عبر الشبكات أمراً روتينياً يصعب الاستغناء عنه في وقتنا الحالي كونها سهلت متطلبات العمل اليومية."},
+            {"id": 62, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "لماذا تُعد تقنية استخدام وتناقل المعلومات عبر الشبكات \"سلاحاً ذا حدين\"؟", "options": ["لأنها بطيئة ومكلفة في آن واحد", "لأنها معرضة للاختراق والضرر الناتج إما من سوء الاستخدام أو الاستهداف عن قصد", "لأنها تعمل على الشبكة الداخلية فقط", "لأنها تتلف الأجزاء المادية للحاسوب تلقائياً"], "correct": 1, "explanation": "تعد هذه التقنية سلاحاً ذا حدين؛ فإلى جانب تسهيل العمل اليومي، فهي معرضة للاختراق والضرر الناتج إما من سوء الاستخدام أو الاستهداف عن قصد."},
+            {"id": 63, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "بماذا يرتبط أمن المعلومات (Information Security) ارتباطاً مباشراً؟", "options": ["بتصميم صفحات الويب", "بأمن الحاسبات", "بسرعة الاتصال بالإنترنت", "بسعة القرص الصلب"], "correct": 1, "explanation": "يرتبط أمن المعلومات ارتباطاً مباشراً بأمن الحاسبات، ولذلك يجب تحديد إجراءات وقائية ودفاعية حسب الإمكانيات المتوفرة."},
+            {"id": 64, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو التعريف الدقيق لـ \"أمن المعلومات\"؟", "options": ["تشفير كلمات المرور الخاصة بالبريد الإلكتروني فقط", "مجموعة من الإجراءات الوقائية للحفاظ على المعلومات من مخاطر الاستخدام غير الصحيح (متعمداً أو عن غير قصد) ومن مخاطر الكوارث الطبيعية", "تثبيت برامج مكافحة الفيروسات على الأجهزة المكتبية فقط", "منع الموظفين من استخدام الشبكة العنكبوتية نهائياً"], "correct": 1, "explanation": "يُعرف أمن المعلومات بأنه مجموعة من الإجراءات الوقائية للحفاظ على المعلومات من مخاطر الاستخدام غير الصحيح سواء كان متعمداً أو عن غير قصد، ومن مخاطر الكوارث الطبيعية."},
+            {"id": 65, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "كم عدد المكونات الأساسية لأمن المعلومات التي تُعتبر على درجة واحدة من الأهمية؟", "options": ["مكون واحد فقط وهو سرية المعلومات", "مكونان أساسيان", "ثلاثة مكونات أساسية", "خمسة مكونات أساسية"], "correct": 2, "explanation": "الحفاظ على سرية المعلومات هو مكون واحد فقط من أصل ثلاثة مكونات أساسية لأمن المعلومات تُعتبر على درجة واحدة من الأهمية."},
+            {"id": 66, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المصطلح الإنجليزي لمكوّن \"سرية المعلومات\"؟", "options": ["Data Integrity", "Data Confidentiality", "Data Availability", "Data Sender"], "correct": 1, "explanation": "يُشار إلى المكون الأول من مكونات أمن المعلومات وهو \"سرية المعلومات\" بالمصطلح الإنجليزي Data Confidentiality."},
+            {"id": 67, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ماذا يشمل جانب \"سرية المعلومات\" (Data Confidentiality)؟", "options": ["حماية البيانات من التعديل فقط", "كل التدابير اللازمة لمنع اطلاع الأشخاص غير المصرح بهم على المعلومات السرية", "ضمان وصول المستخدمين إلى البناية التي تحتوي على قاعدة البيانات", "تحديث نظام التشغيل بشكل دوري"], "correct": 1, "explanation": "يشمل جانب سرية المعلومات كل التدابير اللازمة لمنع اطلاع الأشخاص غير المصرح بهم على المعلومات السرية."},
+            {"id": 68, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "أي مما يلي ذُكر كمثال على المعلومات التي يُحرص على سريتها ضمن مكون (Data Confidentiality)؟", "options": ["استهداف بناية تحتوي على قاعدة بيانات", "المعلومات الشخصية لوزارة معينة", "التلاعب بقواعد بيانات لوزارة معينة", "الإعلانات التجارية الإجبارية"], "correct": 1, "explanation": "من الأمثلة المذكورة على المعلومات التي يُحرص على سريتها هي المعلومات الشخصية لوزارة معينة."},
+            {"id": 69, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المصطلح الإنجليزي لمكوّن \"سلامة محتوى البيانات\"؟", "options": ["Data Confidentiality", "Data Integrity", "Data Availability", "Information Security"], "correct": 1, "explanation": "يُعرف المكون الثاني وهو \"سلامة محتوى البيانات\" باللغة الإنجليزية باسم Data Integrity."},
+            {"id": 70, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ماذا يشمل جانب \"سلامة محتوى البيانات\" (Data Integrity)؟", "options": ["منع الأشخاص غير المصرح بهم من قراءة البيانات فقط", "التدابير اللازمة لحماية المعلومة من التلاعب (التغيير) من قِبل أشخاص مخولين أو أشخاص يوهمون النظام بأنهم مخولون", "إتاحة البيانات للجميع عبر الإنترنت", "تسريع نقل البيانات في الشبكة الداخلية"], "correct": 1, "explanation": "يختص جانب سلامة محتوى البيانات بالتدابير اللازمة لحماية المعلومة من التلاعب أو التغيير سواء من أشخاص مخولين أو ممن يوهمون النظام بأنهم مخولون."},
+            {"id": 71, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المثال المذكور في المحاضرة على الإخلال بـ \"سلامة محتوى البيانات\" (Data Integrity)؟", "options": ["المعلومات الشخصية لوزارة معينة", "التلاعب بقواعد بيانات لوزارة معينة", "استهداف بناية تحتوي على قاعدة بيانات مهمة", "سرقة كلمة المرور عبر البريد الإلكتروني"], "correct": 1, "explanation": "ذكرت المحاضرة التلاعب بقواعد بيانات لوزارة معينة كمثال مباشر على انتهاك سلامة محتوى البيانات."},
+            {"id": 72, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المصطلح الإنجليزي لمكوّن \"ضمان الوصول إلى المعلومات\"؟", "options": ["Data Confidentiality", "Data Integrity", "Data Availability", "Denial of Service"], "correct": 2, "explanation": "يُعرف المكون الثالث لأمن المعلومات وهو \"ضمان الوصول إلى المعلومات\" بالمصطلح Data Availability."},
+            {"id": 73, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "متى تصبح المعلومات بلا قيمة وفقاً لمبدأ \"ضمان الوصول إلى المعلومات\" (Data Availability)؟", "options": ["عندما يتم حفظها في قواعد بيانات", "في حالة عدم إمكانية الوصول إليها من قِبل الأشخاص المخولين لها", "عندما يطلع عليها الأشخاص المخولون", "عند نقلها عبر الشبكة الداخلية"], "correct": 1, "explanation": "تنص المحاضرة على أن المعلومات تصبح بلا قيمة في حالة عدم إمكانية الوصول إليها من قِبل الأشخاص المخولين لها، ولذا ينفذ المخربون وسائل عدة لمنعهم من الوصول إليها."},
+            {"id": 74, "page": 2, "category": "أولاً: مفهوم أمن المعلومات ومكوناته", "q": "ما هو المثال المذكور على الوسائل التي يمنع بها المخربون الوصول إلى المعلومة ضمن مكون (Data Availability)؟", "options": ["التلاعب بقواعد بيانات لوزارة معينة", "استهداف بناية تحتوي على قاعدة بيانات مهمة", "الاطلاع على المعلومات الشخصية لوزارة معينة", "إرسال إعلانات تجارية إجبارية"], "correct": 1, "explanation": "من الأمثلة على منع الأشخاص المخولين من الوصول إلى المعلومة هو استهداف بناية تحتوي على قاعدة بيانات مهمة."},
+            {"id": 75, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "كم عدد العناصر الرئيسية التي يجب أن تتوفر لشن الهجمات الإلكترونية على المعلومات والأنظمة الإلكترونية؟", "options": ["عنصران رئيسيان", "ثلاثة عناصر رئيسية", "أربعة عناصر رئيسية", "خمسة عناصر رئيسية"], "correct": 1, "explanation": "توجد ثلاثة عناصر رئيسية يجب أن تتوفر لشن الهجمات الإلكترونية وهي: وجود الدافع (الهدف)، وجود طريقة لتنفيذ الهجوم، ووجود الثغرات."},
+            {"id": 76, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "أي مما يلي يُعد من الدوافع (الأهداف) المذكورة لشن الهجمات الإلكترونية على نظام معلومات؟", "options": ["تحديث النظام وسد الثغرات", "الحصول على المال أو الانتقام أو التخريب أو لأغراض سياسية", "فحص البرامج باستمرار", "تسهيل متطلبات العمل اليومية"], "correct": 1, "explanation": "لا بد لمن يهاجم نظام معلومات من وجود دافع (هدف)، وقد يكون هذا الدافع الحصول على المال، أو الانتقام، أو التخريب، أو لأغراض سياسية."},
+            {"id": 77, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "ما هو الشرط الأساسي لكي يتمكن المهاجم من شن هجوم ناجح وفقاً لعنصر \"وجود طريقة لتنفيذ الهجوم\"؟", "options": ["أن يمتلك حاسوباً سريعاً فقط", "أن يكون لديه تصور وخطة واضحة لطريقة هجوم تحقق الغرض", "أن يعمل في وزارة حكومية", "أن يستخدم برنامج فوتوشوب"], "correct": 1, "explanation": "لن يتمكن المهاجم من شن هجوم ناجح ما لم يكن لديه تصور وخطة واضحة لطريقة هجوم تحقق الغرض."},
+            {"id": 78, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "ما هو الفارق الأساسي بين المهاجمين المحترفين وغير المحترفين كما ورد في المحاضرة؟", "options": ["امتلاك المهاجم المحترف لتصور وخطة واضحة لطريقة هجوم تحقق الغرض", "نوع نظام التشغيل الذي يستخدمه المهاجم", "العمر الصغير للمهاجم المحترف", "استخدام أقراص CD بدلاً من USB"], "correct": 0, "explanation": "امتلاك تصور وخطة واضحة لطريقة هجوم تحقق الغرض هو الفارق بين المهاجمين المحترفين وغير المحترفين."},
+            {"id": 79, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "ماذا يجب علينا فعله لصد الهجمات الإلكترونية أو تقليل أضرارها؟", "options": ["الاستغناء عن أجهزة الحاسوب تماماً", "معرفة طرق الهجوم وخططه، ومتطلبات نجاح التنفيذ", "حذف جميع الملفات ذات الامتداد EXE", "إيقاف جميع التحديثات التلقائية"], "correct": 1, "explanation": "لصد الهجمات الإلكترونية أو تقليل أضرارها يجب علينا معرفة طرق الهجوم وخططه ومتطلبات نجاح التنفيذ."},
+            {"id": 80, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "ما هو المصطلح الإنجليزي لـ \"الثغرات\"؟", "options": ["Viruses", "Vulnerabilities", "Worms", "Blocker"], "correct": 1, "explanation": "يُطلق على الثغرات باللغة الإنجليزية مصطلح Vulnerabilities."},
+            {"id": 81, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "ما المقصود بـ \"الثغرات\" (Vulnerabilities)؟", "options": ["برامج تقوم بالتكاثر ذاتياً عبر الشبكة", "نقاط الضعف في تصميم أو إعداد البرامج أو الأنظمة", "وسائل تخزين خارجية لنقل الملفات", "رسائل بريدية تحتوي على إعلانات تجارية"], "correct": 1, "explanation": "الثغرات هي نقاط الضعف في تصميم أو إعداد البرامج أو الأنظمة، وتُستغل من قِبل المخربين لإحداث الضرر المراد."},
+            {"id": 82, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "كيف يمكننا حماية أنظمتنا وبرامجنا من استغلال الثغرات الأمنية؟", "options": ["بعدم ربط الحاسوب بالطابعة", "بفحص نظامنا وبرامجنا باستمرار وتحديثهما باستمرار", "بإغلاق الشاشة عند عدم الاستخدام", "بحذف جدار الحماية"], "correct": 1, "explanation": "لتجنب استغلال الثغرات من المخربين علينا فحص نظامنا وبرامجنا باستمرار وتحديثهما باستمرار."},
+            {"id": 83, "page": 2, "category": "ثانياً: العناصر الضرورية لشن الهجمات الإلكترونية", "q": "لماذا تُعد بعض التحديثات، وخاصة تحديثات نظام التشغيل، مهمة جداً من الناحية الأمنية؟", "options": ["لأنها تغير ألوان الواجهة فقط", "لأنها ما هي إلا سد لثغرات أمنية قد اكتُشفت", "لأنها تزيد من عدد الإعلانات التجارية", "لأنها تقوم بحذف كافة البرامج المثبتة"], "correct": 1, "explanation": "بعض التحديثات وخاصة لنظام التشغيل ما هي إلا سد لثغرات أمنية قد تم اكتشافها، ولذا يجب التحديث باستمرار."},
+            {"id": 84, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "ما هو تعريف \"البرامج الضارة\"؟", "options": ["أي برنامج يهدف إلى حماية الشبكة من الاختراق", "أي برنامج يكون كل مهامه أو أحدها عمل ضرر ما في النظام من تجسس أو تخريب أو استنزاف لموارد النظام", "البرامج المخصصة لتعديل الصور فقط", "التحديثات الرسمية الصادرة عن نظام التشغيل"], "correct": 1, "explanation": "البرامج الضارة هي أي برنامج يكون كل مهامه أو أحدها إحداث ضرر ما في النظام من تجسس أو تخريب أو استنزاف لموارد النظام."},
+            {"id": 85, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "أي من الخيارات التالية يمثل أمثلة على \"موارد النظام\" التي تستنزفها البرامج الضارة؟", "options": ["الوقت، المعالج، الذاكرة، وحدة الخزن، وموارد الشبكة", "لوحة المفاتيح والشاشة فقط", "الطابعة والماسح الضوئي فقط", "أقراص CD وDVD فقط"], "correct": 0, "explanation": "تشمل موارد النظام التي تتعرض للاستنزاف من البرامج الضارة: الوقت، المعالج، الذاكرة، وحدة الخزن، وموارد الشبكة."},
+            {"id": 86, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "بين أي فئة ينتشر غالباً دافع تطوير البرامج الضارة لإثبات الشخص لنفسه أو لغيره مقدرته على الاختراق أو التجسس؟", "options": ["المؤسسات الحكومية الكبرى", "صغار السن أو المبتدئين", "شركات التسويق التجاري", "مطوري أنظمة التشغيل"], "correct": 1, "explanation": "الدافع الأول من أهداف البرامج الضارة هو أن يثبت الشخص لنفسه أو لغيره مقدرته على تطوير برامج تستطيع الاختراق أو التجسس، وغالباً ما ينتشر هذا النوع بين صغار السن أو المبتدئين."},
+            {"id": 87, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "على أي مستوى يتم \"التجسس الصريح وسرقة المعلومات\" كدافع لتطوير البرامج الضارة؟", "options": ["على مستوى الأفراد فقط", "على مستوى الشركات فقط", "على مستوى أفراد أو شركات أو وزارة", "على مستوى الأجهزة غير المتصلة بالشبكة فقط"], "correct": 2, "explanation": "يُعد التجسس الصريح وسرقة المعلومات من الدوافع الشائعة لتطوير البرامج الضارة سواء على مستوى أفراد أو شركات أو وزارة."},
+            {"id": 88, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "أي مما يلي يمثل الجهات التي قد يستهدفها دافع \"الانتقام\" في تطوير البرامج الضارة؟", "options": ["الأفراد فقط", "أفراد أو شركات أو وزارة أو دولة", "الجامعات فقط", "المبتدئين فقط"], "correct": 1, "explanation": "أحد أهداف البرامج الضارة هو الانتقام من أفراد أو شركات أو وزارة أو دولة."},
+            {"id": 89, "page": 2, "category": "ثالثاً: البرامج الضارة وأهدافها", "q": "كيف تكون الإعلانات التجارية المرتبطة بدافع \"التسويق التجاري\" في البرامج الضارة، وما هو أثرها؟", "options": ["تكون اختيارية ومفيدة لتسريع الحاسوب", "غالباً ما تكون غير مرغوب بها وإجبارية وتستنزف موارد النظام (معالج وذاكرة ووحدة تخزين وسعة نقل الشبكة)", "تظهر مرة واحدة فقط عند تثبيت النظام ولا تستهلك موارد", "تقتصر على حماية جدار الحماية"], "correct": 1, "explanation": "في دافع التسويق التجاري، غالباً ما تكون الإعلانات التجارية غير مرغوب بها وإجبارية وتستنزف موارد النظام من معالج وذاكرة ووحدة تخزين وسعة نقل الشبكة."},
+            {"id": 90, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "ما هو المصطلح الإنجليزي لـ \"الفيروسات\"؟", "options": ["Worms", "Viruses", "Trojan Horses", "Vulnerabilities"], "correct": 1, "explanation": "يُشار إلى الفيروسات باللغة الإنجليزية بمصطلح Viruses."},
+            {"id": 91, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "كيف تعمل الفيروسات (Viruses) بهدف إصابة النظام؟", "options": ["تعمل كبرنامج قائم بذاته لا يحتاج لأي ملف آخر", "تستطيع أن تنسخ نفسها أو ترفق نفسها إلى برنامج قابل للتشغيل ذي امتداد EXE", "تكتفي بتعطيل جدار الحماية دون نسخ نفسها", "تنتشر عبر الشبكة دون تدخل المستخدم نهائياً"], "correct": 1, "explanation": "الفيروسات عبارة عن برامج تستطيع أن تنسخ نفسها أو ترفق نفسها إلى برنامج قابل للتشغيل ذي امتداد .EXE بهدف إصابة النظام."},
+            {"id": 92, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "ما هو امتداد البرامج القابلة للتشغيل التي يرفق الفيروس نفسه بها، وما هو المثال المذكور في المحاضرة؟", "options": ["الامتداد .TXT مثل notes.txt", "الامتداد .EXE مثل photoshop.exe", "الامتداد .PDF مثل book.pdf", "الامتداد .JPG مثل image.jpg"], "correct": 1, "explanation": "يرفق الفيروس نفسه إلى برنامج قابل للتشغيل ذي امتداد .EXE مثل photoshop.exe."},
+            {"id": 93, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "متى تحدث الإصابة الفعلية بالفيروس داخل جهاز الحاسوب؟", "options": ["بمجرد توصيل الكهرباء بالحاسوب", "عندما يقوم مستخدم الجهاز بتفعيل الفيروس وذلك بالنقر على البرنامج القابل للتشغيل الذي يحتوي على الفيروس", "تلقائياً عبر الشبكة دون أي تدخل من المستخدم", "عند تحديث نظام التشغيل"], "correct": 1, "explanation": "تحدث الإصابة عندما يقوم مستخدم الجهاز بتفعيل الفيروس من خلال النقر على البرنامج القابل للتشغيل الذي يحتوي على الفيروس."},
+            {"id": 94, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "كيف يكون الفيروس قادراً على الانتشار من جهاز لآخر؟", "options": ["على شكل برنامج قابل للتشغيل (.EXE) عندما يؤخذ البرنامج الحاوي للفيروس للجهاز المستهدف", "عبر موجات الصوت الصادرة من السماعات", "عن طريق تغيير خلفية سطح المكتب", "بدون أن ينتقل أي برنامج إلى الجهاز المستهدف"], "correct": 0, "explanation": "ينتشر الفيروس من جهاز لآخر على شكل برنامج قابل للتشغيل (.EXE) عند نقل البرنامج الحاوي للفيروس إلى الجهاز المستهدف."},
+            {"id": 95, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "أي من الوسائل التالية ذُكرت كطرق يمكن أن ينتقل عبرها البرنامج الحاوي للفيروس؟", "options": ["عبر الشبكة الحاسوبية لمؤسسة أو جامعة أو عبر الإنترنت، أو عبر واسطة تخزينية مثل (CD, DVD, USB drive)", "عبر كابل الشاشة فقط", "عبر لوحة المفاتيح والفأرة فقط", "عبر مكبرات الصوت فقط"], "correct": 0, "explanation": "قد يُرسل المستخدم البرنامج الحاوي للفيروس عبر الشبكة الحاسوبية لمؤسسة ما أو جامعة ما أو عبر الإنترنت، وقد ينتقل عبر واسطة تخزينية مثل (CD أو DVD أو USB drive / فلاش)."},
+            {"id": 96, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "ما هو المصطلح الإنجليزي لـ \"ديدان الحاسبة\"؟", "options": ["Viruses", "Worms", "Trojan Horses", "Proxy"], "correct": 1, "explanation": "تُعرف ديدان الحاسبة باللغة الإنجليزية باسم Worms."},
+            {"id": 97, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "كيف تتكاثر \"ديدان الحاسبة\" (Worms) وتنتشر؟", "options": ["تتكاثر ذاتياً باستخدام الشبكة الحاسوبية لإرسال عدة نسخ من نفسها إلى الأجهزة المرتبطة بالشبكة", "تنتقل فقط عبر أقراص CD ولا تستخدم الشبكة", "تتطلب دائماً إرفاق نفسها ببرنامج فوتوشوب", "لا تستطيع نسخ نفسها أبداً"], "correct": 0, "explanation": "ديدان الحاسبة هي برامج ضارة تقوم بالتكاثر ذاتياً حيث تستخدم الشبكة الحاسوبية لإرسال عدة نسخ من نفسها إلى الأجهزة المرتبطة بالشبكة."},
+            {"id": 98, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "هل تحتاج دودة الحاسبة (Worm) إلى مستخدم لتفعيلها حتى تنتشر عبر الشبكة؟", "options": ["نعم، يجب أن ينقر المستخدم عليها دائماً مثل الفيروس", "لا، فهي ترسل نفسها عبر الشبكة دون الحاجة إلى مستخدم لتفعيلها", "نعم، تحتاج لتشغيلها من قِبل مدير الشبكة", "لا تنتشر عبر الشبكة أصلاً"], "correct": 1, "explanation": "ترسل الدودة نفسها عبر الشبكة دون الحاجة إلى مستخدم لتفعيلها، على خلاف الفيروس الذي يحتاج لتفعيل المستخدم."},
+            {"id": 99, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "هل تحتاج الدودة (Worm) إلى أن ترفق نفسها مع برنامج آخر لكي تعمل وتنتشر؟", "options": ["نعم، يجب إرفاقها بملف ذي امتداد EXE", "لا تحتاج الدودة إلى أن ترفق نفسها مع برنامج آخر", "نعم، ترفق نفسها ببرامج مكافحة الفيروسات فقط", "نعم، ترفق نفسها بالرسائل البريدية فقط"], "correct": 1, "explanation": "على عكس الفيروس، لا تحتاج الدودة إلى أن ترفق نفسها مع برنامج آخر."},
+            {"id": 100, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "ما هو الضرر الرئيسي الذي تلحقه \"الديدان\" (Worms) بالشبكة؟", "options": ["حذف نظام التشغيل بالكامل", "استهلاك حزمة الشبكة وبالتالي إبطاء الشبكة وجعلها مشلولة بأقل تقدير", "تعديل الصور والمستندات النصية فقط", "إيقاف تشغيل شاشة الحاسوب"], "correct": 1, "explanation": "تُلحق الديدان ضرراً بالشبكة عن طريق استهلاك حزمة الشبكة، مما يؤدي إلى إبطائها وجعلها مشلولة بأقل تقدير."},
+            {"id": 101, "page": 2, "category": "رابعاً: الفيروسات (Viruses) وديدان الحاسبة (Worms)", "q": "ما هو الضرر الذي تقوم به \"الفيروسات\" بالأغلب في الجهاز المستهدف مقارنةً بالديدان؟", "options": ["استهلاك حزمة الشبكة فقط دون لمس الملفات", "تدمير أو تعديل الملفات في الجهاز المستهدف", "إنشاء وسيط اتصال خفي", "إرسال الإعلانات التجارية فقط"], "correct": 1, "explanation": "بينما تركز الديدان على استهلاك حزمة الشبكة وإبطائها، فإن الفيروسات بالأغلب تقوم بتدمير أو تعديل الملفات في الجهاز المستهدف."},
+            {"id": 102, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هو المصطلح الإنجليزي لـ \"أحصنة طروادة\"؟", "options": ["Worms", "Trojan Horses", "Data Sender", "Remote Access"], "correct": 1, "explanation": "يُعرف النوع الثالث من البرامج الضارة الشائعة وهو \"أحصنة طروادة\" بالمصطلح الإنجليزي Trojan Horses."},
+            {"id": 103, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "كيف توصف آلية عمل وانتشار \"حصان طروادة\" من حيث اعتماده على البرامج الأخرى؟", "options": ["يعتمد دائماً على إرفاق نفسه ببرنامج قابل للتشغيل", "هو برنامج قائم بذاته أي لا يعتمد في آلية عمله أو انتشاره على برنامج آخر", "لا يعمل إلا داخل برنامج فوتوشوب", "يحتاج إلى دودة حاسوبية لتشغيله"], "correct": 1, "explanation": "حصان طروادة هو برنامج قائم بذاته، أي لا يعتمد في آلية عمله أو انتشاره على برنامج آخر."},
+            {"id": 104, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "كيف يبدو حصان طروادة للمستخدم، وما الذي يفعله فعلياً في الخفاء؟", "options": ["يظهر كرسالة تحذير ويقوم بحذف الفيروسات", "يبدو على أنه برنامج مفيد ويخدم غاية المستخدم، ولكنه يعمل في الخفاء محدثاً ثغرات بالنظام تسمح بالدخول أو بعمليات غير مصرح بها", "يبدو كبرنامج ضار صريح ويطلب إذن المستخدم للاختراق", "يقوم فقط بإظهار الوقت والتاريخ على شريط المهام"], "correct": 1, "explanation": "يبدو حصان طروادة للمستخدم على أنه برنامج مفيد ويخدم غايته، لكنه يعمل في الخفاء ليُحدث ثغرات بالنظام تسمح للأشخاص بالدخول أو لعمليات غير مصرح بها بالحدوث."},
+            {"id": 105, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هي الفكرة الأساسية من \"حصان طروادة\"؟", "options": ["إبطاء الشبكة باستهلاك حزمتها", "خداع المستخدم على أنه برنامج مفيد بينما يُستخدم في الحقيقة من قِبل المخترقين والمخربين بهدف الوصول للمعلومات المهمة", "إثبات مهارة المبرمج أمام أصدقائه فقط", "إظهار إعلانات تجارية إجبارية"], "correct": 1, "explanation": "الفكرة الأساسية من حصان طروادة هي خداع المستخدم على أنه برنامج مفيد، بينما هو في الحقيقة يُستخدم من قِبل المخترقين والمخربين بهدف الوصول للمعلومات المهمة."},
+            {"id": 106, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "أي نوع من أنواع أحصنة طروادة يسمح للمهاجم بالتحكم في جهاز الضحية عن بُعد بشكل مخفي؟", "options": ["مرسل البيانات (Data Sender)", "الوصول عن بعد (Remote Access)", "معطل البرامج (Blocker)", "وسيط اتصال (Proxy)"], "correct": 1, "explanation": "برامج الوصول عن بعد (Remote Access) هي نوع من أحصنة طروادة تسمح للمهاجم بأن يتحكم في جهازك عن بُعد بشكل مخفي."},
+            {"id": 107, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هي وظيفة حصان طروادة من نوع \"مرسل البيانات\" (Data Sender)؟", "options": ["تعطيل برامج مكافحة الفيروسات", "إرسال بيانات خاصة بمستخدم النظام دون علمه، مثل كلمة المرور والمحادثات المخزونة وغيرها من المعلومات الأمنية", "توقيف حاسوب معين عن العمل بالكامل", "جعل الحاسوب وسيطاً لتخفي المهاجم"], "correct": 1, "explanation": "يقوم مرسل البيانات (Data Sender) بإرسال بيانات خاصة بمستخدم النظام دون علمه مثل كلمة المرور والمحادثات المخزونة وغيرها من المعلومات الأمنية."},
+            {"id": 108, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "كيف يقوم برنامج \"مرسل البيانات\" (Data Sender) بإيصال البيانات المسروقة إلى المهاجم؟", "options": ["عن طريق نسخها على قرص DVD", "بواسطة رسالة بريدية أو تزويدها لموقع المهاجم مباشرة", "عبر طباعتها على الطابعة", "عن طريق حفظها في سلة المهملات"], "correct": 1, "explanation": "تُرسل البيانات الخاصة من قِبل برنامج مرسل البيانات (Data Sender) بواسطة رسالة بريدية أو بتزويدها لموقع المهاجم مباشرة."},
+            {"id": 109, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هو نوع أحصنة طروادة الذي يعمل بالتنسيق مع نسخ أخرى مشابهة على أجهزة أخرى لمهاجمة حاسوب معين وتوقيفه عن العمل بشكل كامل أو جعله بطيئاً جداً؟", "options": ["الوصول عن بعد (Remote Access)", "معطل خدمات النظام (Denial of Service)", "مرسل البيانات (Data Sender)", "وسيط اتصال (Proxy)"], "correct": 1, "explanation": "تعمل برامج معطل خدمات النظام (Denial of Service) بالتنسيق مع نسخ أخرى مشابهة على أجهزة أخرى مهاجمة على مهاجمة حاسوب معين لتوقفه عن العمل بشكل كامل أو لجعله بطيئاً جداً."},
+            {"id": 110, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هو المصطلح الإنجليزي لنوع أحصنة طروادة \"وسيط اتصال\"؟", "options": ["Blocker", "Proxy", "Remote Access", "Denial of Service"], "correct": 1, "explanation": "يُعرف نوع \"وسيط اتصال\" من أحصنة طروادة بالمصطلح الإنجليزي Proxy."},
+            {"id": 111, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "لماذا يتخذ المهاجم من حصان طروادة \"وسيط اتصال\" (Proxy) وسيطاً بينه وبين الضحية الأصلي؟", "options": ["لكي يعطل برامج مكافحة الفيروسات", "لكي يصل إلى ضحيته بصورة خفية", "لكي يرسل المحادثات المخزونة عبر البريد", "لكي يزيد من سرعة الإنترنت لدى الضحية"], "correct": 1, "explanation": "يتخذ المهاجم برنامج وسيط الاتصال (Proxy) وسيطاً بينه وبين الضحية الأصلي لكي يصل إلى ضحيته بصورة خفية."},
+            {"id": 112, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "في حال تم اكتشاف المهاجم الذي يستخدم \"وسيط اتصال\" (Proxy)، ما هي آخر نقطة يتم تتبعها؟", "options": ["الحاسبة الأصلية للمهاجم مباشرة", "الحاسبة الوسيطة", "موقع الشركة المنتجة لنظام التشغيل", "مزود خدمة البريد الإلكتروني"], "correct": 1, "explanation": "عند استخدام وسيط اتصال (Proxy)، لو تم اكتشاف المهاجم فإن آخر نقطة يتم تتبعها هي الحاسبة الوسيطة وليس جهاز المهاجم الأصلي."},
+            {"id": 113, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هو المصطلح الإنجليزي لنوع أحصنة طروادة \"معطل البرامج\"؟", "options": ["Proxy", "Blocker", "Data Sender", "Denial of Service"], "correct": 1, "explanation": "يُعرف نوع \"معطل البرامج\" من أحصنة طروادة بالمصطلح الإنجليزي Blocker."},
+            {"id": 114, "page": 2, "category": "خامساً: أحصنة طروادة (Trojan Horses) وأنواعها", "q": "ما هي البرامج التي يستهدفها حصان طروادة \"معطل البرامج\" (Blocker) بشكل خاص، وما الهدف من ذلك؟", "options": ["يستهدف برامج تعديل الصور لزيادة حجمها", "يستهدف برامج مكافحة الفايروسات وبرامج جدران الحماية لكي يكون نظامك سهل الاختراق", "يستهدف متصفحات الإنترنت لمنع ظهور الإعلانات", "يستهدف برامج المحادثة لحذفها"], "correct": 1, "explanation": "تقوم برامج معطل البرامج (Blocker) بتعطيل بعض البرامج، خاصة برامج مكافحة الفايروسات وبرامج جدران الحماية، وذلك لكي يكون نظامك سهل الاختراق."},
+            {"id": 115, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ما هو التعريف الأول للإنترنت كما ورد في المحاضرة؟", "options": ["مجموعة من الحواسيب المنفصلة غير المتصلة ببعضها", "شبكة عالمية من الروابط بين الحواسيب تسمح للناس بالاتصال والتواصل واكتساب ونقل المعلومات من الشبكة الممتدة في جميع أرجاء العالم", "برنامج محلي مخصص لحفظ الملفات النصية فقط", "مكتبة ورقية إلكترونية محصورة في بلد واحد"], "correct": 1, "explanation": "عُرف الإنترنت بأنه شبكة عالمية من الروابط بين الحواسيب تسمح للناس بالاتصال والتواصل بعضهم مع بعض واكتساب ونقل المعلومات من الشبكة الممتدة في جميع أرجاء العالم."},
+            {"id": 116, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ما هي الوسائل التي يتم من خلالها اكتساب ونقل المعلومات عبر شبكة الإنترنت؟", "options": ["وسائل نصية مكتوبة فقط", "وسائل صوتية فقط", "وسائل بصرية وصوتية ونصية مكتوبة", "وسائل ورقية وبريدية تقليدية"], "correct": 2, "explanation": "تتيح شبكة الإنترنت اكتساب ونقل المعلومات بوسائل بصرية وصوتية ونصية مكتوبة."},
+            {"id": 117, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ما هي الحدود والقيود التي يتجاوزها الإنترنت، وما الذي يتحداه في الوقت نفسه؟", "options": ["يتجاوز حدود الزمان والمكان والكلفة وقيود المسافات، ويتحدى في الوقت نفسه سيطرة الرقابة", "يتجاوز سرعة المعالج فقط، ويتحدى حجم القرص الصلب", "يقتصر على حدود مكان معين، ويخضع لقيود المسافات", "يتجاوز حدود الكلفة فقط دون تجاوز حدود الزمان"], "correct": 0, "explanation": "يعمل الإنترنت بصورة تتجاوز حدود الزمان والمكان والكلفة وقيود المسافات، ويتحدى في الوقت نفسه سيطرة الرقابة."},
+            {"id": 118, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "كيف تتفاهم شبكة الإنترنت الدولية للمعلومات وفق التعريف الثاني الوارد في المحاضرة؟", "options": ["باستخدام البريد الورقي", "باستخدام بروتوكولات", "باستخدام الأقراص المدمجة فقط", "بدون أي قواعد تفاهم"], "correct": 1, "explanation": "يُعرف الإنترنت أيضاً بأنه شبكة دولية للمعلومات تتفاهم باستخدام بروتوكولات وتتعاون فيما يتعلق بجميع مستخدميها."},
+            {"id": 119, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "أي مما يلي تشمله شبكة الإنترنت من خدمات ومحتويات؟", "options": ["الرسائل الإلكترونية، الاتصال الصوتي المرئي، إقامة المؤتمرات بالفيديو، قوائم البريد الإلكتروني، الأخبار والتحليلات الصحفية، وآلات البحث المرجعي", "الكتب الورقية والمجلات المطبوعة فقط", "المكالمات الهاتفية الأرضية فقط", "قواعد البيانات المحلية غير المتصلة بالشبكة"], "correct": 0, "explanation": "تشمل شبكة الإنترنت العديد من الرسائل الإلكترونية، والاتصال الصوتي المرئي بين الأشخاص، وإقامة المؤتمرات بالفيديو، وقوائم البريد الإلكتروني، والملايين من الأخبار والتحليلات الصحفية المتاحة لنقلها بطريقة شخصية، وكذلك آلات البحث المرجعي."},
+            {"id": 120, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ما هو الرأي المذكور في المحاضرة حول فرض ضوابط وتشريعات على استخدام الإنترنت في أمور البحث العلمي؟", "options": ["يجب فرض أشد الضوابط والتشريعات على البحث العلمي", "في أمور البحث العلمي لا يجب أن تكون مثل هذه الضوابط والتشريعات", "يجب منع استخدام الإنترنت في البحث العلمي نهائياً", "يجب حصر البحث العلمي في المكتبات الورقية فقط"], "correct": 1, "explanation": "ذكرت المحاضرة أنه رغم وجود من يقول بضرورة وجود ضوابط معينة على استخدام الإنترنت، إلا أنه في أمور البحث العلمي لا يجب أن تكون مثل هذه الضوابط والتشريعات."},
+            {"id": 121, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ماذا أثبتت الدراسات بشأن أكثر مجالات استخدام الإنترنت مقارنة بالبحث والتطوير العلمي؟", "options": ["أن أكثر استخدام للإنترنت هو في البحث العلمي وقليل في الدردشة", "أن أكثر استخدام للإنترنت هو في الدردشة وأمور الشات، وقليل من يستخدمه في أمور لها علاقة بالبحث والتطوير العلمي", "أن استخدام الدردشة والبحث العلمي متساويان تماماً", "أن أحداً لا يستخدم الإنترنت في البحث العلمي"], "correct": 1, "explanation": "أثبتت الدراسات أن أكثر استخدام للإنترنت يكون في الدردشة وأمور الشات، بينما قليل من يستخدم الإنترنت في أمور لها علاقة بالبحث والتطوير العلمي."},
+            {"id": 122, "page": 3, "category": "أولاً: مفهوم الإنترنت واستخدامه في البحث العلمي", "q": "ما هو المؤشر الجيد جداً على تطور أمور البحث العلمي كما أشارت المحاضرة؟", "options": ["انخفاض عدد مستخدمي الإنترنت", "أن نسبة البحث في الإنترنت عن أمور لها علاقة بالبحث العلمي في تزايد مستمر", "توقف استخدام الدردشة والشات", "زيادة عدد المكتبات الورقية فقط"], "correct": 1, "explanation": "نسبة البحث في الإنترنت عن أمور لها علاقة بالبحث العلمي في تزايد مستمر، وهو ما اعتبرته المحاضرة مؤشراً جيداً جداً على تطور أمور البحث العلمي."},
+            {"id": 123, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "ماذا يتيح الإنترنت للباحث ضمن ميزة \"البحث في مجالات أوسع\"؟", "options": ["الاقتصار على أبحاث بلد واحد فقط", "التعرف على العديد من ثقافات وأبحاث البلدان المجاورة، والحصول على معلومات من معظم البلدان العربية", "البحث عن المعلومات الرياضية فقط", "الوصول إلى مكتبة جامعته فقط"], "correct": 1, "explanation": "يتيح الإنترنت البحث في مجالات أوسع حيث يتم التعرف على ثقافات وأبحاث البلدان المجاورة ولا يقتصر البحث على بلد معين، كما يسمح للباحث بالحصول على معلومات من معظم البلدان العربية."},
+            {"id": 124, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "كيف تساعد كثرة وتعدد المصادر على الإنترنت الباحث العلمي؟", "options": ["تزيد من تعب وجهد الباحث في التنقل بين المكتبات", "تتيح اكتشاف علوم ونظريات جديدة وتصل إليه المعلومات وهو جالس في المنزل بدون تعب وجهد أو البحث في المكتبات المختلفة", "تقلل من عدد النظريات المتاحة للبحث", "تجبر الباحث على الاعتماد على مصدر واحد فقط"], "correct": 1, "explanation": "تعدد المصادر وكثرتها يساعد في اكتشاف علوم ونظريات جديدة تعين الباحث في كتابة بحثه بأريحية، وتصله المعلومات وهو جالس في المنزل دون تعب وجهد أو بحث في المكتبات المختلفة."},
+            {"id": 125, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "كيف يُسهم الإنترنت في توفير وقت الباحث الثمين؟", "options": ["بتمكينه من الوصول للمعلومات بسهولة دون الحاجة لأحد الأشخاص، وجلب عدة معلومات من مصادر مختلفة في وقت واحد بسيط", "بإلغاء الحاجة لقراءة المصادر العلمية", "بتقليل عدد صفحات البحث العلمي تلقائياً", "بتحديد ساعة واحدة فقط للبحث يومياً"], "correct": 0, "explanation": "من أبرز مميزات الإنترنت أنه يسهل الوصول للمعلومات ويوفر وقت الباحث، فيحصل عليها دون الحاجة لأحد الأشخاص ويجلب عدة معلومات من مصادر مختلفة في وقت واحد بسيط."},
+            {"id": 126, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "بماذا تتميز المعلومات المأخوذة من الإنترنت مقارنةً بالصحف والكتب الموجودة في المكتبات المختلفة؟", "options": ["تكون قديمة وغير قابلة للتعديل", "تكون حديثة وجديدة ومطورة", "تكون مكتوبة بلغة واحدة فقط", "تكون محدودة العدد"], "correct": 1, "explanation": "جميع المعلومات التي يتم أخذها من الإنترنت تكون حديثة وجديدة ومطورة، على عكس المعلومات المكتوبة في مصادر أخرى مثل الصحف والكتب بالمكتبات."},
+            {"id": 127, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "وفقاً للمحاضرة، كل متى يقوم الإنترنت بتحديث المعلومات تقريباً؟", "options": ["كل عشر سنوات", "سنوياً تقريباً", "لا يتم تحديثها أبداً", "كل خمس سنوات"], "correct": 1, "explanation": "ذكرت المحاضرة أن الإنترنت يقوم بتحديث المعلومات سنوياً تقريباً على شبكة الإنترنت."},
+            {"id": 128, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "ما هي ميزة الإنترنت من حيث الزمان والمكان للحصول على المعلومات؟", "options": ["متاحة خلال ساعات الدوام الرسمي فقط", "لا يتقيد الباحث بوقت أو مكان معين، فالمعلومات متاحة أربعاً وعشرين ساعة طوال اليوم وفي أي وقت وزمن ومكان", "متاحة فقط داخل الحرم الجامعي", "تتوقف الخدمة في العطل الرسمية"], "correct": 1, "explanation": "لا يتم تحديد مكان وزمان للحصول على المعلومات عبر الإنترنت، فهي متاحة 24 ساعة طوال اليوم ويمكن استخدامها في أي وقت وزمن ومكان."},
+            {"id": 129, "page": 3, "category": "ثانياً: مميزات الإنترنت في البحث العلمي", "q": "ما هي فائدة عملية \"التعليم الجماعي\" التي تتم عبر الإنترنت؟", "options": ["تمنع ذوي الخبرة من التواصل مع بعضهم", "تساعد أكثر من شخص من ذوي الخبرة على الاجتماع ومناقشة الأفكار المختلفة فتضيف لهم خبرات ومعارف عديدة", "تقتصر على العمل الفردي المنعزل", "تقلل من الاستفادة العلمية"], "correct": 1, "explanation": "تساعد عملية التعليم الجماعي عبر الإنترنت أكثر من شخص من ذوي الخبرة على الاجتماع ومناقشة الأفكار المختلفة، مما يضيف لهم خبرات ومعارف عديدة يُستفاد منها بشكل كبير."},
+            {"id": 130, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "على ماذا تعتمد الطرق والأساليب الحديثة لجمع البيانات التي وظفت وفق المتغيرات التكنولوجية الحديثة؟", "options": ["البطء وكثرة التكاليف", "السرعة واختزال الوقت والبحث عن الصدقية وقلة التكاليف والدقة في العمل وتسهيل التعامل مع المبحوثين أو مصادر المعلومات", "الأساليب الكلاسيكية الورقية فقط", "إطالة وقت جمع البيانات وزيادة تكلفتها"], "correct": 1, "explanation": "وُظفت طرق وأساليب حديثة لجمع البيانات تعتمد السرعة واختزال الوقت وتبحث عن الصدقية وقلة التكاليف والدقة في العمل وتسهيل التعامل مع المبحوثين أو مصادر المعلومات."},
+            {"id": 131, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "في أي من العلوم ذُكر خصوصاً توظيف الأساليب الحديثة لجمع البيانات عبر شبكة الإنترنت؟", "options": ["العلوم الفيزيائية والكيميائية فقط", "العلوم الإنسانية والاجتماعية", "علم الفلك فقط", "علوم الجيولوجيا فقط"], "correct": 1, "explanation": "أشارت المحاضرة إلى الأساليب الحديثة لجمع البيانات بتوظيف شبكة الإنترنت خصوصاً في العلوم الإنسانية والاجتماعية."},
+            {"id": 132, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "ما هو أشهر محرك بحث (Search Engine) ذُكر ضمن الأساليب الحديثة لاكتشاف ما هو موجود على شبكة الإنترنت؟", "options": ["غوغل (GOOGLE)", "ويكيبيديا", "كتابي", "فيسبوك"], "correct": 0, "explanation": "من الأساليب الحديثة استخدام محركات البحث (SEARCH ENGINES) على شبكة الإنترنت لاكتشاف ما هو موجود على الشبكة مما تبحث عنه، وأشهرها محرك البحث غوغل (GOOGLE)."},
+            {"id": 133, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "ما هو المصطلح الإنجليزي لـ \"أدلة الإنترنت\"؟", "options": ["E-FORUMS", "INTERNET GUIDES", "E-WEBSITES", "SEARCH ENGINES"], "correct": 1, "explanation": "يُشار إلى أدلة الإنترنت باللغة الإنجليزية بمصطلح INTERNET GUIDES."},
+            {"id": 134, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "أي مما يلي يُعد من الأمثلة المذكورة على \"أدلة الإنترنت\" (INTERNET GUIDES) المتخصصة؟", "options": ["دليل المجلات العلمية، دليل الجامعات، دليل الباحثين، ودليل المواقع العراقية أو التونسية أو العربية", "استمارات الاستبيان واستطلاعات الرأي فقط", "برامج المحادثة الصوتية فقط", "العيادات الطبية فقط"], "correct": 0, "explanation": "تشمل أدلة الإنترنت المتخصصة بشتى أنواع الاهتمامات: دليل المجلات العلمية، ودليل الجامعات، ودليل الباحثين، ودليل المواقع العراقية أو التونسية أو العربية وغيرها."},
+            {"id": 135, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "كيف تتم المقابلات باستخدام برامج المحادثة (CHAT) في جمع البيانات؟", "options": ["بالكتابة فقط دون صوت أو صورة", "بالصوت فقط دون كتابة", "سواء الصوتية منها أو الكتابية، وبإمكانها عقد اتصال بالصوت والصورة مع الطرف الآخر حيثما كان", "حضورياً في نفس المكان فقط"], "correct": 2, "explanation": "تتم المقابلات عبر برامج المحادثة (تشات CHAT) سواء الصوتية أو الكتابية، كما يمكن لهذه البرامج عقد اتصال بالصوت والصورة مع الطرف الآخر أينما كان."},
+            {"id": 136, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "ما هي وظيفة \"المواقع الإلكترونية\" (E-WEBSITES) ضمن الأساليب الحديثة لجمع البيانات؟", "options": ["وضع استمارات استبيان أو استطلاعات للرأي", "حجب المعلومات عن الباحثين", "عقد مؤتمرات صوتية فقط", "تقديم خدمات البريد الورقي"], "correct": 0, "explanation": "تُستخدم المواقع الإلكترونية (E-WEBSITES) في جمع البيانات من خلال وضع استمارات استبيان أو استطلاعات للرأي."},
+            {"id": 137, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "أي مما يلي يُعد من أمثلة \"المواقع الخدمية الخاصة\" المستخدمة في جمع البيانات؟", "options": ["محرك البحث غوغل فقط", "المواقع الحكومية والتعليمية والعيادات الطبية والإرشادية والمواقع الدينية", "برامج المحادثة الكتابية فقط", "المنتديات الرياضية فقط"], "correct": 1, "explanation": "تشمل المواقع الخدمية الخاصة كلاً من المواقع الحكومية والتعليمية والعيادات الطبية والإرشادية والمواقع الدينية وغيرها."},
+            {"id": 138, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "أي مما يلي ذُكر كأحد الأساليب الحديثة لجمع البيانات عبر الإنترنت إلى جانب المواقع الخدمية والمنتديات؟", "options": ["المكتبات الإلكترونية المتوفرة على شبكة الإنترنت", "الأرشيف الورقي التقليدي", "الرسائل البريدية اليدوية", "الإعلانات التلفزيونية"], "correct": 0, "explanation": "تُعد المكتبات الإلكترونية المتوفرة على شبكة الإنترنت أحد الأساليب الحديثة لجمع البيانات بتوظيف الشبكة."},
+            {"id": 139, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "ما هو المصطلح الإنجليزي لـ \"المنتديات الإلكترونية\"؟", "options": ["E-WEBSITES", "E-FORUMS", "INTERNET GUIDES", "CHAT"], "correct": 1, "explanation": "يُطلق على المنتديات الإلكترونية المصطلح الإنجليزي E-FORUMS."},
+            {"id": 140, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "ما المقصود بـ \"المنتديات الإلكترونية\" (E-FORUMS)؟", "options": ["مواقع حكومية لإصدار الوثائق الرسمية", "مواقع لتبادل الآراء والأفكار لأعداد من مرتادي الشبكة تجمعهم خصائص أو اهتمامات مشتركة", "برامج مخصصة لكتابة رسائل الماجستير فقط", "أدلة متخصصة بعناوين الجامعات فقط"], "correct": 1, "explanation": "المنتديات الإلكترونية هي مواقع لتبادل الآراء والأفكار لأعداد من مرتادي الشبكة تجمعهم خصائص مشتركة (مثل فئات الشباب أو النساء) أو اهتمامات مشتركة (مثل الرياضة والفن أو الإعجاب بفنان أو رياضي أو سياسي)."},
+            {"id": 141, "page": 3, "category": "ثالثاً: الأساليب الحديثة لجمع واستحصال البيانات", "q": "كيف يتم الانضمام إلى المنتديات الإلكترونية (E-FORUMS)، وماذا يحصل المشترك بموجب ذلك؟", "options": ["بدفع اشتراك مالي إجباري دون الحصول على كلمة مرور", "وفق فتح حساب مجاني عادة يحصل بموجبه المشترك على كلمة مرور (PASSWORD) إلى جانب لقبه الخاص (NICKNAME)", "بدون أي حساب أو لقب خاص", "عن طريق إرسال رسالة ورقية لإدارة المنتدى"], "correct": 1, "explanation": "يتم الانضمام للمنتديات الإلكترونية وفق فتح حساب مجاني عادة، يحصل بموجبه المشترك على كلمة مرور (PASSWORD) إلى جانب لقبه الخاص (NICKNAME)."},
+            {"id": 142, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "ما هو التعريف الدقيق لـ \"محرك البحث\" (WEB SEARCH ENGINE)؟", "options": ["جهاز مادي يُربط بالحاسوب لتسريع الإنترنت", "برنامج حاسوبي مصمم للمساعدة في العثور على مستندات مخزنة على شبكات معلوماتية كالشبكة العنكبوتية العالمية (WWW) أو على حاسوب شخصي", "موقع مخصص لتبادل الآراء والأفكار فقط", "نظام تشغيل للأجهزة اللوحية"], "correct": 1, "explanation": "محرك البحث (WEB SEARCH ENGINE) هو برنامج حاسوبي مصمم للمساعدة في العثور على مستندات مخزنة على شبكات معلوماتية مثل الشبكة العنكبوتية العالمية (WWW) أو على حاسوب شخصي."},
+            {"id": 143, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "إلى ماذا يرمز الاختصار (WWW) باللغة الإنجليزية؟", "options": ["WEB WIDE WINDOW", "WORLD WIDE WEB", "WORLD WEB WORK", "WIDE WEB WORLD"], "correct": 1, "explanation": "يرمز الاختصار WWW إلى الشبكة العنكبوتية العالمية (WORLD WIDE WEB)."},
+            {"id": 144, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "كيف تُقدم نتائج البحث عادةً في محركات البحث، وبماذا يُشار إليها؟", "options": ["على شكل ملف صوتي واحد", "على شكل قائمة من النتائج يُشار إليها عادةً بـ \"صفحات نتائج محرك البحث\"", "على شكل رسالة بريدية فقط", "على شكل جدول إحصائي مغلق"], "correct": 1, "explanation": "تُقدم نتائج البحث عادةً على شكل قائمة من النتائج يُشار إليها عادةً بـ \"صفحات نتائج محرك البحث\"."},
+            {"id": 145, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "مما قد تتكون المعلومات المقدمة في نتائج محرك البحث؟", "options": ["نصوص مكتوبة فقط", "مزيج من صفحات ويب وصور وأي نوع آخر من الملفات", "صور فوتوغرافية فقط", "مقاطع فيديو فقط"], "correct": 1, "explanation": "قد تكون المعلومات المقدمة في نتائج محرك البحث مزيجاً من صفحات ويب وصور وأي نوع آخر من الملفات."},
+            {"id": 146, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "أين تنقب بعض محركات البحث عن البيانات المتوفرة؟", "options": ["في قواعد البيانات أو أدلة مواقع الويب", "في البريد الورقي", "في الكتب المطبوعة غير المرقمنة", "في الأجهزة المطفأة"], "correct": 0, "explanation": "تنقب بعض محركات البحث عن البيانات المتوفرة في قواعد البيانات أو أدلة مواقع الويب."},
+            {"id": 147, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "أين تبحث \"محركات البحث في الويب\" عن المعلومات؟", "options": ["في الحواسيب الشخصية الفردية فقط", "على الشبكة العنكبوتية العالمية", "داخل الشبكات المحلية للمؤسسات فقط", "في الأقراص المدمجة فقط"], "correct": 1, "explanation": "تبحث محركات البحث في الويب عن المعلومات على الشبكة العنكبوتية العالمية."},
+            {"id": 148, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "ما هو المصطلح الإنجليزي الذي يُطلق على الشبكات المحلية للمؤسسات التي تستخدم محركات بحث ذات نطاق ضيق للبحث داخلها؟", "options": ["INTERNET", "INTRANET", "WORLD WIDE WEB", "E-FORUMS"], "correct": 1, "explanation": "من محركات البحث ما يُستعمل على نطاق ضيق يشمل البحث داخل الشبكات المحلية للمؤسسات، أي إنترانت (INTRANET)."},
+            {"id": 149, "page": 3, "category": "رابعاً: محركات البحث (Search Engines) وأنواعها", "q": "أين تبحث \"محركات البحث الشخصية\"؟", "options": ["على الشبكة العنكبوتية العالمية", "في الشبكات المحلية للمؤسسات الكبرى", "في الحواسيب الشخصية الفردية", "في قواعد بيانات الجامعات العالمية"], "correct": 2, "explanation": "تختص محركات البحث الشخصية بالبحث في الحواسيب الشخصية الفردية."},
+            {"id": 150, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هي الشركة المقدمة لمحرك البحث \"الباحث العلمي\" (GOOGLE SCHOLAR)؟", "options": ["شركة مايكروسوفت", "شركة كوكل", "مؤسسة ويكيميديا", "شركة ريسيرش غيت"], "correct": 1, "explanation": "الباحث العلمي (GOOGLE SCHOLAR) هو محرك بحث مقدم من شركة كوكل."},
+            {"id": 151, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "بماذا ينفع محرك البحث (GOOGLE SCHOLAR) الطلبة والباحثين؟", "options": ["في البحث عن الألعاب الإلكترونية", "في البحث عن مصادر علمية رصينة للحصول على المعلومات الصحيحة والموثوقة", "في إجراء المحادثات الصوتية فقط", "في تحرير المقالات بدون تسجيل"], "correct": 1, "explanation": "يُعد الباحث العلمي من أشهر وأهم محركات البحث التي تنفع الطلبة والباحثين في البحث عن مصادر علمية رصينة للحصول على المعلومات الصحيحة والموثوقة."},
+            {"id": 152, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هي العبارة الجميلة والمشجعة التي تظهر عند فتح \"الباحث العلمي\" لكوكل (Google Scholar)؟", "options": ["المعرفة للجميع", "انطلق بمعاونة العمالقة", "ابحث أكثر وتعلم أقل", "البحث العلمي للجميع"], "correct": 1, "explanation": "عند فتح الباحث العلمي لكوكل تجد عبارة جميلة ومشجعة هي \"انطلق بمعاونة العمالقة\"."},
+            {"id": 153, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كيف يمكن الوصول إلى \"الباحث العلمي لكوكل\" (Google Scholar) كما ورد في المحاضرة؟", "options": ["عبر تثبيت برنامج خاص بالقرص المدمج فقط", "عبر الدخول على متصفح كوكل في الهاتف النقال أو الحاسوب الشخصي وكتابة (الباحث العلمي لكوكل) أو (GOOGLE SCHOLAR) في مؤشر البحث", "عبر إنشاء حساب مدفوع في منتدى إلكتروني", "لا يمكن فتحه إلا من داخل الجامعة"], "correct": 1, "explanation": "يمكن الوصول إليه من خلال الدخول على متصفح كوكل في الهاتف النقال أو الحاسوب الشخصي وكتابة (الباحث العلمي لكوكل) أو (GOOGLE SCHOLAR) في مؤشر البحث."},
+            {"id": 154, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "أي مما يلي يُعد من الأمثلة على نتائج البحث في \"الباحث العلمي\" (Google Scholar)؟", "options": ["رسائل الماجستير والدكتوراه، قضايا المحاكم والآراء القانونية، الأبحاث الأكاديمية، تقارير الأبحاث الطبية، والتحليلات الاقتصادية والسياسية", "الإعلانات التجارية والمنتديات الترفيهية فقط", "محادثات الشات الشخصية", "روابط تحميل الألعاب"], "correct": 0, "explanation": "تشمل الأمثلة على نتائج بحث الباحث العلمي: رسائل الماجستير والدكتوراه، قضايا المحاكم والآراء القانونية المتعلقة بها، الأبحاث الأكاديمية، تقارير الأبحاث الطبية، والتحليلات الاقتصادية والسياسية."},
+            {"id": 155, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هو تعريف موسوعة \"ويكيبيديا\" كما ورد في المحاضرة؟", "options": ["محرك بحث مخصص للعلماء فقط", "موسوعة رقمية متعددة اللغات حرة المحتوى", "موقع لبيع الكتب الأكاديمية", "شبكة محلية للجامعات"], "correct": 1, "explanation": "ويكيبيديا هي موسوعة رقمية متعددة اللغات حرة المحتوى."},
+            {"id": 156, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هو الشرط المطلوب للتحرير في موسوعة \"ويكيبيديا\"؟", "options": ["الحصول على شهادة الدكتوراه", "لا يُشترط التسجيل، حيث يستطيع أي شخص التحرير فيها بدون تسجيل", "دفع رسوم اشتراك سنوية", "أن يكون المستخدم موظفاً في شركة مايكروسوفت"], "correct": 1, "explanation": "يستطيع أي شخص التحرير في موسوعة ويكيبيديا بدون تسجيل."},
+            {"id": 157, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ماذا يُسمح للمستخدم بفعله بمحتوى موسوعة \"ويكيبيديا\" وفقاً لترخيص الموسوعة؟", "options": ["القراءة فقط دون نسخ أو استغلال", "الاستفادة من المحتوى واستغلاله بهدف تجاري أو غيره وفقاً لترخيص الموسوعة", "الاستفادة منه للأغراض غير التجارية حصراً", "استخدامه في النسخة الإنجليزية فقط"], "correct": 1, "explanation": "يستطيع أي شخص الاستفادة من محتوى ويكيبيديا واستغلاله بهدف تجاري أو غيره وفقاً لترخيص الموسوعة."},
+            {"id": 158, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد النسخ الموجودة من موسوعة \"ويكيبيديا\" بلغات مختلفة وفقاً للمحاضرة؟", "options": ["100 نسخة", "205 نسخة", "303 نسخة", "500 نسخة"], "correct": 2, "explanation": "أشارت المحاضرة إلى وجود 303 نسخة من ويكيبيديا بلغة مختلفة."},
+            {"id": 159, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد المساهمين النشطين في النسخة العربية من ويكيبيديا وفقاً للمحاضرة؟", "options": ["أكثر من 1,500 مساهم نشط", "أكثر من 7,519 مساهماً نشطاً", "أكثر من 15 مليون مساهم نشط", "أكثر من 19 مليون مساهم نشط"], "correct": 1, "explanation": "يساهم في النسخة العربية من ويكيبيديا أكثر من 7,519 مساهماً نشطاً."},
+            {"id": 160, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد المقالات في النسخة العربية من ويكيبيديا كما ذُكر في المحاضرة؟", "options": ["ما يزيد عن 500,000 مقال", "ما يزيد عن 1,047,003 مقالات", "ما يزيد عن 38 مليون مقال", "ما يزيد عن 15 مليون مقال"], "correct": 1, "explanation": "يساهم المساهمون النشطون في النسخة العربية من ويكيبيديا في كتابة ما يزيد عن 1,047,003 مقالات، بينما يجري آلاف الزوار من مختلف أنحاء العالم التعديلات وينشئون مقالات جديدة يومياً."},
+            {"id": 161, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "بماذا يختص محرك البحث \"ريسيرش غيت\" (RESEARCHGATE)؟", "options": ["تحرير المقالات العامة بدون تسجيل", "تبادل الخبرات المهنية بين العلماء والباحثين من جميع أنحاء العالم", "بيع الكتب المدرسية", "تقديم خدمات البريد الإلكتروني"], "correct": 1, "explanation": "ريسيرش غيت (RESEARCHGATE) هو محرك بحث يختص بتبادل الخبرات المهنية بين العلماء والباحثين من جميع أنحاء العالم."},
+            {"id": 162, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد الباحثين والعلماء الذين يستخدمون موقع \"ريسيرش غيت\" (ResearchGate) لتبادل أبحاثهم ومناقشتها؟", "options": ["أكثر من 7,519 باحثاً وعالماً", "أكثر من 15 مليون باحث وعالم", "أكثر من 19 مليون باحث وعالم", "أكثر من 38 مليون باحث وعالم"], "correct": 1, "explanation": "يقوم أكثر من 15 مليون باحث وعالم باستخدام ResearchGate لتبادل أبحاثهم ومناقشتها وجعلها متاحة أمام الجميع حول العالم."},
+            {"id": 163, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هي المهمة التي يتيحها موقع (ResearchGate) فيما يخص المواد العلمية والبيانات؟", "options": ["حجب المواد العلمية ومنع نشر البيانات", "مشاركة المواد العلمية المنشورة للمستخدم عليه، والوصول إلى المواد المنشورة للآخرين، ونشر البيانات التي يمتلكها المستخدم عن طريقه", "حذف أبحاث الباحثين الآخرين", "طباعة الأبحاث ورقياً فقط"], "correct": 1, "explanation": "من مهام ResearchGate مشاركة المواد العلمية المنشورة للمستخدم عليه، والوصول إلى المواد الأخرى المنشورة للآخرين، ونشر البيانات التي يمتلكها المستخدم عن طريقه."},
+            {"id": 164, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كيف يساعد موقع (ResearchGate) الباحث في معرفة مدى الإقبال على أبحاثه؟", "options": ["من خلال اكتشاف نسبة الاستفادة من الأبحاث الخاصة بكل ناشر والحصول على إحصائيات لذلك", "من خلال إرسال استبيان ورقي للقراء", "لا يوفر أي إحصائيات للناشرين", "من خلال عدد مرات تسجيل الدخول فقط"], "correct": 0, "explanation": "يتيح الموقع اكتشاف نسبة الاستفادة من الأبحاث الخاصة بكل ناشر والحصول على إحصائيات لذلك."},
+            {"id": 165, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كيف يساهم موقع (ResearchGate) في معالجة مشاكل البحوث العالقة؟", "options": ["عبر طرح الأسئلة والحصول على إجاباتها والحصول على حلول لمشاكل البحوث العالقة", "عبر إلغاء البحث المتعثر تلقائياً", "عبر منع التواصل مع المختصين", "عبر تحويل البحث إلى موسوعة ويكيبيديا"], "correct": 0, "explanation": "من مهام ResearchGate طرح الأسئلة والحصول على إجاباتها، والحصول على حلول لمشاكل البحوث العالقة، إلى جانب التواصل والتعاون مع الزملاء والعلماء والمختصين."},
+            {"id": 166, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "أي مما يلي يُعد من المهام المهنية والعلمية الأخرى التي يقدمها موقع (ResearchGate)؟", "options": ["البحث عن وظائف تتعلق بالأبحاث، ومشاركة التحديثات على المشاريع ومواكبة الأبحاث المتجددة", "بيع الأجهزة الحاسوبية للباحثين", "تصميم المواقع التجارية", "تقديم قضايا المحاكم والآراء القانونية فقط"], "correct": 0, "explanation": "تشمل مهام ResearchGate أيضاً البحث عن وظائف تتعلق بالأبحاث، ومشاركة التحديثات على المشاريع ومواكبة الأبحاث المتجددة."},
+            {"id": 167, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "بأي محرك بحث يُشبه \"باحث مايكروسوفت الأكاديمي\" (MICROSOFT ACADEMIC SEARCH)؟", "options": ["ويكيبيديا", "الباحث العلمي من جوجل", "موقع كتابي", "موقع بيكيت"], "correct": 1, "explanation": "ذكرت المحاضرة أن باحث مايكروسوفت الأكاديمي (MICROSOFT ACADEMIC SEARCH) شبيه بالباحث العلمي من جوجل."},
+            {"id": 168, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هي أنواع المصادر التي يتيح \"باحث مايكروسوفت الأكاديمي\" استكشاف المعلومات حولها؟", "options": ["الأبحاث الأكاديمية والمؤلفات والكتب والمجلات العلمية والمؤتمرات", "المحادثات الصوتية والمنتديات فقط", "الأخبار الرياضية فقط", "إعلانات الوظائف فقط"], "correct": 0, "explanation": "يتيح باحث مايكروسوفت الأكاديمي إمكانية استكشاف الكثير من المعلومات حول الأبحاث الأكاديمية والمؤلفات والكتب والمجلات العلمية والمؤتمرات."},
+            {"id": 169, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد المنشورات العلمية التي يغطيها \"باحث مايكروسوفت الأكاديمي\"؟", "options": ["أكثر من 15 مليون منشور علمي", "أكثر من 19 مليون منشور علمي", "أكثر من 38 مليون منشور علمي", "أكثر من مليون منشور علمي"], "correct": 2, "explanation": "يغطي باحث مايكروسوفت الأكاديمي أكثر من 38 مليون منشور علمي في العديد من المجالات والتخصصات."},
+            {"id": 170, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "كم عدد المؤلفين الذين يغطيهم \"باحث مايكروسوفت الأكاديمي\"؟", "options": ["أكثر من 7,519 مؤلفاً", "أكثر من 15 مليون مؤلف", "أكثر من 19 مليون مؤلف", "أكثر من 38 مليون مؤلف"], "correct": 2, "explanation": "يغطي باحث مايكروسوفت الأكاديمي أكثر من 38 مليون منشور علمي لأكثر من 19 مليون مؤلف."},
+            {"id": 171, "page": 3, "category": "خامساً: أشهر محركات البحث المستخدمة في البحث العلمي", "q": "ما هي الدورية الزمنية لتحديث جميع المحتويات في \"باحث مايكروسوفت الأكاديمي\"؟", "options": ["يومياً", "أسبوعياً", "شهرياً", "سنوياً"], "correct": 1, "explanation": "يتم تحديث كل المحتويات في باحث مايكروسوفت الأكاديمي أسبوعياً."},
+            {"id": 172, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هي الوظيفة الأساسية لبرنامج Excel 2013 كأحد البرامج المكتبية التابعة لحزمة Microsoft Office 2013؟", "options": ["تحرير مقاطع الفيديو والصوتيات", "المساعدة على العمل الإحصائي وإجراء بعض المعادلات الرياضية أو بعض الحسابات", "تصفح الإنترنت وإرسال البريد الإلكتروني فقط", "حماية الحاسوب من الفيروسات"], "correct": 1, "explanation": "يُعد برنامج الأكسل أحد البرامج المكتبية التابعة لبرنامج Microsoft Office 2013 والذي يساعد على العمل الإحصائي وإجراء بعض المعادلات الرياضية أو بعض الحسابات."},
+            {"id": 173, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو المسار الصحيح للدخول إلى برنامج Excel 2013 عن طريق قائمة ابدأ؟", "options": ["Start &gt; Settings &gt; Excel 2013", "Start &gt; All programs &gt; Microsoft office 2013 &gt; Excel 2013", "Start &gt; Computer &gt; Excel 2013", "Start &gt; Documents &gt; Microsoft office 2013 &gt; Excel 2013"], "correct": 1, "explanation": "يتم الدخول إلى البرنامج عن طريق قائمة ابدأ Start ثم كل البرامج All programs ثم Microsoft office 2013 ومنه نختار الدخول إلى برنامج Excel 2013."},
+            {"id": 174, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "لماذا تتشابه طريقة فتح برنامج Excel 2013 وبعض أوامره وتبويباته مع برنامجي Word 2013 وPowerPoint 2013؟", "options": ["لأنها جميعاً برامج لتصفح الإنترنت", "لأن جميع هذه البرامج تعمل ضمن برنامج واحد هو Microsoft office 2013 وتُفتح بنفس الطريقة", "لأنها تشترك في نفس اسم الخزن الافتراضي", "لأنها تعمل بدون نظام تشغيل"], "correct": 1, "explanation": "كل برامج Microsoft office 2013 تعمل ضمن برنامج واحد وتُفتح بنفس الطريقة، ولذلك توجد أوامر وتبويبات متشابهة بين Excel 2013 وWord 2013 وPowerPoint 2013."},
+            {"id": 175, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "أين يحصل الاختلاف عند الخزن بين نسخة ونسخة أحدث من برنامج Microsoft Office؟", "options": ["في طريقة الدخول من قائمة ابدأ", "فقط في اسم استطالة الخزن وحسب حداثة النسخة", "في إلغاء جميع الأوامر والتبويبات", "في عدم إمكانية حفظ الملفات"], "correct": 1, "explanation": "يطبق نفس الكلام على جميع نسخ Microsoft Office، ولكن الاختلاف يحصل بين نسخة ونسخة أحدث فقط في اسم استطالة الخزن وحسب حداثة النسخة."},
+            {"id": 176, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو الاسم الافتراضي عند الخزن في برنامج Excel 2013، وكيف تُعامل البيانات فيه؟", "options": ["Document1 وتُعامل البيانات كمستندات نصية", "Book1 وتُعامل البيانات على أنها أوراق عمل", "Sheet1 وتُعامل البيانات كصور رقمية", "File1 وتُعامل البيانات كشرائح عرض"], "correct": 1, "explanation": "يكون اسم الخزن في Excel 2013 هو Book1 (ونوع الحفظ Excel Workbook) حيث تتم معاملة البيانات على أنها أوراق عمل، بخلاف Word 2013 الذي يكون اسم الخزن فيه Document1."},
+            {"id": 177, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو الاسم الافتراضي عند الخزن في برنامج Word 2013 مقارنة ببرنامج Excel 2013؟", "options": ["Book1", "Document1", "Workbook1", "Sheet1"], "correct": 1, "explanation": "في برنامج Word 2013 يكون الاسم الافتراضي عند الخزن باسم Document1 (ويظهر Doc1 في مثال مربع الحفظ)، بينما في Excel 2013 يكون Book1."},
+            {"id": 178, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ماذا نجد على الجهة اليسرى من الشاشة عند الدخول إلى برنامج Excel 2013؟", "options": ["القوالب الجاهزة Template", "الملفات المفتوحة أو التي تم العمل عليها مؤخراً (Recent)", "حساب وحدة الخزن السحابية Sky drive", "شريط الصيغة Formula Bar"], "correct": 1, "explanation": "عند الدخول إلى Excel 2013 سنجد على اليسار قائمة Recent التي تظهر فيها الملفات المفتوحة أو التي تم العمل عليها مؤخراً."},
+            {"id": 179, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو الخيار الموجود في وسط واجهة البدء في Excel 2013 الذي يتيح اختيار ورقة عمل فارغة لتسهيل العمل وإدراج المعلومات عليها؟", "options": ["Recent", "Blank workbook", "Template", "Sign in"], "correct": 1, "explanation": "يوجد في الوسط خيار أوراق عمل فارغة (Blank workbook) الذي يتيح اختيار ورقة عمل فارغة لتسهيل العمل عليها وإدراج المعلومات عليها."},
+            {"id": 180, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو المصطلح الإنجليزي لـ \"القوالب الجاهزة\" التي توجد في وسط واجهة البدء في Excel 2013؟", "options": ["Recent", "Blank workbook", "Template", "Options"], "correct": 2, "explanation": "توجد في الوسط أيضاً القوالب الجاهزة (Template) التي تتيح إمكانية اختيار قوالب جاهزة للعمل عليها."},
+            {"id": 181, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "في أي جهة من واجهة البدء في Excel 2013 نجد الحساب الذي يمكن من خلاله الدخول إلى وحدة الخزن على الإنترنت؟", "options": ["الجهة اليسرى", "الوسط", "الجهة اليمنى", "أسفل الشاشة في شريط الحالة"], "correct": 2, "explanation": "في الجهة اليمنى نجد الحساب الذي من خلاله يمكن الدخول إلى وحدة الخزن على الإنترنت."},
+            {"id": 182, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو اسم وحدة الخزن على الإنترنت المتوفرة في برنامج Excel 2013؟", "options": ["Google Drive", "Sky drive", "Drop Box", "Hard Drive"], "correct": 1, "explanation": "تسمى وحدة الخزن على الإنترنت التي يمكن الدخول إليها من الحساب في Excel 2013 باسم Sky drive."},
+            {"id": 183, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هي الفائدة من وحدة الخزن على الإنترنت (Sky drive) في Excel 2013؟", "options": ["زيادة سرعة المعالج", "خزن أوراق العمل التي نعمل عليها ومشاركتها مع الآخرين من خلال الإنترنت", "طباعة الملفات بدون طابعة", "تحويل أوراق العمل إلى ملفات صوتية"], "correct": 1, "explanation": "يمكن من خلال Sky drive خزن أوراق العمل التي يتم العمل عليها وكذلك مشاركتها مع الآخرين عبر الإنترنت."},
+            {"id": 184, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "كم تبلغ مساحة وحدة الخزن السحابية (Sky drive) كما ورد في المحاضرة؟", "options": ["2 G", "5 G", "7 G", "15 G"], "correct": 2, "explanation": "تبلغ مساحة وحدة الخزن Sky drive المتاحة للمستخدم 7 G (7 غيغابايت)."},
+            {"id": 185, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هي العبارة الصحيحة حول توفر ميزة (Sky drive) في النسخ القديمة لبرامج Microsoft Office؟", "options": ["كانت موجودة في جميع النسخ القديمة بمساحة أكبر", "لا توجد هذه الميزة في النسخ القديمة للبرامج التابعة لـ Microsoft Office", "كانت موجودة في برنامج Word فقط دون Excel", "تتطلب دفع اشتراك مالي شهري في Excel 2013"], "correct": 1, "explanation": "أكدت المحاضرة أن ميزة وحدة الخزن السحابية المجانية هذه لا توجد في النسخ القديمة للبرامج التابعة لبرنامج Microsoft Office."},
+            {"id": 186, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "كيف يمكن الولوج إلى خدمة (Sky drive) المجانية والاستفادة من المساحة المتاحة فيها من داخل Excel 2013؟", "options": ["عن طريق خيار Recent", "عن طريق التسجيل (Sign in) بكتابة البريد الإلكتروني وكلمة السر أو الاشتراك باسم جديد", "عن طريق قائمة Insert", "عن طريق شريط التمرير"], "correct": 1, "explanation": "يمكن الولوج إلى هذه الخدمة المجانية (التي توفر حساباً على Gmail أو Hotmail) عن طريق التسجيل Sign in وكتابة البريد الإلكتروني وكلمة السر أو الاشتراك باسم جديد إذا لم تكن تملك حساباً."},
+            {"id": 187, "page": 4, "category": "أولاً: مدخل إلى برنامج Excel 2013 وواجهة البدء وخدمة SkyDrive", "q": "ما هو الرابط الإلكتروني المذكور للوصول إلى شاشة الولوج إلى (Sky drive)؟", "options": ["https://excel.live.com", "https://skydrive.live.com", "https://office.google.com", "https://hotmail.excel.com"], "correct": 1, "explanation": "يمكن الوصول والتعامل مع المساحة الخاصة عبر البريد الإلكتروني وكلمة السر، أو من خلال الرابط https://skydrive.live.com لتظهر شاشة الولوج إلى Sky drive."},
+            {"id": 188, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "ما هو التعريف الصحيح لـ \"الخلية\" (Cell) في ورقة العمل؟", "options": ["الشريط الذي يقع في أعلى واجهة البرنامج", "المربع الذي يتكون من تقاطع عمود مع سطر في ورقة العمل", "قائمة الأوامر السريعة في البرنامج", "الصفحة الكاملة التي تحتوي على الأوراق"], "correct": 1, "explanation": "الخلية (Cell) هي المربع الذي يتكون من تقاطع عمود مع سطر في ورقة العمل."},
+            {"id": 189, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "أين يظهر اسم الخلية في واجهة برنامج Excel 2013؟", "options": ["في شريط الحالة Status Bar", "في صندوق الاسم (Name Box) في شريط الصيغة (Formula bar)", "في شريط العنوان Address bar", "في قائمة Recent"], "correct": 1, "explanation": "يظهر اسم الخلية في صندوق الاسم (Name Box) الموجود في شريط الصيغة (Formula bar)، وهو يشير إلى موقع الخلية الناتج من تقاطع اسم العمود والسطر."},
+            {"id": 190, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "ما هو الحد الأعلى لعدد الحروف التي يمكن إدخالها داخل الخلية الواحدة في Excel 2013؟", "options": ["1000 حرف", "16000 حرف", "32000 حرف", "64000 حرف"], "correct": 2, "explanation": "يمكن إدخال معلومات إلى الخلية الواحدة وبحدود 32000 حرف كحد أعلى."},
+            {"id": 191, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "ما المقصود بـ \"الخلية النشطة\" (Active Cell)؟", "options": ["الخلية الفارغة دائماً في نهاية ورقة العمل", "الخلية التي نختارها بالضغط عليها بمفتاح الماوس الأيسر تمهيداً لإدخال المعلومات فيها أو التعديل على محتوياتها", "أول خلية في العمود A فقط ولا يمكن تغييرها", "الخلية المحذوفة من ورقة العمل"], "correct": 1, "explanation": "الخلية النشطة (Active Cell) هي الخلية التي نختارها بالضغط عليها بمفتاح الماوس الأيسر تمهيداً لإدخال المعلومات فيها أو التعديل على محتوياتها (مثل المسح أو تغيير لون الخط أو حجمه)."},
+            {"id": 192, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "أي مما يلي يمثل طرق الانتقال بين الخلايا في ورقة العمل كما ورد في المحاضرة؟", "options": ["النقر بزر الماوس الأيسر على إحدى الخلايا، أو الأسهم الموجودة في لوحة المفاتيح، أو مفتاح Enter", "النقر بزر الماوس الأيمن فقط", "الضغط على مفتاح Delete فقط", "إغلاق البرنامج وإعادة فتحه"], "correct": 0, "explanation": "يتم الانتقال بين الخلايا بالنقر بزر الماوس الأيسر لتصبح خلية نشطة، أو عبر الأسهم الموجودة في لوحة المفاتيح (Keyboard)، أو من خلال مفتاح Enter."},
+            {"id": 193, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "عند كتابة عملية حسابية في خلية معينة، أين تظهر العملية الحسابية نفسها وأين يظهر ناتجها؟", "options": ["تظهر العملية الحسابية في شريط الحالة ويظهر الناتج في صندوق الاسم", "تظهر العملية الحسابية في شريط العمليات (Formula Bar) بينما يظهر ناتج العملية الحسابية في الخلية نفسها", "يظهر كلاهما في الخلية نفسها فقط", "تظهر العملية الحسابية في شريط العنوان ويظهر الناتج في شريط الصيغة"], "correct": 1, "explanation": "أي عملية حسابية مستخدمة في الخلية تظهر في شريط العمليات (Formula Bar)، بينما يظهر ناتج العملية الحسابية في الخلية نفسها."},
+            {"id": 194, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "ما هي العلامات الثلاث التي تميز \"الخلية النشطة\" عن بقية الخلايا غير النشطة؟", "options": ["يكون مؤشر الماوس عليها، ويمكن إدخال المعلومات عليها، ويظهر اسمها في صندوق الاسم", "يكون لونها أحمر دائماً، ولا تقبل الأرقام، وتقع في الصف الأول", "يظهر اسمها في شريط الحالة، وتكون مقفلة ضد التعديل، وتقع يسار الورقة", "تحتوي على علامة (+) في وسطها فقط"], "correct": 0, "explanation": "النقاط الثلاث التي تدل على الفرق بين الخلية النشطة وبقية الخلايا هي: وجود مؤشر الماوس عليها، إمكانية إدخال المعلومات عليها، وظهور اسمها في صندوق الاسم (بينما لا يظهر اسم بقية الخلايا إلا بعد التأشير عليها بزر الماوس الأيسر)."},
+            {"id": 195, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "أين يظهر مؤشر علامة الجمع (+) المستخدم في ملء الخلايا وتكرار محتوياتها؟", "options": ["في منتصف الخلية تماماً", "عند المربع الصغير الموجود أسفل يسار الخلية", "أعلى يمين الخلية", "في شريط العنوان"], "correct": 1, "explanation": "يظهر المؤشر (+) عند المربع الصغير الموجود أسفل يسار الخلية، ومن خلاله يمكن عمل ملء للخلايا وتكرار محتوياتها."},
+            {"id": 196, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "كيف يتم تنفيذ عملية تكرار محتويات الخلية أو ملء الخلايا المظللة بصورة متسلسلة باستخدام المؤشر (+)؟", "options": ["بالنقر المزدوج بزر الماوس الأيمن", "بالتأشير على المؤشر (+) ثم سحب الماوس مع الضغط على مفتاح الماوس الأيسر", "بالضغط على مفتاح Delete في لوحة المفاتيح", "بكتابة اسم الخلية في شريط التبويبات"], "correct": 1, "explanation": "تتم العملية بالتأشير على المؤشر (+) ثم سحب الماوس مع الضغط على مفتاح الماوس الأيسر، فيتم تكرار محتويات الخلية أو ملء الخلايا المظللة بصورة متسلسلة مثل (1، 2، 3، 4، 5...) أو (السبت، الأحد، الاثنين، الثلاثاء...)."},
+            {"id": 197, "page": 4, "category": "ثانياً: الخلية (Cell) والخلية النشطة والمؤشرات", "q": "ما هي وظيفة \"المؤشر الاعتيادي\" الخاص بالخلية مقارنةً بمؤشر الملء (+)؟", "options": ["حذف محتويات الخلية", "تحديد الخلايا المراد العمل عليها", "تسمية ورقة العمل", "إخفاء شريط الصيغة"], "correct": 1, "explanation": "المؤشر الاعتيادي الخاص بالخلية يُستخدم لتحديد الخلايا المراد العمل عليها، بينما يُستخدم مؤشر (+) لملء الخلايا وتكرارها أو تسلسلها."},
+            {"id": 198, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "أين يقع \"شريط العنوان\" (Address bar) في واجهة Excel 2013 وماذا يحتوي في منتصفه؟", "options": ["في أسفل الواجهة ويحتوي على أسماء أوراق العمل", "في أعلى واجهة برنامج الأكسل ويحتوي على عنوان أو اسم ورقة العمل", "على يسار الواجهة ويحتوي على قائمة Recent", "في وسط الجدول ويحتوي على الخلايا"], "correct": 1, "explanation": "يوجد شريط العنوان (Address bar) في أعلى واجهة برنامج الأكسل ويحتوي على عنوان أو اسم ورقة العمل."},
+            {"id": 199, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "ماذا يوجد على يمين شريط العنوان (Address bar)؟", "options": ["شريط أدوات الوصول السريع", "أزرار الإغلاق وتصغير الشاشة وتوسيطها", "صندوق الاسم Name Box", "علامة (+) لإضافة أوراق عمل"], "correct": 1, "explanation": "يوجد على يمين شريط العنوان أزرار الإغلاق وتصغير الشاشة أو توسيطها."},
+            {"id": 200, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "ماذا يوجد على يسار شريط العنوان (Address bar)؟", "options": ["أزرار إغلاق وتصغير النافذة", "شريط أدوات الوصول السريع (Quick Access Toolbar)", "شريط التمرير الأفقي", "قائمة القوالب الجاهزة"], "correct": 1, "explanation": "يوجد على يسار شريط العنوان شريط أدوات الوصول السريع (Quick Access Toolbar) الذي يوفر عدداً من الأوامر الجاهزة للتنفيذ أمامنا على الشاشة."},
+            {"id": 201, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "كيف يمكن إضافة أوامر إلى \"شريط أدوات الوصول السريع\" مباشرةً من الشريط نفسه؟", "options": ["من خلال السهم الموجود في يمين الشريط حيث تظهر نافذة صغيرة لإضافة الأوامر أو اختيار More Commands", "بالضغط على زر الإغلاق X", "من خلال تبويب Review", "بالضغط على مفتاح Enter"], "correct": 0, "explanation": "يمكن إضافة أوامر لشريط أدوات الوصول السريع عبر السهم الموجود في يمين الشريط لتظهر نافذة صغيرة لإضافة الأوامر، أو باختيار الأمر More Commands (أوامر إضافية) أسفل تلك النافذة."},
+            {"id": 202, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "ما هو المسار الآخر لإضافة أوامر إضافية (More commands) إلى شريط أدوات الوصول السريع؟", "options": ["Home &gt; Cells &gt; Format", "File (ملف) &gt; Options (خيارات) &gt; شريط أدوات الوصول السريع", "View &gt; Show &amp; Hide &gt; Quick Access", "Formulas &gt; Defined Names"], "correct": 1, "explanation": "الطريقة الثانية لإضافة الأوامر هي عن طريق ملف File ثم خيارات Options ثم شريط أدوات الوصول السريع فتُفتح نافذة فيها أوامر إضافية More commands."},
+            {"id": 203, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "بماذا يرتبط \"شريط التبويبات\" (Tabs bar) ارتباطاً شاملاً؟", "options": ["بشريط الحالة", "بشريط المجموعات (الأدوات)", "بشريط التمرير العمودي", "بصندوق الاسم فقط"], "correct": 1, "explanation": "يرتبط شريط التبويبات (Tabs bar) ارتباطاً شاملاً بشريط المجموعات (الأدوات)، وتختلف المجموعات عند اختيار تبويب آخر حسب طبيعة العمل على ورقة العمل."},
+            {"id": 204, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "أي من القوائم التالية تضم التبويبات السبعة المكونة لشريط التبويبات في Excel 2013؟", "options": ["Home، Insert، Page Layout، Formula، Data، Review، View", "File، Edit، Format، Tools، Table، Window، Help", "Home، Recent، Template، Sky drive، Cells، Delete، Rename", "Insert، Save، Print، Share، Export، Close، Account"], "correct": 0, "explanation": "يتكون شريط التبويب من التبويبات التالية: الصفحة الرئيسة Home، إدراج Insert، تخطيط الصفحة Page Layout، الصيغ (المعادلات) Formula، البيانات Data، المراجعة Review، والعرض View."},
+            {"id": 205, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "على ماذا يدل ظهور الاسم (B2) أو (G15) في صندوق الاسم (Name Box) ضمن شريط الصيغة؟", "options": ["أن الخلية ناتجة من تقاطع العمود B مع الصف 2، أو العمود G مع الصف 15", "أن ورقة العمل تحتوي على صفين أو 15 صفاً فقط", "أن حجم الخط هو 2 أو 15", "أن عدد أوراق العمل هو 2 أو 15"], "correct": 0, "explanation": "يحتوي شريط العمليات (الصيغ) على اسم الخلية النشطة في صندوق الاسم Name Box مثل B2 أو G15، مما يعني أن الخلية ناتجة من تقاطع العمود B أو G مع الصف 2 أو 15."},
+            {"id": 206, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "ما هي وظيفة \"رمز الصح\" و\"رمز الخطأ\" اللذين يظهران في شريط الصيغة (Formula Bar) عند إدخال عملية حسابية أو تعديل خلية؟", "options": ["رمز الصح لحذف الخلية، ورمز الخطأ لحفظ الملف", "رمز الصح لتأكيد العملية الحسابية، ورمز الخطأ للتراجع عن عملية تعديل الخلية النشطة أو العملية الحسابية", "رمز الصح لإضافة عمود، ورمز الخطأ لإضافة صف", "رمز الصح لإخفاء الشريط، ورمز الخطأ لإظهاره"], "correct": 1, "explanation": "يظهر في شريط الصيغة رمز صح لتأكيد العملية الحسابية، ورمز خطأ للتراجع عن عملية تعديل الخلية النشطة أو العملية الحسابية."},
+            {"id": 207, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "كيف يمكن إخفاء أو إظهار \"شريط الصيغة\" (Formula Bar) في Excel 2013؟", "options": ["عن طريق تبويب Home ثم مجموعة Cells", "عن طريق تبويب عرض (View) من خلال مجموعة (Show &amp; Hide) بوضع أو إزالة علامة صح أمام الأمر Formula Bar", "عن طريق تبويب Formulas ثم مجموعة Defined Names", "عن طريق النقر بزر الماوس الأيمن على شريط العنوان"], "correct": 1, "explanation": "نستطيع إخفاء شريط الصيغة أو إظهاره عن طريق تبويب عرض View من خلال مجموعة Show &amp; Hide وذلك بوضع علامة صح أمام الأمر Formula Bar."},
+            {"id": 208, "page": 4, "category": "ثالثاً: واجهة برنامج Excel 2013 والأشرطة", "q": "متى نستخدم \"أشرطة التمرير الأفقي أو العمودي\" في برنامج Excel 2013؟", "options": ["عند الحاجة لتغيير اسم الخلية", "عند احتواء ورقة العمل على خلايا متعددة وبالتالي صفوف وأعمدة تتعدى حدود الصفحة", "عند إضافة أوامر لشريط الوصول السريع", "عند حذف ورقة عمل"], "correct": 1, "explanation": "عند احتواء ورقة العمل على خلايا متعددة وصفوف وأعمدة تتعدى حدود الصفحة فإننا نستخدم أشرطة التمرير الأفقي أو العمودي."},
+            {"id": 209, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "كم عدد أوراق العمل الافتراضية التي تظهر عند فتح ملف جديد في Excel 2013 مقارنةً بالنسخ السابقة؟", "options": ["تظهر ثلاث أوراق عمل في Excel 2013 وورقة واحدة في النسخ السابقة", "تظهر ورقة عمل واحدة (Sheet 1) مع علامة (+) على عكس النسخ السابقة التي كانت تحتوي على ثلاث أوراق عمل افتراضية (Sheet 1, Sheet 2, Sheet 3)", "تظهر خمس أوراق عمل في جميع النسخ", "لا تظهر أي ورقة عمل حتى يضيفها المستخدم"], "correct": 1, "explanation": "عند تنفيذ Excel 2013 بملف جديد تظهر نافذة تحتوي على ورقة عمل واحدة (Sheet 1) مع علامة (+)، على عكس النسخ السابقة التي احتوت على ثلاث أوراق عمل افتراضية."},
+            {"id": 210, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "كيف يتم ترقيم الأسطر والأعمدة في جدول ورقة العمل في Excel 2013؟", "options": ["تُرقم الأسطر بالأحرف (A, B, C...) والأعمدة بالأرقام (1, 2, 3...)", "تُرقم الأسطر بالأرقام (1, 2, 3...) والأعمدة بالأحرف (A, B, C...)", "يُرقم كلاهما بالأرقام فقط", "يُرقم كلاهما بالأحرف فقط"], "correct": 1, "explanation": "تحتوي ورقة العمل على جدول مقسم إلى خلايا يتكون من أعمدة وأسطر، إذ تُرقم الأسطر بالأرقام (1، 2، 3... الخ) والأعمدة بالأحرف (A، B، C... الخ)."},
+            {"id": 211, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ما هي العبارة الصحيحة بخصوص العلاقة بين أوراق العمل (Sheets) داخل ملف Excel واحد؟", "options": ["لا يمكن العمل على ورقة عمل بشكل مستقل عن الأخرى", "يمكن العمل على كل ورقة عمل بشكل مستقل عن نظيراتها وكذلك يمكن نسخ ونقل البيانات فيما بينها", "عند حذف بيانات من ورقة تُحذف تلقائياً من جميع الأوراق الأخرى", "لا يمكن نسخ أو نقل البيانات بين أوراق العمل"], "correct": 1, "explanation": "يمكن العمل على كل ورقة عمل (Sheet) بشكل مستقل عن نظيراتها من أوراق العمل الأخرى، وكذلك يمكن نسخ ونقل البيانات فيما بينها."},
+            {"id": 212, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "أين يقع \"شريط الحالة\" (Status Bar) وماذا يتضمن في جهته اليسرى؟", "options": ["في أعلى الواجهة ويتضمن شريط الوصول السريع", "في أسفل واجهة البرنامج ويتضمن على اليسار علامة (+) وأوراق العمل التي نعمل عليها", "على يمين الواجهة ويتضمن شريط التمرير العمودي", "أسفل شريط التبويبات ويتضمن صندوق الاسم"], "correct": 1, "explanation": "يقع شريط الحالة (Status Bar) في أسفل واجهة البرنامج ويتضمن على اليسار علامة (+) وأوراق العمل التي نعمل عليها."},
+            {"id": 213, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ماذا نجد في الجهة اليمنى من \"شريط الحالة\" (Status Bar) كما ذُكر في المحاضرة؟", "options": ["علامة (+) لإضافة أوراق عمل", "شريط التمرير الأفقي", "أزرار الإغلاق والتصغير", "تبويب File"], "correct": 1, "explanation": "ذكرت المحاضرة أن شريط الحالة يتضمن على اليسار علامة (+) وأوراق العمل، أما في اليمين فنجد شريط التمرير الأفقي."},
+            {"id": 214, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ما هي الطريقة الأولى (المباشرة) لإضافة ورقة عمل إضافية في برنامج Excel 2013؟", "options": ["عن طريق علامة (+) الموجودة أسفل واجهة البرنامج في شريط الحالة", "عن طريق الضغط على مفتاح Delete في لوحة المفاتيح", "عن طريق تبويب View", "عن طريق صندوق الاسم Name Box"], "correct": 0, "explanation": "الطريقة الأولى لإضافة أوراق عمل إضافية هي عن طريق علامة (+) الموجودة في أسفل واجهة البرنامج في شريط الحالة."},
+            {"id": 215, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ما هي الطريقة الثانية لإضافة ورقة عمل جديدة عبر شريط التبويبات؟", "options": ["File &gt; New &gt; Blank sheet", "الصفحة الرئيسة Home &gt; مجموعة خلايا Cells &gt; إدراج Insert &gt; الأمر Insert sheet", "تبويب Insert &gt; مجموعة Tables &gt; New Sheet", "تبويب View &gt; مجموعة Show &gt; Insert sheet"], "correct": 1, "explanation": "الطريقة الثانية لإضافة ورقة عمل هي عن طريق الصفحة الرئيسة Home ثم مجموعة خلايا Cells ثم إدراج Insert ثم اختيار الأمر Insert sheet فتظهر ورقة عمل جديدة أسفل واجهة البرنامج في شريط الحالة."},
+            {"id": 216, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ما هي الطريقة الأولى لتسمية (تغيير اسم) ورقة العمل عبر التبويبات؟", "options": ["تبويب الصفحة الرئيسة Home &gt; مجموعة خلايا Cells &gt; الأمر تنسيق Format &gt; تغيير اسم ورقة العمل Rename Sheet", "تبويب الصفحة الرئيسة Home &gt; مجموعة خلايا Cells &gt; الأمر إدراج Insert &gt; Rename Sheet", "تبويب Formulas &gt; مجموعة Defined Names &gt; Rename Sheet", "تبويب Review &gt; مجموعة Protect &gt; Rename Sheet"], "correct": 0, "explanation": "يمكن تسمية ورقة العمل عبر تبويب الصفحة الرئيسة Home ثم مجموعة خلايا Cells ثم الأمر تنسيق Format ثم اختيار تغيير اسم ورقة العمل Rename Sheet."},
+            {"id": 217, "page": 4, "category": "رابعاً: أوراق العمل (Worksheets) وشريط الحالة", "q": "ما هي الطريقة الثانية لتغيير اسم ورقة العمل من شريط الحالة؟", "options": ["الضغط بزر الماوس الأيسر على علامة (+)", "الضغط بزر الماوس الأيمن على اسم ورقة العمل (Sheet 1) في شريط الحالة ثم اختيار الأمر Rename", "سحب اسم ورقة العمل إلى شريط الصيغة", "الضغط على مفتاح Enter"], "correct": 1, "explanation": "الطريقة الثانية هي الضغط بزر الماوس الأيمن على اسم ورقة العمل Sheet 1 أسفل واجهة البرنامج في شريط الحالة، فيظهر مربع حوار صغير نختار منه تغيير اسم ورقة العمل (Rename)."},
+            {"id": 218, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "عند تحديد عمودين في ورقة العمل ثم تنفيذ أمر الإضافة (Insert)، ماذا سيفعل برنامج Excel 2013؟", "options": ["سيضيف عموداً واحداً فقط", "سيضيف عمودين فارغين", "سيحذف العمودين المحددين", "سيضيف صفين فارغين"], "correct": 1, "explanation": "يمكن إضافة خلية أو سطر أو عدة أسطر أو عمود أو عدة أعمدة؛ فلو اخترت عمودين فإن البرنامج سيضيف عمودين فارغين وهكذا."},
+            {"id": 219, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الأولى لإضافة خلية في ورقة العمل باستخدام الماوس؟", "options": ["الضغط بزر الماوس الأيمن على أي مكان في ورقة العمل ثم اختيار الأمر إدراج خلية (Insert)", "النقر المزدوج بزر الماوس الأيسر على شريط الحالة", "الضغط بزر الماوس الأيسر على صندوق الاسم", "سحب شريط التمرير للأسفل"], "correct": 0, "explanation": "الطريقة الأولى هي الضغط على زر الماوس الأيمن على أي مكان في ورقة العمل فيظهر مربع حوار نختار منه الأمر إدراج خلية Insert."},
+            {"id": 220, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الثانية لإضافة خلايا عن طريق شريط التبويبات؟", "options": ["تبويب Insert &gt; مجموعة Cells &gt; Insert Cells", "تبويب الصفحة الرئيسة Home &gt; مجموعة خلايا Cells &gt; الأمر إدراج Insert &gt; إدراج خلايا Insert Cells", "تبويب Formulas &gt; مجموعة Cells &gt; Insert Cells", "تبويب Data &gt; مجموعة Cells &gt; Insert Cells"], "correct": 1, "explanation": "الطريقة الثانية هي عن طريق تبويب الصفحة الرئيسة Home ثم مجموعة خلايا Cells ثم الأمر إدراج Insert ثم اختيار إدراج خلايا Insert Cells ليظهر نفس مربع الحوار."},
+            {"id": 221, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "أي مما يلي يمثل الخيارات الأربعة التي تظهر في مربع حوار الإدراج (Insert)؟", "options": ["Shift cells left، Shift cells up، Entire row، Entire column", "Shift cells right، Shift cells down، Entire row، Entire column", "Cut، Copy، Paste، Delete", "Rename، Move، Copy، Hide"], "correct": 1, "explanation": "يحتوي مربع حوار Insert على أربعة خيارات هي: تحريك الخلايا إلى اليمين (Shift cells right)، تحريك الخلايا إلى الأسفل (Shift cells down)، صف كامل (Entire row)، وعمود كامل (Entire column)."},
+            {"id": 222, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ماذا يعني الخيار (Shift cells down) في مربع حوار الإدراج (Insert)؟", "options": ["تحريك الخلايا إلى اليمين", "تحريك الخلايا إلى الأسفل", "تحريك الخلايا إلى الأعلى", "إضافة عمود كامل"], "correct": 1, "explanation": "يعني الخيار Shift cells down تحريك الخلايا إلى الأسفل، بينما يعني Shift cells right تحريك الخلايا إلى اليمين."},
+            {"id": 223, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ماذا يُقصد بالخيارين (Entire row) و(Entire column) في مربع حوار الإدراج (Insert)؟", "options": ["تحريك خلية واحدة يميناً أو يساراً", "إضافة صف كامل أو عمود كامل", "تغيير اسم الصف أو العمود", "إخفاء الصف أو العمود"], "correct": 1, "explanation": "المقصود بخياري الصف أو العمود المحدد (Entire row وEntire column) هو إضافة صف كامل أو عمود كامل."},
+            {"id": 224, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الخطوة التمهيدية قبل البدء بحذف خلية أو مجموعة خلايا؟", "options": ["إغلاق شريط الصيغة", "تحديد تلك الخلايا (لتصبح ملونة بالأسود)", "حفظ الملف باسم جديد", "الانتقال إلى تبويب View"], "correct": 1, "explanation": "لحذف خلية أو مجموعة خلايا نقوم أولاً بتحديد تلك الخلايا لتصبح ملونة بالأسود، ثم ننفذ إحدى طرق الحذف."},
+            {"id": 225, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الأولى لحذف الخلايا المحددة باستخدام الماوس؟", "options": ["الضغط على الزر الأيمن للماوس لتظهر قائمة الإيعازات ثم اختيار الأمر حذف (Delete) بزر الماوس الأيسر", "النقر المزدوج على شريط العنوان", "الضغط على علامة (+) في شريط الحالة", "اختيار الأمر Rename من القائمة"], "correct": 0, "explanation": "نضغط على الزر الأيمن للماوس فتظهر قائمة الإيعازات، ثم نختار الأمر حذف Delete بزر الماوس الأيسر ليظهر مربع حوار الحذف."},
+            {"id": 226, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الثانية لحذف الخلايا عبر شريط التبويبات؟", "options": ["تبويب Home &gt; مجموعة خلايا Cells &gt; الأمر Delete &gt; مسح خلايا Delete Cells", "تبويب Insert &gt; مجموعة خلايا Cells &gt; الأمر Delete", "تبويب Page Layout &gt; الأمر Delete Cells", "تبويب Review &gt; الأمر Delete Cells"], "correct": 0, "explanation": "الطريقة الثانية هي عن طريق تبويب الصفحة الرئيسة Home ثم مجموعة خلايا Cells ثم الأمر Delete (ومنه مسح خلايا Delete Cells) ليظهر نفس مربع حوار الحذف."},
+            {"id": 227, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الثالثة لحذف محتوى خلية واحدة باستخدام لوحة المفاتيح؟", "options": ["الضغط على مفتاح Enter", "الضغط على مفتاح Delete في لوحة المفاتيح (Keyboard)", "الضغط على الأسهم في لوحة المفاتيح", "الضغط على مفتاح Esc"], "correct": 1, "explanation": "الطريقة الثالثة المذكورة هي المسح بالضغط على مفتاح Delete الموجود في لوحة المفاتيح (Keyboard)."},
+            {"id": 228, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هو الفرق في اتجاه تحريك الخلايا بين مربع حوار الإضافة (Insert) ومربع حوار الحذف (Delete)؟", "options": ["في الإضافة: تحريك لليسار وللأعلى؛ وفي الحذف: تحريك لليمين وللأسفل", "في الإضافة: تحريك لليمين وللأسفل؛ وفي الحذف: تحريك لليسار وللأعلى", "كلاهما يحرك الخلايا لليمين وللأسفل فقط", "لا يوجد أي خيار لتحريك الخلايا في مربع حوار الحذف"], "correct": 1, "explanation": "عند الإضافة (Insert) تكون خيارات التحريك: تحريك الخلايا إلى اليمين (Shift cells right) وتحريك الخلايا إلى الأسفل (Shift cells down)، أما عند الحذف (Delete) فتكون: تحريك الخلايا إلى اليسار (Shift cells left) وتحريك الخلايا إلى الأعلى (Shift cells up)."},
+            {"id": 229, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي \"الملاحظة المهمة جداً\" التي ذكرتها المحاضرة حول كيفية الوصول الدائم للأوامر المراد تنفيذها في Excel 2013؟", "options": ["لا يمكن الوصول للأوامر إلا عبر تبويب File فقط", "يمكننا الوصول دائماً إلى الأوامر المراد تنفيذها من خلال الزر الأيمن للماوس", "يجب استخدام لوحة المفاتيح حصراً في جميع الأوامر", "الأوامر لا تعمل إلا بعد تسجيل الدخول في Sky drive"], "correct": 1, "explanation": "أكدت المحاضرة في ملاحظة مهمة جداً أنه في برنامج Excel 2013 يمكننا الوصول دائماً إلى الأوامر المراد تنفيذها من خلال الزر الأيمن للماوس (كما في أمري الإضافة والحذف وتغيير اسم الورقة)."},
+            {"id": 230, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما المقصود بـ \"تسمية الخلايا\" (Cells Name) في برنامج Excel 2013؟", "options": ["تغيير اسم ملف الأكسل من Book1 إلى اسم آخر", "إعطاء اسم للخلية أو مجموعة خلايا محددة يتم التعرف به ويمكن من خلاله الوصول إلى الخلايا التي نريد", "تغيير اسم ورقة العمل في شريط الحالة", "ترقيم الأعمدة بالأرقام بدلاً من الأحرف"], "correct": 1, "explanation": "تسمية الخلايا هي ببساطة إعطاء اسم للخلية أو مجموعة خلايا يتم تحديدها ويتم التعرف به، ويمكن من خلاله الوصول إلى الخلايا التي نريد."},
+            {"id": 231, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الأولى لتسمية الخلايا في Excel 2013؟", "options": ["عن طريق شريط الحالة Status Bar", "عن طريق صندوق الاسم (Name Box)", "عن طريق تبويب View", "عن طريق قائمة Recent"], "correct": 1, "explanation": "الطريقة الأولى لتسمية الخلايا هي عن طريق صندوق الاسم Name Box (مثل تغيير اسم الخلية I6 إلى اسم \"أحمد\")."},
+            {"id": 232, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "وفقاً للمثال المذكور في المحاضرة (تغيير اسم الخلية I6 إلى \"أحمد\")، ماذا يحدث عند كتابة اسم \"أحمد\" في صندوق الاسم؟", "options": ["يتم حذف الخلية I6 نهائياً", "تصبح الخلية I6 هي الخلية النشطة وسوف تظلل باللون الأسود", "تتغير أسماء جميع الخلايا في الورقة إلى \"أحمد\"", "يتم فتح ورقة عمل جديدة باسم \"أحمد\""], "correct": 1, "explanation": "عند كتابة اسم \"أحمد\" في صندوق الاسم فإن الخلية I6 (التي سُميت بهذا الاسم) ستصبح هي الخلية النشطة وسوف تظلل باللون الأسود."},
+            {"id": 233, "page": 4, "category": "خامساً: إضافة الخلايا وحذفها وتسميتها", "q": "ما هي الطريقة الثانية لتسمية الخلايا عبر شريط التبويبات في Excel 2013؟", "options": ["تبويب Home &gt; مجموعة Cells &gt; Format &gt; Rename Cell", "تبويب الصيغ (Formulas) &gt; مجموعة تعريف الأسماء (Defined Names) &gt; الأمر تعريف الاسم (Define Name)", "تبويب Insert &gt; مجموعة Names &gt; Define Name", "تبويب Data &gt; مجموعة Sort &gt; Define Name"], "correct": 1, "explanation": "الطريقة الثانية لتسمية الخلايا هي عن طريق تبويب الصيغ Formulas ثم مجموعة تعريف الأسماء Defined Names ثم اختيار الأمر تعريف الاسم Define Name فيتغير اسم الخلية."},
+            {"id": 234, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هي وظيفة مجموعة \"رقم\" (Number) في تبويب الصفحة الرئيسة (Home Tab)؟", "options": ["حذف الأعمدة والصفوف", "تنسيق كيفية عرض قيم الخلايا وتحديد نوع القيمة سواء كانت نسبة مئوية أو تاريخاً أو عملة أو أرقاماً", "تغيير اتجاه الورقة من اليمين إلى اليسار", "ترتيب الأسماء أبجدياً"], "correct": 1, "explanation": "من خلال مجموعة رقم (Number) يتم تنسيق كيفية عرض قيم الخلايا وتحديد القيمة الموجودة بالخلية سواء كانت نسبة مئوية أو تاريخاً أو عملة أو أرقاماً."},
+            {"id": 235, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هي الوظيفة العامة لمجموعة \"أنماط\" (Styles) في تبويب الصفحة الرئيسة؟", "options": ["إجراء العمليات الإحصائية المعقدة", "التحكم التام في تنسيق الشكل ونمط الخلايا سواء كانت خلية واحدة أو مجموعة خلايا حسب نوع التنسيق المرغوب", "طباعة المستند على ورقة واحدة", "البحث عن النصوص واستبدالها"], "correct": 1, "explanation": "تتيح مجموعة أنماط (Style) التحكم التام في تنسيق الشكل ونمط الخلايا سواء كانت خلية واحدة أو مجموعة خلايا حسب نوع التنسيق المرغوب به."},
+            {"id": 236, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هو المصطلح الإنجليزي لـ \"التنسيق الشرطي\" الموجود ضمن مجموعة أنماط (Styles)؟", "options": ["Format Table", "Cell Style", "Conditional Formatting", "Scale to Fit"], "correct": 2, "explanation": "يُعرف التنسيق الشرطي في مجموعة أنماط بالمصطلح الإنجليزي Conditional Formatting."},
+            {"id": 237, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "أي أمر في مجموعة أنماط (Styles) يُستخدم لتنسيق مجموعة حقول كجدول؟", "options": ["Conditional Formatting", "Format Table (Format as Table)", "Cell Style", "AutoSum"], "correct": 1, "explanation": "يُستخدم الأمر Format Table (Format as Table) لتنسيق مجموعة حقول كجدول ضمن مجموعة أنماط."},
+            {"id": 238, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "أي أمر في مجموعة أنماط (Styles) يُستخدم لتنسيق حقل كرأس جدول أو مضمّن به؟", "options": ["Cell Style", "Format Table", "Conditional Formatting", "Clear Formats"], "correct": 0, "explanation": "يُستخدم الأمر Cell Style لتنسيق حقل كرأس جدول أو مضمّن به ضمن مجموعة أنماط."},
+            {"id": 239, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "أي مما يلي يمثل أحد الأوامر الظاهرة ضمن قائمة التنسيق الشرطي (Conditional Formatting)؟", "options": ["Highlight Cells Rules وData Bars وColor Scales وIcon Sets", "Sort Ascending وSort Descending", "Insert Sheet وDelete Sheet", "Define Name وName Manager"], "correct": 0, "explanation": "تحتوي قائمة التنسيق الشرطي (Conditional Formatting) على خيارات مثل Highlight Cells Rules وTop/Bottom Rules وData Bars وColor Scales وIcon Sets، بالإضافة إلى New Rule وClear Rules وManage Rules."},
+            {"id": 240, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هي الأوامر الثلاثة التي تنقسم إليها مجموعة \"خلايا\" (Cells) في تبويب الصفحة الرئيسة؟", "options": ["نسخ Copy، قص Cut، لصق Paste", "إدراج Insert، حذف Delete، تنسيق Format", "ملء Fill، مسح Clear، ترتيب Sort", "جمع Sum، معدل Average، عدّ Count"], "correct": 1, "explanation": "تنقسم مجموعة خلايا (Cells) إلى ثلاثة أوامر تتحكم في الخلايا المكونة لورقة العمل وهي: إدراج Insert، وحذف Delete، وتنسيق Format."},
+            {"id": 241, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هي وظيفة الأمر \"إدراج\" (Insert) ضمن مجموعة خلايا (Cells)؟", "options": ["حذف الأعمدة والصفوف فقط", "إدراج خلايا سواء كانت أعمدة أو صفوفاً أو إدراج ورقة عمل", "تغيير نوع الخط وحجمه", "إخفاء خطوط الشبكة"], "correct": 1, "explanation": "من خلال الأمر Insert في مجموعة خلايا يمكن إدراج خلايا سواء كانت أعمدة أو صفوفاً أو إدراج ورقة عمل."},
+            {"id": 242, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "ما هي وظيفة الأمر \"حذف\" (Delete) ضمن مجموعة خلايا (Cells)؟", "options": ["مسح التنسيق فقط مع بقاء الخلايا", "حذف خلايا سواء كانت أعمدة أو صفوفاً أو حذف ورقة عمل", "نقل ورقة العمل إلى ملف آخر", "إخفاء الخلايا مؤقتاً"], "correct": 1, "explanation": "يتيح الأمر Delete ضمن مجموعة خلايا حذف خلايا سواء كانت أعمدة أو صفوفاً أو حذف ورقة عمل."},
+            {"id": 243, "page": 5, "category": "أولاً: تبويب الصفحة الرئيسة (Home Tab) — مجموعات رقم وأنماط وخلايا", "q": "أي مما يلي يقع ضمن وظائف الأمر \"تنسيق\" (Format) في مجموعة خلايا (Cells)؟", "options": ["تحديد حجم الخلية (ارتفاع وعرض واحتواء)، إخفاء وإظهار الخلايا، وتنسيق ونقل ورقة العمل وإعادة تسميتها", "حساب المعدل وأعلى قيمة في الخلايا", "البحث والاستبدال داخل المستند", "قلب اتجاه الورقة عند الطباعة فقط"], "correct": 0, "explanation": "يمكّننا الأمر Format من تحديد حجم الخلية (ارتفاع وعرض واحتواء) وإخفاء وإظهار الخلايا وتنسيق ونقل ورقة العمل وإعادة تسميتها، وتقع جميعها تحت نطاق التنسيق الإجمالي للمستند."},
+            {"id": 244, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هي وظيفة أمر \"الجمع التلقائي\" (AutoSum) الموجود في مجموعة تحرير (Editing)؟", "options": ["حذف جميع الأرقام في العمود تلقائياً", "حساب المجموع بشكل تلقائي بدون كتابة صيغة المجموع في شريط الصيغة", "ترتيب الأسماء تنازلياً", "تغيير لون الخلية النشطة"], "correct": 1, "explanation": "يُستخدم أمر الجمع التلقائي AutoSum لحساب المجموع بشكل تلقائي دون الحاجة لكتابة صيغة المجموع يدوياً في شريط الصيغة."},
+            {"id": 245, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "أي من الدوال الرياضية الشهيرة التالية يتضمنها أمر الجمع التلقائي (AutoSum)؟", "options": ["دالة الجمع Sum، والمعدل Average، وعدد الأرقام Count Numbers، وأعلى قيمة Max، وأقل قيمة Min", "دالة القص Cut واللصق Paste فقط", "دالة الترتيب التصاعدي والتنازلي فقط", "دالة الاستبدال والذهاب إلى فقط"], "correct": 0, "explanation": "يتضمن أمر AutoSum عدة دوال شهيرة وهي: الجمع (Sum)، المعدل (Average)، حساب عدد الأرقام (Count Numbers)، أعلى قيمة (Max)، أقل قيمة (Min)، بالإضافة إلى دوال إضافية (More Functions)."},
+            {"id": 246, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "عند جمع الخلايا من A1 إلى A5 باستخدام أمر الجمع التلقائي، ما هي الخطوة التي تسبق الضغط على دالة الجمع $\\sum$؟", "options": ["إغلاق شريط الصيغة", "تحديد الخلية A6 كخلية نشطة بالضغط عليها بزر الماوس الأيسر لكي يظهر فيها الناتج", "الضغط على مفتاح Delete", "تحديد تبويب Page Layout"], "correct": 1, "explanation": "بعد إدخال الأرقام في الخلايا من A1 إلى A5، نقوم بتحديد الخلية A6 كخلية نشطة بوضع مؤشر الماوس عليها والضغط بزر الماوس الأيسر ثم الضغط على دالة الجمع $\\sum$ في مجموعة تحرير."},
+            {"id": 247, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هي الصيغة التي تظهر في شريط الصيغة وفي الخلية النشطة A6 عند جمع الخلايا من A1 إلى A5؟", "options": ["=ADD(A1-A5)", "=SUM(A1:A5)", "=TOTAL(A1+A5)", "=AVG(A1:A5)"], "correct": 1, "explanation": "عند الضغط على دالة الجمع تظهر المعادلة =SUM(A1:A5) في شريط الصيغة وفي الخلية النشطة A6."},
+            {"id": 248, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "بعد ظهور المعادلة في شريط الصيغة، على ماذا نضغط إذا أردنا إتمام المعادلة وعرض الناتج، وعلى ماذا نضغط إذا لم نرد إتمامها؟", "options": ["علامة الصح لإتمام المعادلة، وعلامة الخطأ لعدم إتمام العملية الحسابية", "علامة الخطأ لإتمام المعادلة، وعلامة الصح لإلغائها", "زر الإغلاق X لإتمام المعادلة", "زر Clear لإتمام المعادلة"], "correct": 0, "explanation": "عند ظهور المعادلة تظهر علامتا صح وخطأ في شريط الصيغة؛ فنضغط على علامة الصح لإتمام المعادلة وإظهار الناتج في الخلية النشطة، وعلامة الخطأ إذا لم نرد إتمام العملية الحسابية."},
+            {"id": 249, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هي الملاحظة المهمة جداً التي يجب عدم نسيانها حول كيفية تعامل برنامج Excel 2013 مع الأرقام والعمليات الحسابية؟", "options": ["يتعامل مع الأرقام مباشرة ويفهم 1 + 1 دون الحاجة للخلايا", "لا يتعامل مع الأرقام وإنما يتعامل مع الخلايا، فلا يفهم 1 + 1 وإنما يفهم A1 + A2 ويجب أن تتم أي عملية حسابية من خلال الخلايا", "لا يقبل إدخال الأرقام إلا في العمود A فقط", "يتعامل مع النصوص فقط ولا يجري عمليات حسابية"], "correct": 1, "explanation": "أكدت المحاضرة أن برنامج Excel 2013 لا يتعامل مع الأرقام بل مع الخلايا نفسها، فمثلاً لا يفهم 1 + 1 وإنما يفهم A1 + A2، لذا يجب إدخال الأرقام في الخلايا وتطبيق المعادلات بكتابة اسم الخلية."},
+            {"id": 250, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "كيف يمكن الحصول على معدل مجموعة أرقام بنفس خطوات إيجاد المجموع؟", "options": ["بتغيير مكان الخلية النشطة فقط", "بنفس الخطوات السابقة لكن نغير نوع الدالة من جمع (Sum) إلى معدل (Average)", "باستخدام أمر Fill بدلاً من AutoSum", "بكتابة كلمة Delete في شريط الصيغة"], "correct": 1, "explanation": "يمكن الحصول على معدل مجموعة أرقام باتباع نفس خطوات الجمع السابقة، ولكن فقط بتغيير نوع الدالة من جمع إلى معدل Average."},
+            {"id": 251, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هو تعريف أمر \"ملء\" (Fill) الموجود في مجموعة تحرير (Editing)؟", "options": ["أمر لمسح محتوى الخلية وتنسيقها", "أمر لملء الخلايا بنفس التنسيق والاتجاه على غرار القيم السابقة الموجودة إما للأسفل أو اليمين أو الأعلى أو اليسار", "أمر لترتيب الأرقام من الأصغر للأكبر", "أمر لإدراج ورقة عمل جديدة"], "correct": 1, "explanation": "يُستخدم أمر ملء (Fill) لملء الخلايا بنفس التنسيق والاتجاه على غرار القيم السابقة الموجودة إما للأسفل (Down) أو اليمين (Right) أو الأعلى (Up) أو اليسار (Left)."},
+            {"id": 252, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هي وظيفة أمر \"مسح\" (Clear) الموجود في مجموعة تحرير (Editing)؟", "options": ["إضافة صف أو عمود جديد", "مسح التنسيق أو محتوى الخلية أو التعليقات أو الارتباطات", "ملء الخلايا بالاتجاه المعاكس", "تغيير اسم الخلية"], "correct": 1, "explanation": "يُستخدم أمر مسح (Clear) لمسح التنسيق (Clear Formats) أو محتوى الخلية (Clear Contents) أو التعليقات (Clear Comments) أو الارتباطات (Clear/Remove Hyperlinks) أو مسح الكل (Clear All)."},
+            {"id": 253, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هو المسار الصحيح للوصول إلى أيقونة الترتيب التصاعدي (Sort Ascending) في Excel 2013؟", "options": ["تبويب Page Layout &gt; مجموعة Sheet Options &gt; Sort", "تبويب الصفحة الرئيسة Home &gt; مجموعة تحرير Editing &gt; الأمر ترتيب Sort &gt; أيقونة A-Z (Sort Smallest to Largest)", "تبويب Formulas &gt; مجموعة Function Library &gt; Sort", "تبويب Home &gt; مجموعة Number &gt; Sort"], "correct": 1, "explanation": "بعد اختيار مجموعة من الخلايا (بشكل أفقي أو عمودي)، ننقر على أيقونة الترتيب التصاعدي من تبويب الصفحة الرئيسة ثم مجموعة تحرير ثم الأمر ترتيب Sort."},
+            {"id": 254, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "كيف تقوم أيقونة الترتيب التصاعدي (A-Z Sort Ascending) بترتيب الأسماء والأرقام على التوالي؟", "options": ["الأسماء من (ي إلى أ أو Z إلى A)، والأرقام من الأكبر إلى الأصغر", "الأسماء من (أ إلى ي أو A إلى Z)، والأرقام من أصغر رقم إلى أكبر رقم", "الأسماء عشوائياً، والأرقام من الأكبر إلى الأصغر", "ترتب الأرقام فقط ولا ترتب الأسماء"], "correct": 1, "explanation": "في الترتيب التصاعدي (Sort Ascending / Sort Smallest to Largest)، تُرتب الأسماء تصاعدياً حسب الحروف الأبجدية من (أ إلى ي أو A إلى Z)، وتُرتب الأرقام من أصغر رقم إلى أكبر رقم."},
+            {"id": 255, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "كيف تقوم أيقونة الترتيب التنازلي (Z-A Sort Descending) بترتيب الأسماء والأرقام على التوالي؟", "options": ["الأسماء من (أ إلى ي أو A إلى Z)، والأرقام من الأصغر إلى الأكبر", "الأسماء من (ي إلى أ أو Z إلى A)، والأرقام من أكبر رقم إلى أصغر رقم", "ترتب الأسماء فقط ولا ترتب الأرقام", "تملأ الخلايا بنفس القيم السابقة"], "correct": 1, "explanation": "في الترتيب التنازلي (Sort Descending / Sort Largest to Smallest)، تُرتب الأسماء تنازلياً من (ي إلى أ أو Z إلى A)، وتُرتب الأرقام من أكبر رقم إلى أصغر رقم."},
+            {"id": 256, "page": 5, "category": "ثانياً: مجموعة تحرير (Editing) في تبويب الصفحة الرئيسة", "q": "ما هي الأوامر التي يتضمنها أمر \"بحث واختيار\" (Find and Select) في مجموعة تحرير (Editing)؟", "options": ["البحث والاختيار والاستبدال (Replace) والذهاب إلى (Go To) وغيرها", "إدراج صف وحذف عمود فقط", "تنسيق العملة والنسبة المئوية فقط", "الجمع التلقائي وحساب المعدل فقط"], "correct": 0, "explanation": "يُستخدم أمر Find and Select للبحث أو الاختيار ويتضمن كذلك أمر الاستبدال (Replace) والذهاب إلى (Go To) وغيرها كما تم شرحها في Word 2013."},
+            {"id": 257, "page": 5, "category": "ثالثاً: تبويب تخطيط الصفحة (Page Layout Tab)", "q": "ما هي وظيفة مجموعة \"تغيير الحجم لغرض الملاءمة\" (Scale to Fit) في تبويب تخطيط الصفحة (Page Layout Tab)؟", "options": ["تغيير لون خلفية الخلايا", "تحديد طول وعرض الخلية ليتم طباعة المستند كاملاً بكل خلاياه في عدد من الأوراق المراد الطباعة فيها", "تسمية الخلايا بأسماء جديدة", "مسح التعليقات والارتباطات"], "correct": 1, "explanation": "تتيح مجموعة Scale to Fit تحديد طول وعرض الخلية ليتم طباعة المستند كاملاً بكل خلاياه في عدد الأوراق المحدد للطباعة."},
+            {"id": 258, "page": 5, "category": "ثالثاً: تبويب تخطيط الصفحة (Page Layout Tab)", "q": "متى تُستخدم مجموعة \"تغيير الحجم لغرض الملاءمة\" (Scale to Fit) بشكل خاص؟", "options": ["في حالة كانت ورقة العمل فارغة", "في حالة كان المستند يحتوي على عدد كبير من الخلايا", "في حالة الحاجة لحذف ورقة عمل", "عند الرغبة في ترتيب الأسماء تصاعدياً"], "correct": 1, "explanation": "تُستخدم مجموعة Scale to Fit في حالة كان المستند يحتوي على عدد كبير من الخلايا ليتم طباعته كاملاً ضمن عدد الأوراق المراد الطباعة فيها."},
+            {"id": 259, "page": 5, "category": "ثالثاً: تبويب تخطيط الصفحة (Page Layout Tab)", "q": "ما هي الوظيفة العامة لمجموعة \"خيارات الورقة\" (Sheet Options) في تبويب تخطيط الصفحة؟", "options": ["إدراج الدوال الرياضية والإحصائية", "تمكيننا من التحكم بالورقة عند الطباعة (اتجاه الورقة، خطوط الخلايا، وعناوين الورقة)", "حساب مجموع مصفوفة من الخلايا", "تنسيق الأرقام كنسبة مئوية"], "correct": 1, "explanation": "تمكننا مجموعة خيارات الورقة (Sheet Options) من التحكم بالورقة عند الطباعة، سواء بقلب اتجاهها أو إظهار وإخفاء خطوط الخلايا والتحكم بعناوين الورقة."},
+            {"id": 260, "page": 5, "category": "ثالثاً: تبويب تخطيط الصفحة (Page Layout Tab)", "q": "أي أمر داخل مجموعة خيارات الورقة (Sheet Options) يُستخدم لتغيير اتجاه الورقة من اليمين إلى اليسار أو بالعكس؟", "options": ["Gridlines", "Headings", "Sheet Right-to-Left", "Scale to Fit"], "correct": 2, "explanation": "يُستخدم الأمر Sheet Right-to-Left في مجموعة Sheet Options لقلب وتغيير اتجاه الورقة من اليمين إلى اليسار أو بالعكس."},
+            {"id": 261, "page": 5, "category": "ثالثاً: تبويب تخطيط الصفحة (Page Layout Tab)", "q": "ما هما العنصران الآخران اللذان يمكن التحكم بإظهارهما (View) أو طباعتهما (Print) من خلال مجموعة (Sheet Options)؟", "options": ["خطوط الخلايا (Gridlines) وعناوين الورقة (Headings)", "شريط الصيغة وشريط العنوان", "التعليقات والارتباطات", "الدوال المالية والمنطقية"], "correct": 0, "explanation": "من خلال مجموعة Sheet Options يمكن إظهار خطوط الخلايا (Gridlines) أو عدم إظهارها والاكتفاء بالمساحة المحددة فقط، وكذلك التحكم بعناوين الورقة (Headings) من إظهار (View) أو طباعة (Print)."},
+            {"id": 262, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ما هي الوظيفة الأساسية لتبويب \"الصيغ\" (Formulas) في Excel 2013؟", "options": ["التحكم بإعدادات الطباعة والهوامش", "التعامل مع الصيغ الرياضية مع تغيير الاختيارات المتعلقة بالصيغ", "تنسيق الخطوط والألوان فقط", "إضافة أوراق عمل جديدة"], "correct": 1, "explanation": "في تبويب الصيغ (Formulas) يمكن التعامل مع الصيغ الرياضية مع تغيير الاختيارات المتعلقة بالصيغ."},
+            {"id": 263, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ما هي وظيفة مجموعة \"مكتبة الدوال\" (Function Library) ضمن تبويب الصيغ؟", "options": ["مسح محتويات الخلايا", "المساعدة على تغيير وإدراج الدوال إلى ورقة العمل والتحكم الكامل بالصيغ المدرجة", "تغيير حجم الخلية وعرضها", "قلب اتجاه الورقة"], "correct": 1, "explanation": "تساعد مجموعة مكتبة الدوال (Function Library) على تغيير وإدراج الدوال إلى ورقة العمل والتحكم الكامل بالصيغ المدرجة."},
+            {"id": 264, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "كيف تُنظم الدوال داخل مجموعة \"مكتبة الدوال\" (Function Library)؟", "options": ["في قائمة واحدة غير مصنفة", "على شكل عدة كتب، بحيث يتخصص كل كتاب في علم من العلوم ويحتوي على الدوال الرياضية والإحصائية المستخدمة في ذلك العلم", "في جدول مقسم إلى صفوف وأعمدة فقط", "داخل مجموعة أنماط"], "correct": 1, "explanation": "نلاحظ وجود عدة كتب في مكتبة الدوال بحيث يتخصص كل كتاب في علم من العلوم ويحتوي على الدوال الرياضية والإحصائية المستخدمة في ذلك العلم."},
+            {"id": 265, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "أي مما يلي يمثل أمثلة على كتب الدوال الموجودة في مكتبة الدوال (Function Library)؟", "options": ["دوال العلوم المالية (Financial)، المنطقية (Logical)، النصية (Text)، الزمنية (Date &amp; Time)، المرجعية (Lookup &amp; Reference)، والرياضيات والمثلثات (Math &amp; Trig)", "دوال القص والنسخ واللصق فقط", "دوال الطباعة والهوامش والاتجاه فقط", "دوال الفرز التصاعدي والتنازلي فقط"], "correct": 0, "explanation": "تضم مكتبة الدوال كتباً متعددة منها: دوال العلوم المالية، والدوال المنطقية، والنصية، والزمنية، والمرجعية، ودوال الرياضيات والمثلثات، وغيرها من الدوال الإضافية (More Functions)."},
+            {"id": 266, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ما هي الوظائف التي يمكن تنفيذها من خلال أيقونة الجمع التلقائي (AutoSum) في تبويب الصيغ؟", "options": ["إيجاد مجموع عدد من الخلايا، وإدراج دوال بسيطة كالمعدل (Average) والعد بين الأعداد (Count Numbers) واحتساب أعلى قيمة (Max) وأقل قيمة (Min)", "البحث عن الكلمات واستبدالها", "تسمية الخلايا بأسماء نصية", "إخفاء خطوط الشبكة"], "correct": 0, "explanation": "يُستخدم أمر الجمع التلقائي لإيجاد مجموع عدد من الخلايا بعد تحديدها ووضع الناتج في الخلية النشطة، ويمكن من خلاله إدراج صيغ ودوال بسيطة مثل المعدل والفرز/العد بين الأعداد وأعلى قيمة (Max) وأقل قيمة (Min)."},
+            {"id": 267, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ما هي الدالة المستخدمة لاحتساب \"أعلى قيمة\" والدالة المستخدمة لاحتساب \"أقل قيمة\" على التوالي؟", "options": ["Min لأعلى قيمة، وMax لأقل قيمة", "Max لأعلى قيمة، وMin لأقل قيمة", "Sum لأعلى قيمة، وAverage لأقل قيمة", "Count لأعلى قيمة، وMod لأقل قيمة"], "correct": 1, "explanation": "تُستخدم الدالة Max لاحتساب أعلى قيمة، بينما تُستخدم الدالة Min لاحتساب أقل قيمة."},
+            {"id": 268, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "كم عدد العمليات الرياضية والإحصائية التي يحتوي عليها برنامج Excel وفقاً للمحاضرة؟", "options": ["أكثر من 50 عملية", "أكثر من 100 عملية", "أكثر من 300 عملية رياضية وإحصائية", "10 عمليات فقط"], "correct": 2, "explanation": "يحتوي برنامج أكسل على أكثر من 300 عملية رياضية وإحصائية كل واحدة منها تختلف عن الأخرى (مثل Sum وAverage وCount Number وMax وMin وMod وغيرها)."},
+            {"id": 269, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ما هي الأيقونة التي نستخدمها للوصول إلى جميع الصيغ والعمليات الرياضية والإحصائية وفتح مربع حوار إدراج الدالة؟", "options": ["أيقونة الدالة FX (Insert Function)", "أيقونة Clear", "أيقونة Fill", "أيقونة Sort"], "correct": 0, "explanation": "عند الرغبة باستخدام إحدى الصيغ نقوم بالنقر بالمفتاح الأيسر للماوس على أيقونة الدالة FX (بعد تحديد الخلية النشطة التي نريد وضع الناتج فيها) ليظهر مربع حوار Insert Function."},
+            {"id": 270, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "في مربع حوار (Insert Function) الذي يظهر بعد النقر على FX، ماذا نحدد أولاً وثانياً لاختيار الدالة المطلوبة؟", "options": ["نحدد اسم الخلية أولاً ثم لون الخط ثانياً", "نحدد تصنيف الدالة (Function Category) أولاً ثم اسم الدالة (Function name) ثانياً، وبعدها ننقر على موافق (OK)", "نحدد عرض العمود أولاً ثم ارتفاع الصف ثانياً", "نحدد اتجاه الورقة أولاً ثم حجمها ثانياً"], "correct": 1, "explanation": "نختار إحدى العمليات الرياضية أو الإحصائية من مربع حوار Insert Function بتحديد تصنيف الدالة (Function Category) ثم اسم الدالة (Function name) ثم النقر على موافق (OK)."},
+            {"id": 271, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "وفقاً لما ورد في المحاضرة، ما هما المفتاحان في لوحة المفاتيح (Keyboard) اللذان نضغط عليهما معاً لكتابة علامة النقطتين : بين اسم أول خلية وآخر خلية؟", "options": ["Ctrl + حرف (ك)", "Shift + مفتاح حرف (ك)", "Alt + مفتاح Enter", "Delete + مفتاح Shift"], "correct": 1, "explanation": "لإدخال علامة النقطتين : بين أسماء الخلايا داخل أقواس الدالة يتم الضغط على مفتاح Shift + مفتاح حرف (ك) في لوحة المفاتيح."},
+            {"id": 272, "page": 5, "category": "رابعاً: تبويب الصيغ (Formulas Tab) — مكتبة الدوال والدالة FX", "q": "ماذا يحدث عند النقر على علامة الصح أو علامة الخطأ في شريط العمليات بعد إدخال مدى الخلايا داخل الدالة FX؟", "options": ["علامة الصح تقبل العملية الرياضية وتنفذها، وعلامة الخطأ تلغي العملية الرياضية", "علامة الصح تلغي العملية، وعلامة الخطأ تحفظ الملف", "كلاهما ينفذ العملية الرياضية", "علامة الخطأ تحذف ورقة العمل"], "correct": 0, "explanation": "بمجرد النقر على علامة الصح يتم قبول وتنفيذ العملية الرياضية، أما عند الضغط على علامة الخطأ فيتم إلغاء العملية الرياضية."},
+            {"id": 273, "page": 5, "category": "خامساً: تطبيقات الدوال، المصفوفة، المعادلات، ومجموعة تعريف الأسماء", "q": "لإيجاد مجموع أو معدل الخلايا العمودية A1 وA2 وA3، أي خلية يتم تحديدها كخلية نشطة لعرض الناتج كما ورد في مثال المحاضرة؟", "options": ["الخلية B1", "الخلية A4", "الخلية D1", "الخلية F7"], "correct": 1, "explanation": "بعد إدخال البيانات في الخلايا العمودية A1 وA2 وA3، يتم جعل الخلية A4 خلية نشطة بالنقر عليها بزر الماوس الأيسر ليظهر فيها الناتج بعد اختيار الدالة والضغط على علامة الصح."},
+            {"id": 274, "page": 5, "category": "خامساً: تطبيقات الدوال، المصفوفة، المعادلات، ومجموعة تعريف الأسماء", "q": "في مثال جمع وإيجاد معدل خلايا بصورة أفقية (A1 وB1 وC1)، ما هي الخلية التي يتم جعلها خلية نشطة في بداية الخطوات؟", "options": ["الخلية A4", "الخلية D1", "الخلية F7", "الخلية B11"], "correct": 1, "explanation": "بعد إدخال البيانات في الخلايا الأفقية A1 وB1 وC1، نقوم بجعل الخلية D1 هي الخلية النشطة بالنقر عليها بزر الماوس الأيسر في ورقة العمل."},
+            {"id": 275, "page": 5, "category": "خامساً: تطبيقات الدوال، المصفوفة، المعادلات، ومجموعة تعريف الأسماء", "q": "ما هي وظيفة مجموعة \"تعريف الأسماء\" (Define Names) الموجودة ضمن تبويب الصيغ (Formulas)؟", "options": ["تغيير أسماء التبويبات في البرنامج", "تسمية الخلايا بدلاً من اسمها المعروف بمربع الاسم إلى اسم آخر سهل يتيح الوصول السريع إليها", "إدراج دوال العلوم المالية", "مسح أسماء الأعمدة والصفوف"], "correct": 1, "explanation": "تُستخدم مجموعة تعريف الأسماء (Define Names) لتسمية الخلايا بدلاً من اسمها المعروف بمربع الاسم إلى اسم آخر سهل يتيح لنا الوصول السريع إليه، مثل تغيير الخلية B6 إلى كلمة (أحمد) أو أي كلمة أخرى نرغب بها. ====================================================================== نهاية بنك الأسئلة ======================================================================"}
+        ];
+
+        const FILE_SHORT = {1: 'ويندوز 10', 2: 'أمن المعلومات', 3: 'الإنترنت والبحث العلمي', 4: 'Excel 2013 (م1-2)', 5: 'Excel 2013 (م3-4)'};
+        const fileLabel = p => `ملف ${p} - ${FILE_SHORT[p] || ''}`;
+
+        const FUNNY_CORRECT_REACTIONS = [
+            "عاشت ايدك يالذهب! جوابك أسرع من SSD 💻⚡",
+            "كفو والله! مايكروسوفت نفسها تصفكلك هسة 👏🔥",
+            "عمي أنت قاري الملزمة لو أنت اللي مبرمجها؟ 😎✨",
+            "بالهدف! جوابك نظيف وما بيه ولا فيروس 🎯🛡️",
+            "مضبوط 100%! عقلك محدّث لآخر إصدار 🪟✅",
+            "لك عيني شهل فهامة! المعلومة وصلت بدون تقطيع نت 🚀🇮🇶"
+        ];
+
+        const FUNNY_WRONG_REACTIONS = [
+            "ها خوية وين رايح؟ جهازك علّق! اقرأ الشرح جوة 😅💻",
+            "لا يمعود! هذا الجواب بيه فيروس، سوّي فحص وشوف الصح 🦠😂",
+            "بوري معدل! طلعتلك الشاشة الزرقاء.. شوف الشرح الصح 🚨😭",
+            "شبيك يمعود طفى الكمبيوتر؟ شغّله واقرأ ليش الجواب الصح يختلف 🔌😅",
+            "غلط خوية غلط! ضغطت Delete على الجواب الصح.. اقرأ التوضيح ❌🗑️"
+        ];
+
+        let activeQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let instantFeedback = true;
+        let timerInterval = null;
+        let secondsElapsed = 0;
+        let soundEnabled = true;
+        let currentReviewFilter = 'all';
+        let currentReviewPage = 'all';
+        let showReviewExplanations = true;
+
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('quiz_theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+
+            const savedState = localStorage.getItem('quiz_state_computers');
+            if (savedState) {
+                const btnContainer = document.getElementById('setup-container');
+                const resumeBtn = document.createElement('button');
+                resumeBtn.className = 'w-full py-4 rounded-2xl bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 text-lg font-black flex items-center justify-center gap-3 shadow-lg mb-4';
+                resumeBtn.innerHTML = '<span>استئناف الاختبار السابق</span><i class="fa-solid fa-clock-rotate-left"></i>';
+                resumeBtn.onclick = resumeQuiz;
+                btnContainer.insertBefore(resumeBtn, btnContainer.firstChild);
+            }
+        });
+
+        function playTone(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+                if (type === 'correct') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.08); osc.frequency.setValueAtTime(783.99, now + 0.16); gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35); osc.start(now); osc.stop(now + 0.35);
+                } else if (type === 'wrong') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(280, now); osc.frequency.setValueAtTime(190, now + 0.12); gain.gain.setValueAtTime(0.14, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3); osc.start(now); osc.stop(now + 0.3);
+                } else if (type === 'click') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(440, now); gain.gain.setValueAtTime(0.05, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06); osc.start(now); osc.stop(now + 0.06);
+                }
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            icon.className = soundEnabled ? 'fa-solid fa-volume-high text-emerald-400' : 'fa-solid fa-volume-xmark text-rose-400';
+            if (soundEnabled) playTone('click');
+            saveState();
+        }
+
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quiz_theme', themeName);
+            const themes = ['dark', 'light', 'gold', 'cyber'];
+            themes.forEach(t => {
+                const btn = document.getElementById(`theme-${t}`);
+                if (t === themeName) {
+                    btn.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                } else {
+                    btn.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold transition-all text-muted hover:text-current';
+                }
+            });
+            playTone('click');
+        }
+
+        function switchWindow(windowId) {
+            document.querySelectorAll('.view-window').forEach(w => w.classList.remove('active'));
+            document.getElementById(windowId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function saveState() {
+            if (activeQuestions.length === 0) return;
+            const state = { activeQuestions, currentIndex, userAnswers, instantFeedback, secondsElapsed, soundEnabled, currentReviewFilter, currentReviewPage, showReviewExplanations };
+            localStorage.setItem('quiz_state_computers', JSON.stringify(state));
+        }
+
+        function resumeQuiz() {
+            playTone('click');
+            const state = JSON.parse(localStorage.getItem('quiz_state_computers'));
+            if (state) {
+                activeQuestions = state.activeQuestions;
+                currentIndex = state.currentIndex;
+                userAnswers = state.userAnswers;
+                instantFeedback = state.instantFeedback;
+                secondsElapsed = state.secondsElapsed;
+                soundEnabled = state.soundEnabled;
+                startTimerAndAutoSave();
+                buildNavStrip();
+                renderQuestion();
+                updateLiveScore();
+                switchWindow('view-quiz');
+            }
+        }
+
+        function startTimerAndAutoSave() {
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                updateTimerDisplay();
+                if (secondsElapsed % 5 === 0) saveState();
+            }, 1000);
+        }
+
+        function startQuiz() {
+            playTone('click');
+            const doShuffleQ = document.getElementById('opt-shuffle-q').checked;
+            const doShuffleA = document.getElementById('opt-shuffle-a').checked;
+            instantFeedback = document.getElementById('opt-instant').checked;
+            const scope = document.getElementById('opt-scope').value;
+
+            let pool = JSON.parse(JSON.stringify(MASTER_QUESTIONS));
+            if (/^f[1-5]$/.test(scope)) pool = pool.filter(q => q.page === Number(scope.slice(1)));
+
+            if (doShuffleQ || scope === 'quick15' || scope === 'quick30' || scope === 'quick50') pool = shuffleArray(pool);
+            if (scope === 'quick15') pool = pool.slice(0, 15);
+            if (scope === 'quick30') pool = pool.slice(0, 30);
+            if (scope === 'quick50') pool = pool.slice(0, 50);
+
+            if (doShuffleA) {
+                pool.forEach(item => {
+                    const correctText = item.options[item.correct];
+                    item.options = shuffleArray(item.options);
+                    item.correct = item.options.indexOf(correctText);
+                });
+            }
+
+            activeQuestions = pool;
+            currentIndex = 0;
+            userAnswers = {};
+            secondsElapsed = 0;
+
+            startTimerAndAutoSave();
+            buildNavStrip();
+            renderQuestion();
+            updateLiveScore();
+            switchWindow('view-quiz');
+        }
+
+        function updateTimerDisplay() {
+            const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const secs = String(secondsElapsed % 60).padStart(2, '0');
+            document.getElementById('live-timer').textContent = `${mins}:${secs}`;
+        }
+
+        function buildNavStrip() {
+            const strip = document.getElementById('q-nav-strip');
+            strip.innerHTML = '';
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `nav-pill-${idx}`;
+                btn.onclick = () => jumpToQuestion(idx);
+                btn.className = 'w-8 h-8 rounded-lg text-xs font-bold shrink-0 transition-all flex items-center justify-center theme-secondary';
+                btn.textContent = idx + 1;
+                strip.appendChild(btn);
+            });
+        }
+
+        function updateNavStrip() {
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.getElementById(`nav-pill-${idx}`);
+                if (!btn) return;
+                const ans = userAnswers[idx];
+
+                let base = 'w-8 h-8 rounded-lg text-xs font-bold shrink-0 transition-all flex items-center justify-center ';
+                if (idx === currentIndex) base += 'ring-2 ring-amber-400 scale-105 ';
+
+                if (ans === undefined) {
+                    btn.className = base + 'theme-secondary text-muted';
+                } else if (instantFeedback) {
+                    if (ans === q.correct) btn.className = base + 'bg-emerald-500/25 text-emerald-400 border border-emerald-500/40';
+                    else btn.className = base + 'bg-rose-500/25 text-rose-400 border border-rose-500/40';
+                } else {
+                    btn.className = base + 'bg-sky-500/25 text-sky-400 border border-sky-500/40';
+                }
+            });
+
+            const activePill = document.getElementById(`nav-pill-${currentIndex}`);
+            if (activePill) activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function renderQuestion() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const item = activeQuestions[currentIndex];
+            const total = activeQuestions.length;
+
+            document.getElementById('q-counter-badge').textContent = `سؤال ${currentIndex + 1} من ${total}`;
+            document.getElementById('q-page-text').textContent = `ملف ${item.page}`;
+            document.getElementById('q-inline-page').innerHTML = `<i class="fa-solid fa-bookmark"></i> ${FILE_SHORT[item.page]}`;
+            document.getElementById('q-category-label').textContent = item.category;
+
+            const pct = Math.round(((currentIndex + 1) / total) * 100);
+            document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
+
+            document.getElementById('q-text').innerHTML = `
+                <span class="inline-block px-2 py-0.5 rounded-md text-xs font-extrabold bg-amber-500/15 text-amber-400 border border-amber-500/30 ml-1.5 align-middle">ملف ${item.page}</span>
+                <span>${item.q}</span>
+            `;
+
+
+            const fbBox = document.getElementById('feedback-box');
+            fbBox.classList.remove('open');
+
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+            const arabicLetters = ['أ', 'ب', 'ج', 'د'];
+            const existingAnswer = userAnswers[currentIndex];
+
+            item.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                let classes = 'option-item w-full text-right p-4 rounded-2xl flex items-center justify-between gap-3 font-bold text-sm sm:text-base ';
+
+                if (existingAnswer !== undefined) {
+                    if (instantFeedback) {
+                        classes += 'disabled cursor-default ';
+                        if (existingAnswer !== -1) {
+                            if (idx === item.correct) classes += 'correct ';
+                            else if (idx === existingAnswer) classes += 'wrong ';
+                        } else {
+                            if (idx === item.correct) classes += 'correct ';
+                        }
+                    } else {
+                        if (idx === existingAnswer) classes += 'selected ';
+                    }
+                }
+
+                btn.className = classes;
+                btn.onclick = () => selectOption(idx);
+
+                let statusIcon = '';
+                if (existingAnswer !== undefined && instantFeedback) {
+                    if (idx === item.correct) statusIcon = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0"></i>';
+                    else if (idx === existingAnswer && existingAnswer !== -1) statusIcon = '<i class="fa-solid fa-circle-xmark text-rose-400 text-lg shrink-0"></i>';
+                } else if (existingAnswer === idx && !instantFeedback && existingAnswer !== -1) {
+                    statusIcon = '<i class="fa-solid fa-circle-dot text-emerald-400 text-lg shrink-0"></i>';
+                }
+
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-xl theme-card flex items-center justify-center text-xs font-black shrink-0">${arabicLetters[idx]}</span>
+                        <span class="leading-relaxed">${optText}</span>
+                    </div>
+                    ${statusIcon}
+                `;
+                optContainer.appendChild(btn);
+            });
+
+            if (existingAnswer !== undefined && instantFeedback) {
+                showInlineFeedback(existingAnswer === item.correct, item, existingAnswer === -1);
+            }
+
+            document.getElementById('btn-prev').disabled = (currentIndex === 0);
+            document.getElementById('btn-next-label').textContent = (currentIndex === total - 1) ? 'إنهاء وعرض النتيجة' : 'السؤال التالي';
+            updateNavStrip();
+        }
+
+        function revealExplanationDirectly() {
+            playTone('click');
+            const fbBox = document.getElementById('feedback-box');
+            if (fbBox.classList.contains('open')) {
+                fbBox.classList.remove('open');
+                return;
+            }
+
+            if (userAnswers[currentIndex] === undefined) {
+                userAnswers[currentIndex] = -1; 
+                saveState();
+                updateLiveScore();
+                renderQuestion(); 
+                return;
+            }
+
+            const item = activeQuestions[currentIndex];
+            const existingAnswer = userAnswers[currentIndex];
+            const isCorrect = (existingAnswer !== undefined && existingAnswer !== -1) ? (existingAnswer === item.correct) : null;
+            showInlineFeedback(isCorrect, item, existingAnswer === -1);
+        }
+
+        function selectOption(optIdx) {
+            if (instantFeedback && userAnswers[currentIndex] !== undefined) return;
+            const item = activeQuestions[currentIndex];
+            userAnswers[currentIndex] = optIdx;
+
+            if (instantFeedback) playTone(optIdx === item.correct ? 'correct' : 'wrong');
+            else playTone('click');
+
+            updateLiveScore();
+            saveState();
+            renderQuestion();
+        }
+
+        function showInlineFeedback(isCorrect, item, isRevealedWithoutAnswering) {
+            const fbBox = document.getElementById('feedback-box');
+            const fbHeader = document.getElementById('feedback-header');
+            const fbIcon = document.getElementById('feedback-icon');
+            const fbText = document.getElementById('feedback-text');
+            const fbPage = document.getElementById('feedback-page-ref');
+            const fbCorrectAns = document.getElementById('feedback-correct-answer');
+            const fbExpTitle = document.getElementById('explanation-title');
+            const fbExpText = document.getElementById('feedback-explanation-text');
+            const arabicLetters = ['أ', 'ب', 'ج', 'د'];
+            const correctOptionFormatted = `(${arabicLetters[item.correct]}) ${item.options[item.correct]}`;
+
+            if (isRevealedWithoutAnswering) {
+                fbBox.className = 'inline-collapse open rounded-2xl overflow-hidden theme-secondary border border-amber-500/40';
+                fbHeader.className = 'px-4 py-3 flex flex-wrap items-center justify-between gap-2 bg-amber-500/15 text-amber-300 border-b border-amber-500/25';
+                fbIcon.className = 'fa-solid fa-lightbulb text-xl text-amber-400';
+                fbText.textContent = 'كشفنالك الجواب الصحيح (تُحسب إجابة خاطئة) 📖👇';
+            } else if (isCorrect) {
+                fbBox.className = 'inline-collapse open rounded-2xl overflow-hidden theme-secondary border border-emerald-500/40';
+                fbHeader.className = 'px-4 py-3 flex flex-wrap items-center justify-between gap-2 bg-emerald-500/15 text-emerald-300 border-b border-emerald-500/25';
+                fbIcon.className = 'fa-solid fa-face-grin-stars text-xl text-emerald-400';
+                fbText.textContent = FUNNY_CORRECT_REACTIONS[currentIndex % FUNNY_CORRECT_REACTIONS.length];
+            } else {
+                fbBox.className = 'inline-collapse open rounded-2xl overflow-hidden theme-secondary border border-rose-500/40';
+                fbHeader.className = 'px-4 py-3 flex flex-wrap items-center justify-between gap-2 bg-rose-500/15 text-rose-300 border-b border-rose-500/25';
+                fbIcon.className = 'fa-solid fa-face-dizzy text-xl text-rose-400';
+                fbText.textContent = FUNNY_WRONG_REACTIONS[currentIndex % FUNNY_WRONG_REACTIONS.length];
+            }
+
+            fbPage.innerHTML = `<i class="fa-solid fa-file-lines"></i> ${fileLabel(item.page)}`;
+            fbCorrectAns.textContent = correctOptionFormatted;
+            fbExpTitle.textContent = `💡 ليش هذا الجواب هو الصح؟`;
+            fbExpText.textContent = item.explanation;
+        }
+
+        function updateLiveScore() {
+            let correctCount = 0;
+            let wrongCount = 0;
+            Object.keys(userAnswers).forEach(qIdx => {
+                const ans = userAnswers[qIdx];
+                const q = activeQuestions[qIdx];
+                if (ans === q.correct) correctCount++;
+                else if (ans === -1 || ans !== q.correct) wrongCount++;
+            });
+            document.getElementById('live-correct').textContent = correctCount;
+            document.getElementById('live-wrong').textContent = instantFeedback ? wrongCount : Object.keys(userAnswers).length;
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                playTone('click');
+                currentIndex--;
+                saveState();
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            playTone('click');
+            if (currentIndex < activeQuestions.length - 1) {
+                currentIndex++;
+                saveState();
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            playTone('click');
+            currentIndex = idx;
+            saveState();
+            renderQuestion();
+        }
+
+        function finishQuiz() {
+            const total = activeQuestions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+            
+            if (answeredCount < total) {
+                const confirmFinish = confirm(`لكيتك مجاوب بس ${answeredCount} من أصل ${total} سؤال! متأكد تريد تسلم الدفتر؟ (الأسئلة الباقية تنحسب غلط)`);
+                if (!confirmFinish) return;
+            }
+
+            if (timerInterval) clearInterval(timerInterval);
+            playTone('correct');
+
+            let correct = 0;
+            const pageStats = {};
+
+            activeQuestions.forEach((q, idx) => {
+                if (!pageStats[q.page]) pageStats[q.page] = { total: 0, correct: 0 };
+                pageStats[q.page].total++;
+                if (userAnswers[idx] === q.correct) {
+                    correct++;
+                    pageStats[q.page].correct++;
+                }
+            });
+
+            const wrongOrSkipped = total - correct;
+            const percent = Math.round((correct / total) * 100);
+
+            document.getElementById('res-percent').textContent = `${percent}%`;
+            document.getElementById('res-correct').textContent = `${correct} / ${total}`;
+            document.getElementById('res-wrong').textContent = wrongOrSkipped;
+            document.getElementById('res-time').textContent = document.getElementById('live-timer').textContent;
+
+            const emojiEl = document.getElementById('rank-emoji');
+            const titleEl = document.getElementById('rank-title');
+            const descEl = document.getElementById('rank-desc');
+
+            if (percent >= 90) { emojiEl.textContent = '💻👑'; titleEl.textContent = 'خبير حاسبات بمرتبة شرف'; descEl.textContent = 'ختمت بنك أسئلة الحاسبات بالكامل! ويندوز وإنترنت وأمن معلومات وإكسل.. تستاهل تصير مبرمج النظام!'; }
+            else if (percent >= 75) { emojiEl.textContent = '🛡️🔥'; titleEl.textContent = 'مهندس نظم محترف'; descEl.textContent = 'مسيطر على الأغلب! بس رادلك نظرة خفيفة عالأخطاء وشرحها حتى تصير خبير رسمي.'; }
+            else if (percent >= 50) { emojiEl.textContent = '🖱️😅'; titleEl.textContent = 'مستخدم يحاول يتعلم'; descEl.textContent = 'ناجح بس يرادلك تراجع شرح الإجابات الصحيحة وتشوف وين خطأت.'; }
+            else if (percent >= 25) { emojiEl.textContent = '🦠🐴'; titleEl.textContent = 'ضحية حصان طروادة'; descEl.textContent = 'خوية جهازك مصاب! الحك على روحك وافتح مراجعة الأجوبة والشرح جوة قبل الامتحان.'; }
+            else { emojiEl.textContent = '💾😭'; titleEl.textContent = 'جهاز بدون نظام تشغيل'; descEl.textContent = 'كلشي ما قاري يمعود! فوت على مراجعة الإجابات واقرأ الشرح!'; }
+
+            const grid = document.getElementById('page-breakdown-grid');
+            grid.innerHTML = '';
+            Object.keys(pageStats).sort((a, b) => Number(a) - Number(b)).forEach(p => {
+                const st = pageStats[p];
+                const pPct = Math.round((st.correct / st.total) * 100);
+                const badgeColor = pPct >= 75 ? 'text-emerald-400' : (pPct >= 50 ? 'text-amber-400' : 'text-rose-400');
+                const card = document.createElement('div');
+                card.className = 'theme-card rounded-xl p-2.5 flex items-center justify-between';
+                card.innerHTML = `<span class="font-bold">ملف ${p}: ${FILE_SHORT[p]}</span><span class="font-black ${badgeColor}">${st.correct}/${st.total} (${pPct}%)</span>`;
+                grid.appendChild(card);
+            });
+
+            localStorage.removeItem('quiz_state_computers');
+            switchWindow('view-results');
+        }
+
+        function openReviewWindow(filterType) {
+            playTone('click');
+            currentReviewFilter = filterType || 'all';
+            currentReviewPage = 'all';
+            document.getElementById('rev-page-select').value = 'all';
+            renderReviewList();
+            switchWindow('view-review');
+        }
+
+        function toggleAllReviewExplanations() {
+            playTone('click');
+            showReviewExplanations = !showReviewExplanations;
+            document.getElementById('toggle-rev-exp-text').textContent = showReviewExplanations ? 'إخفاء الشرح' : 'إظهار الشرح';
+            renderReviewList();
+        }
+
+        function filterReview(type) { playTone('click'); currentReviewFilter = type; renderReviewList(); }
+        function filterReviewByPage(pageVal) { playTone('click'); currentReviewPage = pageVal; renderReviewList(); }
+
+        function renderReviewList() {
+            const container = document.getElementById('review-list-container');
+            container.innerHTML = '';
+            let totalCount = activeQuestions.length; let correctCount = 0; let wrongCount = 0;
+            activeQuestions.forEach((q, idx) => { if (userAnswers[idx] === q.correct) correctCount++; else wrongCount++; });
+            document.getElementById('count-all').textContent = totalCount; document.getElementById('count-correct').textContent = correctCount; document.getElementById('count-wrong').textContent = wrongCount;
+
+            ['all', 'correct', 'wrong'].forEach(t => {
+                document.getElementById(`rev-filter-${t}`).className = (t === currentReviewFilter) ? 'px-2 py-1 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0' : 'px-2 py-1 rounded-lg text-[10px] font-bold theme-secondary text-muted shrink-0';
+            });
+
+            const arabicLetters = ['أ', 'ب', 'ج', 'د'];
+            let shownCount = 0;
+
+            activeQuestions.forEach((q, idx) => {
+                const uAns = userAnswers[idx];
+                const isCorrect = (uAns === q.correct);
+                if (currentReviewFilter === 'correct' && !isCorrect) return;
+                if (currentReviewFilter === 'wrong' && isCorrect) return;
+                if (currentReviewPage !== 'all' && String(q.page) !== String(currentReviewPage)) return;
+
+                shownCount++;
+                const card = document.createElement('div');
+                card.className = 'theme-card rounded-2xl p-5 border-r-4 ' + (isCorrect ? 'border-r-emerald-500' : 'border-r-rose-500');
+
+                let statusBadge = '';
+                if (isCorrect) statusBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-400"><i class="fa-solid fa-check ml-1"></i>إجابتك صحيحة</span>';
+                else if (uAns === -1) statusBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/20 text-rose-400"><i class="fa-solid fa-eye ml-1"></i>تم كشف الحل (خطأ)</span>';
+                else if (uAns === undefined) statusBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-400"><i class="fa-solid fa-minus ml-1"></i>متروك بدون حل</span>';
+                else statusBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/20 text-rose-400"><i class="fa-solid fa-xmark ml-1"></i>إجابتك خاطئة</span>';
+
+                let optionsHtml = '';
+                q.options.forEach((opt, oIdx) => {
+                    let optStyle = 'theme-secondary text-muted opacity-80';
+                    let badge = '';
+                    if (oIdx === q.correct) { optStyle = 'bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold'; badge = '<span class="text-xs font-extrabold text-emerald-400 shrink-0"><i class="fa-solid fa-circle-check ml-1"></i>الجواب الصحيح</span>'; } 
+                    else if (oIdx === uAns && !isCorrect && uAns !== -1) { optStyle = 'bg-rose-500/15 border border-rose-500/40 text-rose-300 font-bold'; badge = '<span class="text-xs font-extrabold text-rose-400 shrink-0"><i class="fa-solid fa-circle-xmark ml-1"></i>اختيارك</span>'; }
+                    optionsHtml += `<div class="p-3 rounded-xl flex items-center justify-between gap-2 text-xs sm:text-sm ${optStyle}"><div class="flex items-center gap-2"><span class="font-black">${arabicLetters[oIdx]})</span><span>${opt}</span></div>${badge}</div>`;
+                });
+
+                const explanationBlockHtml = showReviewExplanations ? `<div class="mt-3 space-y-2"><div class="rounded-xl explanation-card px-4 py-3 text-xs sm:text-sm flex items-start gap-2.5"><i class="fa-solid fa-book-open-reader text-emerald-400 mt-1 text-base shrink-0"></i><div><span class="font-black text-emerald-400 block mb-1">📖 شرح الإجابة الصحيحة </span><p class="leading-relaxed">${q.explanation}</p></div></div></div>` : '';
+
+                card.innerHTML = `<div class="flex flex-wrap items-center justify-between gap-2 mb-3"><div class="flex items-center gap-2"><span class="px-2.5 py-1 rounded-lg theme-secondary text-xs font-black">سؤال #${idx + 1}</span><span class="page-badge"><i class="fa-solid fa-file-lines"></i> ${fileLabel(q.page)}</span><span class="text-xs text-muted font-bold">${q.category}</span></div>${statusBadge}</div><h3 class="font-extrabold text-base sm:text-lg mb-3 leading-relaxed">${q.q}</h3><div class="space-y-2">${optionsHtml}</div>${explanationBlockHtml}`;
+                container.appendChild(card);
+            });
+
+            if (shownCount === 0) container.innerHTML = `<div class="theme-card rounded-2xl p-8 text-center text-muted"><i class="fa-solid fa-box-open text-3xl mb-2 text-amber-400"></i><p class="font-bold">ماكو أسئلة تطابق هذا الفلتر حالياً! جرب تختار "الكل".</p></div>`;
+        }
+    </script>
+</body>
+</html>
